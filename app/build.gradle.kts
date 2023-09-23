@@ -51,7 +51,6 @@ android {
 }
 
 dependencies {
-
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose")
@@ -61,7 +60,24 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
 
+    //Extended M icons
+    implementation("androidx.compose.material:material-icons-extended")
 
+    // Compose view model
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose")
+    // Navigation
+    implementation("androidx.navigation:navigation-compose")
+    // Coil Image loader
+    implementation("io.coil-kt:coil-compose:2.4.0")
+
+    // BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:32.2.3"))
+
+    // AUTHENTICATION
+    // Firebase Authentication library
+    implementation("com.google.firebase:firebase-auth-ktx")
+    // Google Play services library
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
