@@ -1,5 +1,6 @@
 package com.samwrotethecode.socialease.ui.presentation.start
 
+import android.app.Activity
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -24,21 +25,24 @@ import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.FiberManualRecord
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -48,7 +52,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun IntroScreen() {
+fun IntroScreen(windowSize: WindowWidthSizeClass) {
     val pagerState = rememberPagerState(
         initialPage = 0,
         initialPageOffsetFraction = 0f,
@@ -61,59 +65,127 @@ fun IntroScreen() {
             state = pagerState,
             pageSize = PageSize.Fill,
         ) { currentPage ->
-            Box(modifier = Modifier.fillMaxSize()) {
-                Image(
-                    painter = painterResource(id = IntroScreenData[currentPage].backgroundImage),
-                    contentDescription = null,
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop,
-                )
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(8.dp)
-                        .verticalScroll(rememberScrollState()),
-                    verticalArrangement = Arrangement.SpaceBetween,
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        Spacer(modifier = Modifier.height(20.dp))
-                        Text(
-                            text = IntroScreenData[currentPage].title,
-                            style = TextStyle(
-                                color = Color.White,
-                                fontSize = MaterialTheme.typography.headlineLarge.fontSize,
-                                fontWeight = MaterialTheme.typography.headlineLarge.fontWeight,
-                                shadow = Shadow(color = Color.Black, blurRadius = 32f)
-                            ),
+
+            when (windowSize) {
+                WindowWidthSizeClass.Compact -> {
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        Image(
+                            painter = painterResource(id = IntroScreenData[currentPage].backgroundImage),
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = ContentScale.Crop,
                         )
-                        Spacer(modifier = Modifier.height(20.dp))
-                        Text(
-                            text = IntroScreenData[currentPage].subTitle,
-                            style = TextStyle(
-                                color = Color.White,
-                                fontSize = MaterialTheme.typography.headlineSmall.fontSize,
-                                fontWeight = MaterialTheme.typography.headlineSmall.fontWeight,
-                                shadow = Shadow(color = Color.Black, blurRadius = 32f)
-                            ),
-                        )
-                        Spacer(modifier = Modifier.height(20.dp))
-                    }
-                    Column {
-                        Card {
-                            Text(
-                                text = IntroScreenData[currentPage].content,
-                                modifier = Modifier.padding(8.dp),
-                                style = TextStyle(
-                                    fontSize = MaterialTheme.typography.bodyLarge.fontSize,
-                                    fontWeight = MaterialTheme.typography.bodyLarge.fontWeight,
-                                ),
-                            )
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(8.dp)
+                                .verticalScroll(rememberScrollState()),
+                            verticalArrangement = Arrangement.SpaceBetween,
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                        ) {
+                            Column(
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                            ) {
+                                Spacer(modifier = Modifier.height(20.dp))
+                                Text(
+                                    text = IntroScreenData[currentPage].title,
+                                    style = TextStyle(
+                                        color = Color.White,
+                                        fontSize = MaterialTheme.typography.headlineLarge.fontSize,
+                                        fontWeight = MaterialTheme.typography.headlineLarge.fontWeight,
+                                        shadow = Shadow(color = Color.Black, blurRadius = 32f)
+                                    ),
+                                )
+                                Spacer(modifier = Modifier.height(20.dp))
+                                Text(
+                                    text = IntroScreenData[currentPage].subTitle,
+                                    style = TextStyle(
+                                        color = Color.White,
+                                        fontSize = MaterialTheme.typography.headlineSmall.fontSize,
+                                        fontWeight = MaterialTheme.typography.headlineSmall.fontWeight,
+                                        shadow = Shadow(color = Color.Black, blurRadius = 32f)
+                                    ),
+                                )
+                                Spacer(modifier = Modifier.height(20.dp))
+                            }
+                            Column {
+                                Card {
+                                    Text(
+                                        text = IntroScreenData[currentPage].content,
+                                        modifier = Modifier.padding(8.dp),
+                                        style = TextStyle(
+                                            fontSize = MaterialTheme.typography.bodyLarge.fontSize,
+                                            fontWeight = MaterialTheme.typography.bodyLarge.fontWeight,
+                                        ),
+                                    )
+                                }
+                                Spacer(modifier = Modifier.height(100.dp))
+                            }
                         }
-                        Spacer(modifier = Modifier.height(100.dp))
+                    }
+                }
+
+                else -> {
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        Image(
+                            painter = painterResource(id = IntroScreenData[currentPage].backgroundImage),
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = ContentScale.Crop,
+                        )
+                        Row(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(8.dp)
+                                .verticalScroll(rememberScrollState())
+                                .padding(bottom = 100.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                        ) {
+                            Column(
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                modifier = Modifier.padding(16.dp)
+                            ) {
+                                Spacer(modifier = Modifier.height(20.dp))
+                                Text(
+                                    text = IntroScreenData[currentPage].title,
+                                    style = TextStyle(
+                                        color = Color.White,
+                                        fontSize = MaterialTheme.typography.headlineLarge.fontSize,
+                                        fontWeight = MaterialTheme.typography.headlineLarge.fontWeight,
+                                        shadow = Shadow(color = Color.Black, blurRadius = 32f)
+                                    ),
+                                )
+                                Spacer(modifier = Modifier.height(20.dp))
+                                Text(
+                                    text = IntroScreenData[currentPage].subTitle,
+                                    style = TextStyle(
+                                        color = Color.White,
+                                        fontSize = MaterialTheme.typography.headlineSmall.fontSize,
+                                        fontWeight = MaterialTheme.typography.headlineSmall.fontWeight,
+                                        shadow = Shadow(color = Color.Black, blurRadius = 32f)
+                                    ),
+                                )
+                                Spacer(modifier = Modifier.height(20.dp))
+                            }
+                            Column(
+                                modifier = Modifier.padding(32.dp)
+                            ) {
+                                Card {
+                                    Text(
+                                        text = IntroScreenData[currentPage].content,
+                                        modifier = Modifier.padding(8.dp),
+                                        style = TextStyle(
+                                            fontSize = MaterialTheme.typography.bodyLarge.fontSize,
+                                            fontWeight = MaterialTheme.typography.bodyLarge.fontWeight,
+                                        ),
+                                    )
+                                }
+                                Spacer(modifier = Modifier.height(100.dp))
+                            }
+                        }
                     }
                 }
             }
@@ -185,16 +257,26 @@ fun IntroScreen() {
 
 }
 
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun IntroScreenPreview() {
-    IntroScreen()
+    IntroScreen(
+        windowSize = calculateWindowSizeClass(
+            LocalContext.current as Activity
+        ).widthSizeClass
+    )
 }
 
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Preview(
     showBackground = true, showSystemUi = true, device = "spec:parent=pixel_5,orientation=landscape"
 )
 @Composable
 fun IntroScreenPreviewRotated() {
-    IntroScreen()
+    IntroScreen(
+        windowSize = calculateWindowSizeClass(
+            LocalContext.current as Activity
+        ).widthSizeClass
+    )
 }

@@ -70,6 +70,9 @@ dependencies {
     // Coil Image loader
     implementation("io.coil-kt:coil-compose:2.4.0")
 
+    // For adaptive screens
+    implementation("androidx.compose.material3:material3-window-size-class")
+
     // BoM for the Firebase platform
     implementation(platform("com.google.firebase:firebase-bom:32.2.3"))
 
