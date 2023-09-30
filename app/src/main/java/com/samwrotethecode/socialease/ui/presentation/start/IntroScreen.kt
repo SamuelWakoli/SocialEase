@@ -25,12 +25,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.samwrotethecode.socialease.ui.presentation.start.models.IntroScreenData
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -40,6 +42,9 @@ fun IntroScreen() {
         initialPageOffsetFraction = 0f,
         pageCount = { 2 }
     )
+
+    val scope = rememberCoroutineScope()
+
     Box(Modifier.fillMaxSize()) {
         HorizontalPager(
             state = pagerState,
@@ -58,7 +63,13 @@ fun IntroScreen() {
                         Text(text = "Skip")
                     }
                     Spacer(modifier = Modifier.width(24.dp))
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = {
+                        scope.launch {
+                            pagerState.animateScrollToPage(
+                                page = pagerState.currentPage - 1
+                            )
+                        }
+                    }) {
                         Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
                     }
                     Spacer(modifier = Modifier.width(24.dp))
@@ -85,7 +96,13 @@ fun IntroScreen() {
                             Text(text = "Done")
                         }
                     else
-                        IconButton(onClick = { /*TODO*/ }) {
+                        IconButton(onClick = {
+                            scope.launch {
+                                pagerState.animateScrollToPage(
+                                    page = pagerState.currentPage + 1
+                                )
+                            }
+                        }) {
                             Icon(
                                 imageVector = Icons.Default.ArrowForward,
                                 contentDescription = "Forward"
@@ -104,7 +121,8 @@ fun IntroScreenPreview() {
     IntroScreen()
 }
 
-@Preview(showBackground = true, showSystemUi = true,
+@Preview(
+    showBackground = true, showSystemUi = true,
     device = "spec:parent=pixel_5,orientation=landscape"
 )
 @Composable
