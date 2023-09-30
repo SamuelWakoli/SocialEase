@@ -31,7 +31,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
@@ -47,12 +46,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 import com.samwrotethecode.socialease.ui.presentation.start.models.IntroScreenData
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun IntroScreen(windowSize: WindowWidthSizeClass) {
+fun IntroScreen(
+    windowSize: WindowWidthSizeClass,
+    navHostController: NavHostController
+) {
     val pagerState = rememberPagerState(
         initialPage = 0,
         initialPageOffsetFraction = 0f,
@@ -202,11 +207,16 @@ fun IntroScreen(windowSize: WindowWidthSizeClass) {
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(8.dp),
                 ) {
-                    TextButton(onClick = { /*TODO*/ }) {
+                    TextButton(onClick = {
+                        navHostController.navigate(Screens.SignInScreen.route) {
+                            launchSingleTop = true
+                        }
+                    }) {
                         Text(text = "Skip")
                     }
-                    Spacer(modifier = Modifier.width(24.dp))
-                    if (pagerState.currentPage != pagerState.initialPage)
+
+                    if (pagerState.currentPage != pagerState.initialPage) {
+                        Spacer(modifier = Modifier.width(24.dp))
                         IconButton(onClick = {
                             scope.launch {
                                 pagerState.animateScrollToPage(
@@ -216,6 +226,7 @@ fun IntroScreen(windowSize: WindowWidthSizeClass) {
                         }) {
                             Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
                         }
+                    }
                     Spacer(modifier = Modifier.width(24.dp))
                     IntroScreenData.forEach {
                         Icon(
@@ -236,7 +247,11 @@ fun IntroScreen(windowSize: WindowWidthSizeClass) {
                     }
                     Spacer(modifier = Modifier.width(24.dp))
                     if (pagerState.currentPage == IntroScreenData.lastIndex)
-                        Button(onClick = { /*TODO*/ }) {
+                        Button(onClick = {
+                            navHostController.navigate(Screens.SignInScreen.route) {
+                                launchSingleTop = true
+                            }
+                        }) {
                             Text(text = "Sign in")
                         }
                     else IconButton(onClick = {
@@ -264,7 +279,8 @@ fun IntroScreenPreview() {
     IntroScreen(
         windowSize = calculateWindowSizeClass(
             LocalContext.current as Activity
-        ).widthSizeClass
+        ).widthSizeClass,
+        navHostController = rememberNavController(),
     )
 }
 
@@ -277,6 +293,7 @@ fun IntroScreenPreviewRotated() {
     IntroScreen(
         windowSize = calculateWindowSizeClass(
             LocalContext.current as Activity
-        ).widthSizeClass
+        ).widthSizeClass,
+        navHostController = rememberNavController()
     )
 }

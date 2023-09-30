@@ -2,7 +2,6 @@ package com.samwrotethecode.socialease.ui.presentation.navigation
 
 import android.app.Activity
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
@@ -13,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.ui.presentation.start.IntroScreen
+import com.samwrotethecode.socialease.ui.presentation.start.SignInScreen
 
 @Composable
 fun NavGraph(
@@ -22,7 +22,10 @@ fun NavGraph(
 ) {
     NavHost(navController = navHostController, startDestination = startDestination) {
         composable(route = Screens.IntroScreen.route) {
-            IntroScreen(windowSize = windowSize)
+            IntroScreen(windowSize = windowSize, navHostController = navHostController,)
+        }
+        composable(route = Screens.SignInScreen.route) {
+            SignInScreen(windowSize = windowSize, navHostController = navHostController,)
         }
     }
 }

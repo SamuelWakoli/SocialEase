@@ -1,5 +1,6 @@
 package com.samwrotethecode.socialease.ui.presentation.start
 
+import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,21 +10,26 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun SignInScreen() {
+fun SignInScreen(windowSize: WindowWidthSizeClass, navHostController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -47,22 +53,32 @@ fun SignInScreen() {
             )
         )
         Spacer(modifier = Modifier.height(16.dp))
-        ScrollableTabRow(selectedTabIndex = 0) {
-            
-        }
+
     }
 }
 
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun SignInScreenPreview() {
-    SignInScreen()
+    SignInScreen(
+        windowSize = calculateWindowSizeClass(
+            LocalContext.current as Activity
+        ).widthSizeClass,
+        navHostController = rememberNavController()
+    )
 }
 
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Preview(
     device = "spec:parent=pixel_5,orientation=landscape", showSystemUi = true, showBackground = true
 )
 @Composable
 fun SignInScreenPreviewRotated() {
-    SignInScreen()
+    SignInScreen(
+        windowSize = calculateWindowSizeClass(
+            LocalContext.current as Activity
+        ).widthSizeClass,
+        navHostController = rememberNavController()
+    )
 }
