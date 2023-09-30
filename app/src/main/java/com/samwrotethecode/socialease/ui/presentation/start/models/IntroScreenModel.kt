@@ -10,7 +10,7 @@ data class IntroScreenModel(
     @DrawableRes val backgroundImage: Int,
 )
 
-val IntroScreenData = listOf<IntroScreenModel>(
+val IntroScreenData: List<IntroScreenModel> = listOf(
     IntroScreenModel(
         title = "Welcome to SocialEase",
         subTitle = "Enhance Your Social Skills",
