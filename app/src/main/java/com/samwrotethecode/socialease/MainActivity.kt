@@ -65,7 +65,7 @@ class MainActivity : ComponentActivity() {
                     NavGraph(
                         navHostController = rememberNavController(),
                         startDestination =
-                        if (currentUser == null) Screens.IntroScreen.route
+                        if (currentUser != null) Screens.IntroScreen.route
                         else Screens.HomeScreen.route,
                         windowSize = windowSize.widthSizeClass,
                     ) {
