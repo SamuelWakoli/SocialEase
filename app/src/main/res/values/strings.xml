@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SocialEase</string>
+    <string name="web_client_id">todo</string>
 </resources>

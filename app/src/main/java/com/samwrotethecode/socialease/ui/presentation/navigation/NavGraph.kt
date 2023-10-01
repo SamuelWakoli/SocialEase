@@ -18,14 +18,15 @@ import com.samwrotethecode.socialease.ui.presentation.start.SignInScreen
 fun NavGraph(
     navHostController: NavHostController,
     startDestination: String,
-    windowSize: WindowWidthSizeClass
+    windowSize: WindowWidthSizeClass,
+    onSignInWithGoogle: () -> Unit,
 ) {
     NavHost(navController = navHostController, startDestination = startDestination) {
         composable(route = Screens.IntroScreen.route) {
-            IntroScreen(windowSize = windowSize, navHostController = navHostController,)
+            IntroScreen(windowSize = windowSize, navHostController = navHostController)
         }
         composable(route = Screens.SignInScreen.route) {
-            SignInScreen(windowSize = windowSize, navHostController = navHostController,)
+            SignInScreen(windowSize = windowSize, navHostController = navHostController, onSignInWithGoogle = onSignInWithGoogle)
         }
     }
 }
@@ -39,6 +40,7 @@ fun NavGraphPreview() {
         startDestination = Screens.IntroScreen.route,
         windowSize = calculateWindowSizeClass(
             LocalContext.current as Activity
-        ).widthSizeClass
+        ).widthSizeClass,
+        onSignInWithGoogle = {}
     )
 }
