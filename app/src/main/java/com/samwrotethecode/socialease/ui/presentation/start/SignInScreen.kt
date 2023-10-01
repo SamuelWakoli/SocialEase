@@ -2,6 +2,7 @@ package com.samwrotethecode.socialease.ui.presentation.start
 
 import android.app.Activity
 import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -42,8 +43,10 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -58,6 +61,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.composables.GoogleSignInButton
 import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 import com.samwrotethecode.socialease.ui.presentation.start.viewmodels.SignInScreenViewModel
@@ -85,172 +89,187 @@ fun SignInScreen(
         }
     })
 
-    Column(
-        modifier = Modifier
-            .verticalScroll(rememberScrollState())
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxSize()
     ) {
-        Box(
+        Image(
+            painter = painterResource(id = R.drawable.intro_img_1),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop,
+            alpha = 0.1f,
+        )
+        Column(
             modifier = Modifier
-                .width(600.dp)
+                .verticalScroll(rememberScrollState())
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
+            Box(
                 modifier = Modifier
-                    .padding(16.dp),
+                    .width(600.dp),
+            ) {
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .padding(16.dp),
 
-                ) {
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = "SocialEase", style = TextStyle(
-                        color = MaterialTheme.colorScheme.primary,
-                        fontSize = MaterialTheme.typography.headlineLarge.fontSize,
-                        fontWeight = FontWeight.SemiBold,
-                        fontFamily = FontFamily.Monospace,
-                        shadow = Shadow(
-                            color = MaterialTheme.colorScheme.secondary,
-                            offset = Offset(2f, 3f),
-                            blurRadius = 26f
+                    ) {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = "SocialEase", style = TextStyle(
+                            color = MaterialTheme.colorScheme.primary,
+                            fontSize = MaterialTheme.typography.headlineLarge.fontSize,
+                            fontWeight = FontWeight.SemiBold,
+                            fontFamily = FontFamily.Monospace,
+                            shadow = Shadow(
+                                color = MaterialTheme.colorScheme.secondary,
+                                offset = Offset(2f, 3f),
+                                blurRadius = 26f
+                            )
                         )
                     )
-                )
-                Spacer(modifier = Modifier.height(32.dp))
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    Text(
-                        text = "Sign in",
-                        style = TextStyle(
-                            fontSize = MaterialTheme.typography.headlineSmall.fontSize,
-                            fontWeight = MaterialTheme.typography.headlineSmall.fontWeight,
+                    Spacer(modifier = Modifier.height(32.dp))
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        Text(
+                            text = "Sign in",
+                            style = TextStyle(
+                                fontSize = MaterialTheme.typography.headlineSmall.fontSize,
+                                fontWeight = MaterialTheme.typography.headlineSmall.fontWeight,
+                            ),
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    OutlinedTextField(
+                        value = uiState.email,
+                        onValueChange = { signInViewModel.updateEmail(it) },
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true,
+                        isError = uiState.showEmailError,
+                        supportingText = { if (uiState.showEmailError) Text(text = "Email cannot be empty") },
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Outlined.Email, contentDescription = null
+                            )
+                        },
+                        label = { Text(text = "Email") },
+                        shape = MaterialTheme.shapes.medium,
+                        keyboardOptions = KeyboardOptions().copy(
+                            imeAction = ImeAction.Next,
+                            keyboardType = KeyboardType.Email,
+                            autoCorrect = false,
+                            capitalization = KeyboardCapitalization.None,
                         ),
                     )
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = uiState.email,
-                    onValueChange = { signInViewModel.updateEmail(it) },
-                    modifier = Modifier.fillMaxWidth(),
-                    singleLine = true,
-                    isError = uiState.showEmailError,
-                    supportingText = { if (uiState.showEmailError) Text(text = "Email cannot be empty") },
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Outlined.Email, contentDescription = null
-                        )
-                    },
-                    label = { Text(text = "Email") },
-                    shape = MaterialTheme.shapes.medium,
-                    keyboardOptions = KeyboardOptions().copy(
-                        imeAction = ImeAction.Next,
-                        keyboardType = KeyboardType.Email,
-                        autoCorrect = false,
-                        capitalization = KeyboardCapitalization.None,
-                    ),
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = uiState.password,
-                    onValueChange = { signInViewModel.updatePassword(it) },
-                    modifier = Modifier.fillMaxWidth(),
-                    singleLine = true,
-                    isError = uiState.showPasswordError,
-                    supportingText = { if (uiState.showPasswordError) Text(text = "Password cannot be empty") },
-                    visualTransformation = if (uiState.showPassword) VisualTransformation.None
-                    else PasswordVisualTransformation(),
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Outlined.Lock, contentDescription = null
-                        )
-                    },
-                    label = { Text(text = "Password") },
-                    trailingIcon = {
-                        IconButton(onClick = {
-                            signInViewModel.hideOrShowPassword()
-                        }) {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    OutlinedTextField(
+                        value = uiState.password,
+                        onValueChange = { signInViewModel.updatePassword(it) },
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true,
+                        isError = uiState.showPasswordError,
+                        supportingText = { if (uiState.showPasswordError) Text(text = "Password cannot be empty") },
+                        visualTransformation = if (uiState.showPassword) VisualTransformation.None
+                        else PasswordVisualTransformation(),
+                        leadingIcon = {
                             Icon(
-                                imageVector = if (uiState.showPassword) Icons.Outlined.VisibilityOff
-                                else Icons.Outlined.Visibility,
-                                contentDescription = if (uiState.showPassword) "Hide password" else "Show"
+                                imageVector = Icons.Outlined.Lock, contentDescription = null
                             )
-                        }
-                    },
-                    shape = MaterialTheme.shapes.medium,
-                    keyboardOptions = KeyboardOptions(
-                        autoCorrect = false,
-                        keyboardType = KeyboardType.Password,
-                        imeAction = ImeAction.Done,
-                        capitalization = KeyboardCapitalization.None
-                    ),
-                    keyboardActions = KeyboardActions(onDone = {
-                        // first hide keyboard
-                        keyboardController?.hide()
-                        // then sign in
-                        signInViewModel.signInWithEmailPwd()
-                    }),
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(text = " Forgot password? ", style = TextStyle(
-                    color = MaterialTheme.colorScheme.secondary,
-                    textDecoration = TextDecoration.Underline,
-                ), modifier = Modifier
-                    .clickable {
-                        navHostController.navigate(Screens.ForgotPasswordScreen.route)
-                    }
-                    .align(alignment = Alignment.End)
-                    .padding(horizontal = 16.dp))
-                Spacer(modifier = Modifier.height(12.dp))
-                if (uiState.errorMessage != null) Text(
-                    text = uiState.errorMessage, color = MaterialTheme.colorScheme.error
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Button(
-                        onClick = {
+                        },
+                        label = { Text(text = "Password") },
+                        trailingIcon = {
+                            IconButton(onClick = {
+                                signInViewModel.hideOrShowPassword()
+                            }) {
+                                Icon(
+                                    imageVector = if (uiState.showPassword) Icons.Outlined.VisibilityOff
+                                    else Icons.Outlined.Visibility,
+                                    contentDescription = if (uiState.showPassword) "Hide password" else "Show"
+                                )
+                            }
+                        },
+                        shape = MaterialTheme.shapes.medium,
+                        keyboardOptions = KeyboardOptions(
+                            autoCorrect = false,
+                            keyboardType = KeyboardType.Password,
+                            imeAction = ImeAction.Done,
+                            capitalization = KeyboardCapitalization.None
+                        ),
+                        keyboardActions = KeyboardActions(onDone = {
+                            // first hide keyboard
+                            keyboardController?.hide()
+                            // then sign in
                             signInViewModel.signInWithEmailPwd()
-                        },
+                        }),
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(text = " Forgot password? ", style = TextStyle(
+                        color = MaterialTheme.colorScheme.secondary,
+                        textDecoration = TextDecoration.Underline,
+                    ), modifier = Modifier
+                        .clickable {
+                            navHostController.navigate(Screens.ForgotPasswordScreen.route)
+                        }
+                        .align(alignment = Alignment.End)
+                        .padding(horizontal = 16.dp))
+                    Spacer(modifier = Modifier.height(12.dp))
+                    if (uiState.errorMessage != null) Text(
+                        text = uiState.errorMessage, color = MaterialTheme.colorScheme.error
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center
                     ) {
-                        Row {
-                            Text(text = "Sign In", modifier = Modifier.padding(horizontal = 24.dp))
-                            if (uiState.isSignInButtonLoading) {
-                                Spacer(modifier = Modifier.width(12.dp))
-                                CircularProgressIndicator(
-                                    modifier = Modifier.size(20.dp),
-                                    color = MaterialTheme.colorScheme.primary,
-                                    strokeWidth = 2.dp,
+                        Button(
+                            onClick = {
+                                signInViewModel.signInWithEmailPwd()
+                            },
+                        ) {
+                            Row {
+                                Text(
+                                    text = "Sign In",
+                                    modifier = Modifier.padding(horizontal = 24.dp)
                                 )
+                                if (uiState.isSignInButtonLoading) {
+                                    Spacer(modifier = Modifier.width(12.dp))
+                                    CircularProgressIndicator(
+                                        modifier = Modifier.size(20.dp),
+                                        color = MaterialTheme.colorScheme.primary,
+                                        strokeWidth = 2.dp,
+                                    )
+                                }
+                            }
+                        }
+                        Spacer(modifier = Modifier.width(16.dp))
+                        OutlinedButton(
+                            onClick = {
+                                signInViewModel.registerWithEmailPwd()
+                            },
+                        ) {
+                            Row {
+                                Text(text = "Create Account")
+                                if (uiState.isCreateAccountButtonLoading) {
+                                    Spacer(modifier = Modifier.width(12.dp))
+                                    CircularProgressIndicator(
+                                        modifier = Modifier.size(20.dp),
+                                        color = MaterialTheme.colorScheme.primary,
+                                        strokeWidth = 2.dp,
+                                    )
+                                }
                             }
                         }
                     }
-                    Spacer(modifier = Modifier.width(16.dp))
-                    OutlinedButton(
-                        onClick = {
-                            signInViewModel.registerWithEmailPwd()
-                        },
-                    ) {
-                        Row {
-                            Text(text = "Create Account")
-                            if (uiState.isCreateAccountButtonLoading) {
-                                Spacer(modifier = Modifier.width(12.dp))
-                                CircularProgressIndicator(
-                                    modifier = Modifier.size(20.dp),
-                                    color = MaterialTheme.colorScheme.primary,
-                                    strokeWidth = 2.dp,
-                                )
-                            }
-                        }
-                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+                    GoogleSignInButton(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .width(600.dp),
+                        onClick = { onSignInWithGoogle() })
                 }
-                Spacer(modifier = Modifier.height(16.dp))
-                GoogleSignInButton(
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .width(600.dp),
-                    onClick = { onSignInWithGoogle() })
             }
         }
     }
