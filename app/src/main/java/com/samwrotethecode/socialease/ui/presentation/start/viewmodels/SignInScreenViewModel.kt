@@ -124,11 +124,9 @@ class SignInScreenViewModel : ViewModel() {
         val email = uiState.value.email
         val password = uiState.value.password
 
-//        if (name.isEmpty()) {
-//            _uiState.update { it.copy(showNameError = true) }
-//        } else
-//            
-        if (email.isEmpty()) {
+        if (name.isEmpty()) {
+            _uiState.update { it.copy(showNameError = true) }
+        } else if (email.isEmpty()) {
             _uiState.update { it.copy(showEmailError = true) }
         } else if (password.isEmpty()) {
             _uiState.update { it.copy(showPasswordError = true) }

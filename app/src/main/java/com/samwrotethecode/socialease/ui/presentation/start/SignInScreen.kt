@@ -238,7 +238,7 @@ fun SignInScreen(
                                     Spacer(modifier = Modifier.width(12.dp))
                                     CircularProgressIndicator(
                                         modifier = Modifier.size(20.dp),
-                                        color = MaterialTheme.colorScheme.primary,
+                                        color = MaterialTheme.colorScheme.onPrimary,
                                         strokeWidth = 2.dp,
                                     )
                                 }
@@ -247,19 +247,13 @@ fun SignInScreen(
                         Spacer(modifier = Modifier.width(16.dp))
                         OutlinedButton(
                             onClick = {
-                                signInViewModel.registerWithEmailPwd()
+                                navHostController.navigate(Screens.RegisterScreen.route) {
+                                    launchSingleTop = true
+                                }
                             },
                         ) {
                             Row {
                                 Text(text = "Create Account")
-                                if (uiState.isCreateAccountButtonLoading) {
-                                    Spacer(modifier = Modifier.width(12.dp))
-                                    CircularProgressIndicator(
-                                        modifier = Modifier.size(20.dp),
-                                        color = MaterialTheme.colorScheme.primary,
-                                        strokeWidth = 2.dp,
-                                    )
-                                }
                             }
                         }
                     }
