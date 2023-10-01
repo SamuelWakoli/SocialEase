@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
@@ -143,10 +144,9 @@ fun IntroScreen(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(8.dp)
-                                .verticalScroll(rememberScrollState())
-                                .padding(bottom = 100.dp),
+                                .verticalScroll(rememberScrollState()),
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween,
+                            horizontalArrangement = Arrangement.Center,
                         ) {
                             Column(
                                 verticalArrangement = Arrangement.Center,
@@ -175,10 +175,13 @@ fun IntroScreen(
                                 )
                                 Spacer(modifier = Modifier.height(20.dp))
                             }
+                            Spacer(modifier = Modifier.width(20.dp))
                             Column(
                                 modifier = Modifier.padding(32.dp)
                             ) {
-                                Card {
+                                Card (
+                                    modifier = Modifier.widthIn(max = 400.dp)
+                                ) {
                                     Text(
                                         text = IntroScreenData[currentPage].content,
                                         modifier = Modifier.padding(8.dp),
@@ -188,7 +191,6 @@ fun IntroScreen(
                                         ),
                                     )
                                 }
-                                Spacer(modifier = Modifier.height(100.dp))
                             }
                         }
                     }
