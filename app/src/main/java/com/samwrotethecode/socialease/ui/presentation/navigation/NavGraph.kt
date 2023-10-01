@@ -11,6 +11,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.samwrotethecode.socialease.ui.presentation.home.HomeScreen
+import com.samwrotethecode.socialease.ui.presentation.start.ForgotPasswordScreen
 import com.samwrotethecode.socialease.ui.presentation.start.IntroScreen
 import com.samwrotethecode.socialease.ui.presentation.start.SignInScreen
 
@@ -23,10 +25,27 @@ fun NavGraph(
 ) {
     NavHost(navController = navHostController, startDestination = startDestination) {
         composable(route = Screens.IntroScreen.route) {
-            IntroScreen(windowSize = windowSize, navHostController = navHostController)
+            IntroScreen(
+                windowSize = windowSize,
+                navHostController = navHostController
+            )
         }
         composable(route = Screens.SignInScreen.route) {
-            SignInScreen(windowSize = windowSize, navHostController = navHostController, onSignInWithGoogle = onSignInWithGoogle)
+            SignInScreen(
+                windowSize = windowSize,
+                navHostController = navHostController,
+                onSignInWithGoogle = onSignInWithGoogle
+            )
+        }
+        composable(route = Screens.ForgotPasswordScreen.route) {
+            ForgotPasswordScreen(
+                navHostController = navHostController,
+            )
+        }
+        composable(route = Screens.HomeScreen.route) {
+            HomeScreen(
+                navHostController = navHostController,
+            )
         }
     }
 }
