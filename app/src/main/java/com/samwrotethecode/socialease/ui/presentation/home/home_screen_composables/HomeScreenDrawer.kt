@@ -11,13 +11,20 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Feedback
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.WbSunny
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -27,13 +34,19 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.ui.presentation.composables.CoilImage
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeUiStateModel
+import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreenDrawer(navHostController: NavHostController) {
+fun HomeScreenDrawer(
+    navHostController: NavHostController, uiState: HomeUiStateModel
+) {
     Column(
         modifier = Modifier
             .fillMaxHeight()
@@ -63,6 +76,30 @@ fun HomeScreenDrawer(navHostController: NavHostController) {
         Spacer(modifier = Modifier.height(16.dp))
         Card(
             modifier = Modifier.padding(horizontal = 16.dp),
+            onClick = {
+                navHostController.navigate(Screens.ProfileScreen.route) {
+                    launchSingleTop = true
+                }
+            },
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer
+            )
+        ) {
+            ListItem(
+                headlineContent = {
+                    Text(text = uiState.displayName.toString())
+                },
+                supportingContent = {
+                    Text(text = uiState.email.toString())
+                },
+                leadingContent = {
+                    CoilImage(photoUrl = uiState.photoUrl)
+                },
+            )
+        }
+        Divider(modifier = Modifier.padding(horizontal = 32.dp, vertical = 8.dp))
+        Card(
+            modifier = Modifier.padding(horizontal = 16.dp),
             onClick = {},
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer
@@ -71,24 +108,71 @@ fun HomeScreenDrawer(navHostController: NavHostController) {
             ListItem(
                 headlineContent = {
                     Text(
-                        text = "Username",
+                        text = "Feedback",
                         style = TextStyle(
-                            fontSize = MaterialTheme.typography.headlineSmall.fontSize
+                            fontSize = MaterialTheme.typography.bodyLarge.fontSize
                         ),
                     )
                 },
                 leadingContent = {
-                    CoilImage()
+                    Icon(imageVector = Icons.Outlined.Feedback, contentDescription = null)
                 },
             )
         }
-
+        Spacer(modifier = Modifier.height(8.dp))
+        Card(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            onClick = {},
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer
+            )
+        ) {
+            ListItem(
+                headlineContent = {
+                    Text(
+                        text = "About",
+                        style = TextStyle(
+                            fontSize = MaterialTheme.typography.bodyLarge.fontSize
+                        ),
+                    )
+                },
+                leadingContent = {
+                    Icon(imageVector = Icons.Outlined.Info, contentDescription = null)
+                },
+            )
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+        Card(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            onClick = {},
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer
+            )
+        ) {
+            ListItem(
+                headlineContent = {
+                    Text(
+                        text = "Theme",
+                        style = TextStyle(
+                            fontSize = MaterialTheme.typography.bodyLarge.fontSize
+                        ),
+                    )
+                },
+                leadingContent = {
+                    Icon(imageVector = Icons.Outlined.WbSunny, contentDescription = null)
+                },
+            )
+        }
+        Spacer(modifier = Modifier.height(8.dp))
     }
 }
 
 @Preview
 @Composable
 fun HomeScreenDrawerPreview() {
-    HomeScreenDrawer(navHostController = rememberNavController())
+    HomeScreenDrawer(
+        navHostController = rememberNavController(),
+        uiState = viewModel<HomeScreenViewModel>().uiState.collectAsState().value,
+    )
 }
 
