@@ -55,7 +55,10 @@ fun HomeScreen(navHostController: NavHostController) {
         ModalNavigationDrawer(
             drawerState = drawerState,
             drawerContent = {
-                HomeScreenDrawer(navHostController = navHostController)
+                HomeScreenDrawer(
+                    navHostController = navHostController,
+                    uiState = uiState,
+                )
             },
             gesturesEnabled = true, // TODO: allow user to edit this in settings
         ) {
