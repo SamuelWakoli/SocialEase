@@ -12,6 +12,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.ui.presentation.home.HomeScreen
+import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.AboutScreen
+import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.FeedbackScreen
+import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.ProfileScreen
 import com.samwrotethecode.socialease.ui.presentation.start.ForgotPasswordScreen
 import com.samwrotethecode.socialease.ui.presentation.start.IntroScreen
 import com.samwrotethecode.socialease.ui.presentation.start.RegisterScreen
@@ -55,6 +58,23 @@ fun NavGraph(
                 navHostController = navHostController,
             )
         }
+        composable(route = Screens.ProfileScreen.route) {
+            ProfileScreen(
+                navHostController = navHostController,
+            )
+        }
+        composable(route = Screens.FeedbackScreen.route) {
+            FeedbackScreen(
+                navHostController = navHostController,
+            )
+        }
+        composable(route = Screens.AboutScreen.route) {
+            AboutScreen(
+                navHostController = navHostController,
+            )
+        }
+
+
     }
 }
 
