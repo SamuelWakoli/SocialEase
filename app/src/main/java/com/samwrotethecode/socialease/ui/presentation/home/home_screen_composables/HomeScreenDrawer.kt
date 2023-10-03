@@ -17,10 +17,10 @@ import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.WbSunny
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +28,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -95,14 +96,20 @@ fun HomeScreenDrawer(
                 leadingContent = {
                     CoilImage(photoUrl = uiState.photoUrl)
                 },
+                colors = ListItemDefaults.colors(
+                    containerColor = Color.Transparent,
+                    headlineColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    supportingColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                ),
             )
         }
-        Divider(modifier = Modifier.padding(horizontal = 32.dp, vertical = 8.dp))
+        Spacer(modifier = Modifier.height(16.dp))
+//        Divider(modifier = Modifier.padding(horizontal = 32.dp, vertical = 8.dp))
         Card(
             modifier = Modifier.padding(horizontal = 16.dp),
             onClick = {},
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primaryContainer
+                containerColor = MaterialTheme.colorScheme.secondaryContainer
             )
         ) {
             ListItem(
@@ -117,6 +124,12 @@ fun HomeScreenDrawer(
                 leadingContent = {
                     Icon(imageVector = Icons.Outlined.Feedback, contentDescription = null)
                 },
+                colors = ListItemDefaults.colors(
+                    containerColor = Color.Transparent,
+                    leadingIconColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                    headlineColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                    supportingColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                ),
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
@@ -124,7 +137,7 @@ fun HomeScreenDrawer(
             modifier = Modifier.padding(horizontal = 16.dp),
             onClick = {},
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primaryContainer
+                containerColor = MaterialTheme.colorScheme.secondaryContainer
             )
         ) {
             ListItem(
@@ -139,6 +152,12 @@ fun HomeScreenDrawer(
                 leadingContent = {
                     Icon(imageVector = Icons.Outlined.Info, contentDescription = null)
                 },
+                colors = ListItemDefaults.colors(
+                    containerColor = Color.Transparent,
+                    leadingIconColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                    headlineColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                    supportingColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                ),
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
@@ -146,7 +165,7 @@ fun HomeScreenDrawer(
             modifier = Modifier.padding(horizontal = 16.dp),
             onClick = {},
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primaryContainer
+                containerColor = MaterialTheme.colorScheme.secondaryContainer
             )
         ) {
             ListItem(
@@ -161,6 +180,12 @@ fun HomeScreenDrawer(
                 leadingContent = {
                     Icon(imageVector = Icons.Outlined.WbSunny, contentDescription = null)
                 },
+                colors = ListItemDefaults.colors(
+                    containerColor = Color.Transparent,
+                    leadingIconColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                    headlineColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                    supportingColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                ),
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
