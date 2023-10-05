@@ -26,8 +26,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.home.home_screen_composables.HomeScreenAppBar
+import com.samwrotethecode.socialease.ui.presentation.home.home_screen_composables.HomeScreenBody
 import com.samwrotethecode.socialease.ui.presentation.home.home_screen_composables.HomeScreenDrawer
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
+import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,8 +37,7 @@ import kotlinx.coroutines.launch
 fun HomeScreen(navHostController: NavHostController) {
     val viewModel: HomeScreenViewModel = viewModel()
     val uiState = viewModel.uiState.collectAsState().value
-    val drawerState: DrawerState =
-        rememberDrawerState(initialValue = DrawerValue.Closed)
+    val drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val applicationContext = LocalContext.current.applicationContext
     val coroutineScope = rememberCoroutineScope()
 
@@ -73,18 +74,17 @@ fun HomeScreen(navHostController: NavHostController) {
                                 drawerState.open()
                             }
                         },
-                        onSearchClick = {/*TODO*/ },
+                        onSearchClick = {
+                            navHostController.navigate(Screens.SearchScreen.route)
+                        },
                     )
                 },
                 containerColor = Color.Transparent,
             ) {
-                Column(
-                    modifier = Modifier
-                        .padding(it)
-                        .fillMaxSize()
-                ) {
-
-                }
+                HomeScreenBody(
+                    paddingValues = it,
+                    navHostController = navHostController,
+                )
             }
         }
     }
