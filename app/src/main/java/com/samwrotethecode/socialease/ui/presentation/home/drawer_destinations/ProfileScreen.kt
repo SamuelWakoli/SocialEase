@@ -38,6 +38,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.ui.presentation.composables.CoilImage
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
+import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,23 +46,21 @@ fun ProfileScreen(navHostController: NavHostController) {
     val viewModel = viewModel<HomeScreenViewModel>()
     val uiState = viewModel.uiState.collectAsState().value
 
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(text = "Profile")
-                },
-                navigationIcon = {
-                    IconButton(onClick = { navHostController.navigateUp() }) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Navigate back"
-                        )
-                    }
-                },
-            )
-        }
-    ) {
+    Scaffold(topBar = {
+        CenterAlignedTopAppBar(
+            title = {
+                Text(text = "Profile")
+            },
+            navigationIcon = {
+                IconButton(onClick = { navHostController.navigateUp() }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Navigate back"
+                    )
+                }
+            },
+        )
+    }) {
         Box(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
@@ -81,8 +80,7 @@ fun ProfileScreen(navHostController: NavHostController) {
                     contentAlignment = Alignment.Center,
                 ) {
                     CoilImage(
-                        photoUrl = uiState.photoUrl,
-                        size = 160.dp
+                        photoUrl = uiState.photoUrl, size = 160.dp
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
@@ -91,16 +89,24 @@ fun ProfileScreen(navHostController: NavHostController) {
                     supportingContent = { Text(text = uiState.email.toString()) },
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Card(
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.tertiaryContainer
-                    )
-                ) {
+                Card(colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.tertiaryContainer
+                ), onClick = {
+                    viewModel.logOut().also {
+                        navHostController.navigate(
+                            Screens.SignInScreen.route
+                        ) {
+                            navHostController.popBackStack(
+                                Screens.SignInScreen.route, inclusive = false
+                            )
+                        }
+//
+                    }
+                }) {
                     ListItem(
                         leadingContent = {
                             Icon(
-                                imageVector = Icons.Outlined.Logout,
-                                contentDescription = null
+                                imageVector = Icons.Outlined.Logout, contentDescription = null
                             )
                         },
                         headlineContent = { Text(text = "Log out") },
@@ -115,7 +121,19 @@ fun ProfileScreen(navHostController: NavHostController) {
                 Card(
                     colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.errorContainer
-                    )
+                    ),
+                    onClick = {
+                        viewModel.deleteAccount().also {
+                            navHostController.navigate(
+                                Screens.SignInScreen.route
+                            ) {
+                                navHostController.popBackStack(
+                                    Screens.SignInScreen.route, inclusive = false
+                                )
+                            }
+//
+                        }
+                    }
                 ) {
                     ListItem(
                         leadingContent = {

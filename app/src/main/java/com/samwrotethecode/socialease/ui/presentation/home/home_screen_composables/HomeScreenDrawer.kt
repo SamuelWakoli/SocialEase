@@ -107,10 +107,12 @@ fun HomeScreenDrawer(
 //        Divider(modifier = Modifier.padding(horizontal = 32.dp, vertical = 8.dp))
         Card(
             modifier = Modifier.padding(horizontal = 16.dp),
-            onClick = {},
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.secondaryContainer
-            )
+            ),
+            onClick = {
+                navHostController.navigate(Screens.FeedbackScreen.route)
+            }
         ) {
             ListItem(
                 headlineContent = {
@@ -135,10 +137,12 @@ fun HomeScreenDrawer(
         Spacer(modifier = Modifier.height(8.dp))
         Card(
             modifier = Modifier.padding(horizontal = 16.dp),
-            onClick = {},
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.secondaryContainer
-            )
+            ),
+            onClick = {
+                navHostController.navigate(Screens.AboutScreen.route)
+            }
         ) {
             ListItem(
                 headlineContent = {
@@ -163,10 +167,10 @@ fun HomeScreenDrawer(
         Spacer(modifier = Modifier.height(8.dp))
         Card(
             modifier = Modifier.padding(horizontal = 16.dp),
-            onClick = {},
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.secondaryContainer
-            )
+            ),
+            onClick = {}
         ) {
             ListItem(
                 headlineContent = {

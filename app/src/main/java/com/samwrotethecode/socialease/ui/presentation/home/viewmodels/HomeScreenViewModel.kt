@@ -2,6 +2,7 @@ package com.samwrotethecode.socialease.ui.presentation.home.viewmodels
 
 import android.net.Uri
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -21,7 +22,8 @@ class HomeScreenViewModel : ViewModel() {
     private var _uiState: MutableStateFlow<HomeUiStateModel> = MutableStateFlow(HomeUiStateModel())
     val uiState: StateFlow<HomeUiStateModel> = _uiState.asStateFlow()
 
-    val currentUser: FirebaseUser? = Firebase.auth.currentUser
+    private val auth: FirebaseAuth = Firebase.auth
+    private val currentUser: FirebaseUser? = auth.currentUser
 
     init {
         resetHomeState()
@@ -52,5 +54,14 @@ class HomeScreenViewModel : ViewModel() {
                 showDropdownMenu = !it.showDropdownMenu,
             )
         }
+    }
+
+    fun logOut() {
+        auth.signOut()
+    }
+
+    fun deleteAccount() {
+        currentUser?.delete()
+        logOut()
     }
 }
