@@ -23,7 +23,13 @@ fun CustomDialogBox(
         icon = icon,
         title = { if (title != null) Text(text = title) },
         text = { if (text != null) Text(text = text) },
-        onDismissRequest = { /*an empty lambda prevents user from dismissing dialog by clicking outside*/ },
+        onDismissRequest =
+        {
+            if (onDismissClick != null) {
+                onDismissClick()
+            } else { /*an empty lambda prevents user from dismissing dialog by clicking outside*/
+            }
+        },
         confirmButton = {
             if (confirmButtonText != null) TextButton(onClick = onConfirmClick!!) {
                 Text(
