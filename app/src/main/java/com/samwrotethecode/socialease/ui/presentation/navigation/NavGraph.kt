@@ -13,6 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.ui.presentation.home.HomeScreen
 import com.samwrotethecode.socialease.ui.presentation.home.appbar_destinations.SearchScreen
+import com.samwrotethecode.socialease.ui.presentation.home.appbar_destinations.SettingsScreen
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.AboutScreen
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.FeedbackScreen
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.ProfileScreen
@@ -76,6 +77,11 @@ fun NavGraph(
         }
         composable(route = Screens.SearchScreen.route) {
             SearchScreen(
+                navHostController = navHostController,
+            )
+        }
+        composable(route = Screens.SettingsScreen.route) {
+            SettingsScreen(
                 navHostController = navHostController,
             )
         }
