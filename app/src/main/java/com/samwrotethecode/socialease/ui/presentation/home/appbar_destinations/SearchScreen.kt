@@ -22,19 +22,22 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SearchScreenViewModel
 
 @Composable
 fun SearchScreen(navHostController: NavHostController) {
-
-    var noResults: Boolean = true
+    val viewModel = viewModel<SearchScreenViewModel>()
+    val uiState = viewModel.uiState.collectAsState().value
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -44,8 +47,10 @@ fun SearchScreen(navHostController: NavHostController) {
             modifier = Modifier.padding(16.dp)
         ) {
             TextField(
-                value = "",
-                onValueChange = {},
+                value = uiState.query,
+                onValueChange = {
+                    viewModel.updateSearchQuery(it)
+                },
                 colors = TextFieldDefaults.colors(
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
@@ -76,10 +81,10 @@ fun SearchScreen(navHostController: NavHostController) {
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
             verticalArrangement =
-            if (noResults) Arrangement.Center else Arrangement.Top,
+            if (uiState.noResults) Arrangement.Center else Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            if (noResults) {
+            if (uiState.noResults) {
                 Icon(
                     imageVector = Icons.Outlined.SearchOff,
                     contentDescription = null,
