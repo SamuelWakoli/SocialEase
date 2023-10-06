@@ -15,8 +15,16 @@ data class HomeUiStateModel(
     val photoUrl: Uri? = null,
     val displayName: String? = null,
     val email: String? = null,
-    val showDropdownMenu: Boolean = false
+    val showDropdownMenu: Boolean = false,
+    val currentCategory: TopicCategories? = null,
 )
+
+enum class TopicCategories {
+    TOPIC1, TOPIC2,
+    TOPIC3, TOPIC4,
+    TOPIC5, TOPIC6,
+    TOPIC7, TOPIC8,
+}
 
 class HomeScreenViewModel : ViewModel() {
     private var _uiState: MutableStateFlow<HomeUiStateModel> = MutableStateFlow(HomeUiStateModel())

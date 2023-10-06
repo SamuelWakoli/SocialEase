@@ -17,14 +17,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeUiStateModel
+import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 
 
 @Composable
 fun HomeScreenDropdownMenu(
     uiState: HomeUiStateModel,
     viewModel: HomeScreenViewModel,
+    navHostController: NavHostController,
 ) {
     DropdownMenu(
         expanded = uiState.showDropdownMenu,
@@ -41,7 +45,12 @@ fun HomeScreenDropdownMenu(
                     Text(text = "Settings")
                 }
             },
-            onClick = { /*TODO*/ }
+            onClick = {
+                viewModel.updateAppbarDropDownMenu()
+                navHostController.navigate(Screens.SettingsScreen.route) {
+                    launchSingleTop = true
+                }
+            }
         )
     }
 }
@@ -52,5 +61,6 @@ fun HomeScreenDropdownMenuPreview() {
     HomeScreenDropdownMenu(
         uiState = viewModel<HomeScreenViewModel>().uiState.collectAsState().value,
         viewModel = viewModel<HomeScreenViewModel>(),
+        navHostController = rememberNavController(),
     )
 }

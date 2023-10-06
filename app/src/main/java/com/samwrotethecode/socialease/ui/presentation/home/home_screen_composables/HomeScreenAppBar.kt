@@ -58,7 +58,11 @@ fun HomeScreenAppBar(
                     imageVector = Icons.Default.MoreVert,
                     contentDescription = "Show popup menu"
                 )
-                HomeScreenDropdownMenu(uiState = uiState, viewModel = viewModel)
+                HomeScreenDropdownMenu(
+                    uiState = uiState,
+                    viewModel = viewModel,
+                    navHostController = navHostController,
+                )
             }
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
