@@ -40,16 +40,19 @@ import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.TopicCateg
 
 @Composable
 fun HomeScreenBodyItem(
-    windowWidth: WindowWidthSizeClass,
+    windowSize: WindowWidthSizeClass,
     navHostController: NavHostController,
     homeBodyItemModel: HomeBodyItemModel
 ) {
+
     Card(
         modifier = Modifier
             .width(
-                if (windowWidth == WindowWidthSizeClass.Compact ||
-                    windowWidth == WindowWidthSizeClass.Medium
-                ) 400.dp else 500.dp
+                when (windowSize) {
+                    WindowWidthSizeClass.Compact -> 400.dp
+                    WindowWidthSizeClass.Medium -> 300.dp
+                    else -> 290.dp
+                }
             )
             .padding(horizontal = 8.dp, vertical = 4.dp),
         colors = CardDefaults.cardColors(
@@ -69,7 +72,7 @@ fun HomeScreenBodyItem(
             supportingContent = {
                 Text(
                     text = stringResource(id = homeBodyItemModel.description),
-                    maxLines = 4,
+//                    maxLines = 5,
                     overflow = TextOverflow.Ellipsis,
                 )
             },
@@ -90,21 +93,39 @@ fun HomeScreenBodyItem(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Preview(
     showSystemUi = true, showBackground = true,
 )
 @Composable
 fun HomeScreenBodyItemPreview() {
-    HomeScreenBodyItem(
-        windowWidth = WindowWidthSizeClass.Compact,
-        navHostController = rememberNavController(),
-        homeBodyItemModel = HomeBodyItemModel(
-            imageDrawable = R.drawable.communication,
-            title = R.string.communication,
-            description = R.string.communication_description,
-            topicCategory = TopicCategories.COMMUNICATION,
-        ),
-    )
+    Column(
+        Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        FlowColumn(
+            verticalArrangement = Arrangement.Top,
+            maxItemsInEachColumn = 10,
+        ) {
+
+            repeat(10) {
+                HomeScreenBodyItem(
+                    windowSize = WindowWidthSizeClass.Compact,
+                    navHostController = rememberNavController(),
+                    homeBodyItemModel = HomeBodyItemModel(
+                        imageDrawable = R.drawable.communication,
+                        title = R.string.communication,
+                        description = R.string.communication_description,
+                        topicCategory = TopicCategories.COMMUNICATION,
+                    ),
+                )
+            }
+        }
+
+    }
 }
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -124,11 +145,49 @@ fun HomeScreenBodyItemPreviewMedium() {
         FlowColumn(
             verticalArrangement = Arrangement.Top,
             maxItemsInEachColumn = 5,
-            ) {
+        ) {
 
             repeat(10) {
                 HomeScreenBodyItem(
-                    windowWidth = WindowWidthSizeClass.Compact,
+                    windowSize = WindowWidthSizeClass.Compact,
+                    navHostController = rememberNavController(),
+                    homeBodyItemModel = HomeBodyItemModel(
+                        imageDrawable = R.drawable.communication,
+                        title = R.string.communication,
+                        description = R.string.communication_description,
+                        topicCategory = TopicCategories.COMMUNICATION,
+                    ),
+                )
+            }
+        }
+
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Preview(
+    showSystemUi = true, showBackground = true,
+    device = "spec:width=1280dp,height=800dp,dpi=240",
+)
+@Composable
+fun HomeScreenBodyItemPreviewExpanded() {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        FlowColumn(
+            verticalArrangement = Arrangement.Top,
+            maxItemsInEachColumn = 10 / 3 + 1,
+//            maxItemsInEachColumn = Total / Columns + 1(for odd num) ,
+
+        ) {
+
+            repeat(10) {
+                HomeScreenBodyItem(
+                    windowSize = WindowWidthSizeClass.Compact,
                     navHostController = rememberNavController(),
                     homeBodyItemModel = HomeBodyItemModel(
                         imageDrawable = R.drawable.communication,
