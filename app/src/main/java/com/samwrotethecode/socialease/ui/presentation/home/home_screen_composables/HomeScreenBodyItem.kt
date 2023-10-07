@@ -1,24 +1,30 @@
 package com.samwrotethecode.socialease.ui.presentation.home.home_screen_composables
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowColumn
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForwardIos
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -29,12 +35,22 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.R
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeBodyItemModel
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.TopicCategories
 
 @Composable
-fun HomeScreenBodyItem(navHostController: NavHostController, homeBodyItemModel: HomeBodyItemModel) {
+fun HomeScreenBodyItem(
+    windowWidth: WindowWidthSizeClass,
+    navHostController: NavHostController,
+    homeBodyItemModel: HomeBodyItemModel
+) {
     Card(
         modifier = Modifier
-            .widthIn(min = 200.dp, max = 500.dp)
+            .width(
+                if (windowWidth == WindowWidthSizeClass.Compact ||
+                    windowWidth == WindowWidthSizeClass.Medium
+                ) 400.dp else 500.dp
+            )
             .padding(horizontal = 8.dp, vertical = 4.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.secondaryContainer
@@ -69,7 +85,7 @@ fun HomeScreenBodyItem(navHostController: NavHostController, homeBodyItemModel: 
                 )
             },
             modifier = Modifier.clickable {
-                navHostController.navigate(homeBodyItemModel.navigationRoute)
+
             })
     }
 }
@@ -80,78 +96,49 @@ fun HomeScreenBodyItem(navHostController: NavHostController, homeBodyItemModel: 
 @Composable
 fun HomeScreenBodyItemPreview() {
     HomeScreenBodyItem(
-        navHostController = rememberNavController(), HomeBodyItemModel(
-            imageDrawable = R.drawable.intro_img_1,
-            title = R.string.title_1,
-            description = R.string.lorem_ipsum,
-            navigationRoute = "",
-        )
+        windowWidth = WindowWidthSizeClass.Compact,
+        navHostController = rememberNavController(),
+        homeBodyItemModel = HomeBodyItemModel(
+            imageDrawable = R.drawable.communication,
+            title = R.string.communication,
+            description = R.string.communication_description,
+            topicCategory = TopicCategories.COMMUNICATION,
+        ),
     )
 }
 
-data class HomeBodyItemModel(
-    @DrawableRes val imageDrawable: Int,
-    @StringRes val title: Int,
-    @StringRes val description: Int,
-    val navigationRoute: String,
+@OptIn(ExperimentalLayoutApi::class)
+@Preview(
+    showSystemUi = true, showBackground = true,
+    device = "spec:parent=pixel_5,orientation=landscape",
 )
+@Composable
+fun HomeScreenBodyItemPreviewMedium() {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        FlowColumn(
+            verticalArrangement = Arrangement.Top,
+            maxItemsInEachColumn = 5,
+            ) {
 
-val homeScreenBodyData = listOf<HomeBodyItemModel>(
-    // TODO: Add home data here
-    HomeBodyItemModel(
-        imageDrawable = R.drawable.intro_img_1,
-        title = R.string.title_1,
-        description = R.string.lorem_ipsum,
-        navigationRoute = "",
-    ),
+            repeat(10) {
+                HomeScreenBodyItem(
+                    windowWidth = WindowWidthSizeClass.Compact,
+                    navHostController = rememberNavController(),
+                    homeBodyItemModel = HomeBodyItemModel(
+                        imageDrawable = R.drawable.communication,
+                        title = R.string.communication,
+                        description = R.string.communication_description,
+                        topicCategory = TopicCategories.COMMUNICATION,
+                    ),
+                )
+            }
+        }
 
-    HomeBodyItemModel(
-        imageDrawable = R.drawable.intro_img_2,
-        title = R.string.title_2,
-        description = R.string.lorem_ipsum,
-        navigationRoute = "",
-    ),
-
-    HomeBodyItemModel(
-        imageDrawable = R.drawable.intro_img_3,
-        title = R.string.title_3,
-        description = R.string.lorem_ipsum,
-        navigationRoute = "",
-    ),
-
-    HomeBodyItemModel(
-        imageDrawable = R.drawable.intro_img_4,
-        title = R.string.title_4,
-        description = R.string.lorem_ipsum,
-        navigationRoute = "",
-    ),
-//    HomeBodyItemModel(
-//        imageDrawable = R.drawable.intro_img_1,
-//        title = R.string.title_1,
-//        description = R.string.lorem_ipsum,
-//        navigationRoute = "",
-//    ),
-//
-//    HomeBodyItemModel(
-//        imageDrawable = R.drawable.intro_img_2,
-//        title = R.string.title_2,
-//        description = R.string.lorem_ipsum,
-//        navigationRoute = "",
-//    ),
-//
-//    HomeBodyItemModel(
-//        imageDrawable = R.drawable.intro_img_3,
-//        title = R.string.title_3,
-//        description = R.string.lorem_ipsum,
-//        navigationRoute = "",
-//    ),
-//
-//    HomeBodyItemModel(
-//        imageDrawable = R.drawable.intro_img_4,
-//        title = R.string.title_4,
-//        description = R.string.lorem_ipsum,
-//        navigationRoute = "",
-//    ),
-
-
-)
+    }
+}
