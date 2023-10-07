@@ -58,6 +58,7 @@ fun NavGraph(
         composable(route = Screens.HomeScreen.route) {
             HomeScreen(
                 navHostController = navHostController,
+                windowSize = windowSize
             )
         }
         composable(route = Screens.ProfileScreen.route) {

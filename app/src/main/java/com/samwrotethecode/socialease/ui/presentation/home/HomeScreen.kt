@@ -2,15 +2,14 @@ package com.samwrotethecode.socialease.ui.presentation.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberDrawerState
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
@@ -34,7 +33,10 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navHostController: NavHostController) {
+fun HomeScreen(
+    navHostController: NavHostController,
+    windowSize: WindowWidthSizeClass,
+) {
     val viewModel: HomeScreenViewModel = viewModel()
     val uiState = viewModel.uiState.collectAsState().value
     val drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -84,6 +86,7 @@ fun HomeScreen(navHostController: NavHostController) {
                 HomeScreenBody(
                     paddingValues = it,
                     navHostController = navHostController,
+                    windowSize = windowSize,
                 )
             }
         }
@@ -93,5 +96,8 @@ fun HomeScreen(navHostController: NavHostController) {
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen(navHostController = rememberNavController())
+    HomeScreen(
+        navHostController = rememberNavController(),
+        windowSize = WindowWidthSizeClass.Compact,
+    )
 }
