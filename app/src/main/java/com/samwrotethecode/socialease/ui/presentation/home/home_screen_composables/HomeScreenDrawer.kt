@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Bookmarks
 import androidx.compose.material.icons.outlined.Feedback
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.WbSunny
@@ -155,6 +156,36 @@ fun HomeScreenDrawer(
                 },
                 leadingContent = {
                     Icon(imageVector = Icons.Outlined.Info, contentDescription = null)
+                },
+                colors = ListItemDefaults.colors(
+                    containerColor = Color.Transparent,
+                    leadingIconColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                    headlineColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                    supportingColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                ),
+            )
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+        Card(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer
+            ),
+            onClick = {
+                navHostController.navigate(Screens.BookmarksScreen.route)
+            }
+        ) {
+            ListItem(
+                headlineContent = {
+                    Text(
+                        text = "Bookmarks",
+                        style = TextStyle(
+                            fontSize = MaterialTheme.typography.bodyLarge.fontSize
+                        ),
+                    )
+                },
+                leadingContent = {
+                    Icon(imageVector = Icons.Outlined.Bookmarks, contentDescription = null)
                 },
                 colors = ListItemDefaults.colors(
                     containerColor = Color.Transparent,
