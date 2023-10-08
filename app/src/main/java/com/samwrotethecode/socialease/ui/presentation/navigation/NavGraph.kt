@@ -15,6 +15,7 @@ import com.samwrotethecode.socialease.ui.presentation.home.HomeScreen
 import com.samwrotethecode.socialease.ui.presentation.home.appbar_destinations.SearchScreen
 import com.samwrotethecode.socialease.ui.presentation.home.appbar_destinations.SettingsScreen
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.AboutScreen
+import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.BookmarksScreen
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.FeedbackScreen
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.ProfileScreen
 import com.samwrotethecode.socialease.ui.presentation.start.ForgotPasswordScreen
@@ -68,6 +69,11 @@ fun NavGraph(
         }
         composable(route = Screens.FeedbackScreen.route) {
             FeedbackScreen(
+                navHostController = navHostController,
+            )
+        }
+        composable(route = Screens.BookmarksScreen.route) {
+            BookmarksScreen(
                 navHostController = navHostController,
             )
         }
