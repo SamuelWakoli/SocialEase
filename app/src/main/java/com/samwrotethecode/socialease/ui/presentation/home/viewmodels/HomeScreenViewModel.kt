@@ -72,6 +72,10 @@ class HomeScreenViewModel : ViewModel() {
         }
     }
 
+    fun updateTopicCategory(currentCategory: TopicCategories) {
+        _uiState.update { it.copy(currentCategory = currentCategory) }
+    }
+
     fun logOut() {
         auth.signOut()
     }

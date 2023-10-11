@@ -87,6 +87,7 @@ fun HomeScreen(
                     paddingValues = it,
                     navHostController = navHostController,
                     windowSize = windowSize,
+                    viewModel = viewModel,
                 )
             }
         }

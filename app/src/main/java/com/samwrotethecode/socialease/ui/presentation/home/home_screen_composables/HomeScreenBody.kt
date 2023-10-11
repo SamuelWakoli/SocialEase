@@ -1,5 +1,6 @@
 package com.samwrotethecode.socialease.ui.presentation.home.home_screen_composables
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -14,9 +15,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeBodyItemModel
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.homeScreenBodyData
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -25,6 +28,7 @@ fun HomeScreenBody(
     paddingValues: PaddingValues,
     navHostController: NavHostController,
     windowSize: WindowWidthSizeClass,
+    viewModel: HomeScreenViewModel,
 ) {
     Column(
         modifier = Modifier
@@ -42,7 +46,7 @@ fun HomeScreenBody(
             when (windowSize) {
                 WindowWidthSizeClass.Compact -> homeScreenBodyData.size
                 WindowWidthSizeClass.Medium -> homeScreenBodyData.size / 2 + 1
-                WindowWidthSizeClass.Expanded -> homeScreenBodyData.size / 3 + 1
+                WindowWidthSizeClass.Expanded -> homeScreenBodyData.size / 4 + 1
                 else -> homeScreenBodyData.size
             }, // added + 1 to fit odd numbers
 
@@ -50,13 +54,14 @@ fun HomeScreenBody(
             for (item in homeScreenBodyData) {
                 HomeScreenBodyItem(
                     windowSize = windowSize,
-                    navHostController = rememberNavController(),
+                    navHostController = navHostController,
                     homeBodyItemModel = HomeBodyItemModel(
                         imageDrawable = item.imageDrawable,
                         title = item.title,
                         description = item.description,
                         topicCategory = item.topicCategory,
                     ),
+                    viewModel = viewModel,
                 )
             }
         }
@@ -70,6 +75,7 @@ fun HomeScreenBodyPreview() {
         paddingValues = PaddingValues(),
         navHostController = rememberNavController(),
         windowSize = WindowWidthSizeClass.Compact,
+        viewModel = viewModel<HomeScreenViewModel>(),
     )
 }
 
@@ -78,11 +84,12 @@ fun HomeScreenBodyPreview() {
     showBackground = true
 )
 @Composable
-fun HomeScreenBodyPreviewRorated() {
+fun HomeScreenBodyPreviewRotated() {
     HomeScreenBody(
         paddingValues = PaddingValues(),
         navHostController = rememberNavController(),
         windowSize = WindowWidthSizeClass.Medium,
+        viewModel = viewModel<HomeScreenViewModel>(),
     )
 }
 
@@ -96,6 +103,7 @@ fun HomeScreenBodyTabletPreview() {
         paddingValues = PaddingValues(),
         navHostController = rememberNavController(),
         windowSize = WindowWidthSizeClass.Medium,
+        viewModel = viewModel<HomeScreenViewModel>(),
     )
 }
 
@@ -109,5 +117,6 @@ fun HomeScreenBodyTabletPreviewRotated() {
         paddingValues = PaddingValues(),
         navHostController = rememberNavController(),
         windowSize = WindowWidthSizeClass.Expanded,
+        viewModel = viewModel<HomeScreenViewModel>(),
     )
 }

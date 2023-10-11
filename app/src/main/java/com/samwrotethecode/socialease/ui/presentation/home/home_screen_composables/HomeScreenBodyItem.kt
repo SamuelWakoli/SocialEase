@@ -32,29 +32,32 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeBodyItemModel
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.TopicCategories
+import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 
 @Composable
 fun HomeScreenBodyItem(
     windowSize: WindowWidthSizeClass,
     navHostController: NavHostController,
-    homeBodyItemModel: HomeBodyItemModel
+    homeBodyItemModel: HomeBodyItemModel,
+    viewModel: HomeScreenViewModel,
 ) {
-
     Card(
         modifier = Modifier
             .width(
                 when (windowSize) {
                     WindowWidthSizeClass.Compact -> 400.dp
                     WindowWidthSizeClass.Medium -> 300.dp
-                    else -> 290.dp
+                    else -> 280.dp
                 }
             )
-            .padding(horizontal = 8.dp, vertical = 4.dp),
+            .padding(horizontal = 4.dp, vertical = 4.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.secondaryContainer
         ),
@@ -88,7 +91,10 @@ fun HomeScreenBodyItem(
                 )
             },
             modifier = Modifier.clickable {
-
+                viewModel.updateTopicCategory(currentCategory = homeBodyItemModel.topicCategory)
+                navHostController.navigate(route = Screens.SubTopicsScreen.route) {
+                    launchSingleTop = true
+                }
             })
     }
 }
@@ -121,6 +127,7 @@ fun HomeScreenBodyItemPreview() {
                         description = R.string.communication_description,
                         topicCategory = TopicCategories.COMMUNICATION,
                     ),
+                    viewModel = viewModel<HomeScreenViewModel>(),
                 )
             }
         }
@@ -157,6 +164,7 @@ fun HomeScreenBodyItemPreviewMedium() {
                         description = R.string.communication_description,
                         topicCategory = TopicCategories.COMMUNICATION,
                     ),
+                    viewModel = viewModel<HomeScreenViewModel>(),
                 )
             }
         }
@@ -195,6 +203,7 @@ fun HomeScreenBodyItemPreviewExpanded() {
                         description = R.string.communication_description,
                         topicCategory = TopicCategories.COMMUNICATION,
                     ),
+                    viewModel = viewModel<HomeScreenViewModel>(),
                 )
             }
         }
