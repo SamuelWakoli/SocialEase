@@ -7,6 +7,7 @@ import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -20,10 +21,14 @@ import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.A
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.BookmarksScreen
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.FeedbackScreen
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.ProfileScreen
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.FeedbackScreenViewmodel
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SearchScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.start.ForgotPasswordScreen
 import com.samwrotethecode.socialease.ui.presentation.start.IntroScreen
 import com.samwrotethecode.socialease.ui.presentation.start.RegisterScreen
 import com.samwrotethecode.socialease.ui.presentation.start.SignInScreen
+import com.samwrotethecode.socialease.ui.presentation.start.viewmodels.SignInScreenViewModel
 
 @Composable
 fun NavGraph(
@@ -32,6 +37,11 @@ fun NavGraph(
     windowSize: WindowWidthSizeClass,
     onSignInWithGoogle: () -> Unit,
 ) {
+    val signInScreenViewModel = viewModel<SignInScreenViewModel>()
+    val homeScreenViewModel = viewModel<HomeScreenViewModel>()
+    val searchScreenViewModel = viewModel<SearchScreenViewModel>()
+    val feedbackScreenViewModel = viewModel<FeedbackScreenViewmodel>()
+
     NavHost(navController = navHostController, startDestination = startDestination) {
         composable(route = Screens.IntroScreen.route) {
             IntroScreen(
@@ -43,40 +53,49 @@ fun NavGraph(
             SignInScreen(
                 windowSize = windowSize,
                 navHostController = navHostController,
-                onSignInWithGoogle = onSignInWithGoogle
-            )
+                viewModel = signInScreenViewModel,
+            ) {
+                onSignInWithGoogle()
+            }
         }
         composable(route = Screens.RegisterScreen.route) {
             RegisterScreen(
                 windowSize = windowSize,
                 navHostController = navHostController,
-                onSignInWithGoogle = onSignInWithGoogle
-            )
+                viewModel = signInScreenViewModel,
+            ) {
+                onSignInWithGoogle()
+            }
         }
         composable(route = Screens.ForgotPasswordScreen.route) {
             ForgotPasswordScreen(
                 navHostController = navHostController,
+                viewModel = signInScreenViewModel,
             )
         }
         composable(route = Screens.HomeScreen.route) {
             HomeScreen(
                 navHostController = navHostController,
-                windowSize = windowSize
+                windowSize = windowSize,
+                viewModel = homeScreenViewModel,
             )
         }
         composable(route = Screens.ProfileScreen.route) {
             ProfileScreen(
                 navHostController = navHostController,
+                viewModel = homeScreenViewModel,
             )
         }
         composable(route = Screens.FeedbackScreen.route) {
             FeedbackScreen(
                 navHostController = navHostController,
+                viewModel = feedbackScreenViewModel,
             )
         }
         composable(route = Screens.BookmarksScreen.route) {
             BookmarksScreen(
                 navHostController = navHostController,
+                viewModel = homeScreenViewModel,
             )
         }
         composable(route = Screens.AboutScreen.route) {
@@ -87,16 +106,19 @@ fun NavGraph(
         composable(route = Screens.SearchScreen.route) {
             SearchScreen(
                 navHostController = navHostController,
+                viewModel = searchScreenViewModel,
             )
         }
         composable(route = Screens.SubTopicsScreen.route) {
             SubTopicsScreen(
                 navHostController = navHostController,
+                viewModel = homeScreenViewModel,
             )
         }
         composable(route = Screens.ReadingScreen.route) {
             ReadingScreen(
                 navHostController = navHostController,
+                viewModel = homeScreenViewModel,
             )
         }
         composable(route = Screens.SettingsScreen.route) {
