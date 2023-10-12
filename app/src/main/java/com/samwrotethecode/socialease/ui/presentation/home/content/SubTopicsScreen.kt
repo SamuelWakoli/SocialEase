@@ -3,6 +3,7 @@ package com.samwrotethecode.socialease.ui.presentation.home.content
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -30,10 +31,12 @@ fun SubTopicsScreen(navHostController: NavHostController) {
     val viewModel = viewModel<HomeScreenViewModel>()
     val uiState = viewModel.uiState.collectAsState().value
 
+
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = "Current Topic") },
+                title = { Text(text = stringResource(id = uiState.currentSubTopicTitleId!!)) },
                 navigationIcon = {
                     IconButton(onClick = { navHostController.navigateUp() }) {
                         Icon(
@@ -45,19 +48,13 @@ fun SubTopicsScreen(navHostController: NavHostController) {
             )
         }
     ) {
-        Column(
-            modifier = Modifier
-                .padding(it)
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-        ) {
-            repeat(20) {
+        LazyColumn(contentPadding = it) {
+            items(uiState.currentSubTopicsList!!.size) { index ->
                 SubTopicListItem(
-                    title = "Title",
-                    description = stringResource(id = R.string.lorem_ipsum)
+                    title = stringResource(id = uiState.currentSubTopicsList[index].titleId),
+                    generalDescription = stringResource(id = uiState.currentSubTopicsList[index].generalDescriptionId)
                 )
             }
-
         }
     }
 }

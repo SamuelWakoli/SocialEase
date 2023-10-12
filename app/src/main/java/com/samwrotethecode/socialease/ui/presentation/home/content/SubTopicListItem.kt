@@ -30,7 +30,7 @@ import com.samwrotethecode.socialease.R
 @Composable
 fun SubTopicListItem(
     title: String,
-    description: String,
+    generalDescription: String,
     onClick: () -> Unit = {},
 ) {
     Card(
@@ -52,7 +52,7 @@ fun SubTopicListItem(
                     Text(
                         text = buildAnnotatedString {
                             withStyle(SpanStyle(color = MaterialTheme.colorScheme.onTertiaryContainer)) {
-                                append(description)
+                                append(generalDescription)
                             }
                             append(" ")
                             withStyle(SpanStyle(color = MaterialTheme.colorScheme.secondary)) {
@@ -93,7 +93,7 @@ fun SubTopicListItemPreview() {
     MaterialTheme {
         SubTopicListItem(
             title = "Title",
-            description = stringResource(id = R.string.lorem_ipsum)
+            generalDescription = stringResource(id = R.string.lorem_ipsum)
         )
     }
 }

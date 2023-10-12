@@ -12,5 +12,6 @@ sealed class Screens(val route: String) {
     object BookmarksScreen : Screens("bookmarks_screen")
     object SearchScreen : Screens("search_screen")
     object SubTopicsScreen : Screens("sub_topics_screen")
+    object ReadingScreen : Screens("reading_screen")
     object SettingsScreen : Screens("settings_screen")
 }

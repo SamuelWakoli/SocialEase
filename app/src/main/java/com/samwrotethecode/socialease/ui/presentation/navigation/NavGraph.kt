@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.ui.presentation.home.HomeScreen
 import com.samwrotethecode.socialease.ui.presentation.home.appbar_destinations.SearchScreen
 import com.samwrotethecode.socialease.ui.presentation.home.appbar_destinations.SettingsScreen
+import com.samwrotethecode.socialease.ui.presentation.home.content.ReadingScreen
 import com.samwrotethecode.socialease.ui.presentation.home.content.SubTopicsScreen
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.AboutScreen
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.BookmarksScreen
@@ -90,6 +91,11 @@ fun NavGraph(
         }
         composable(route = Screens.SubTopicsScreen.route) {
             SubTopicsScreen(
+                navHostController = navHostController,
+            )
+        }
+        composable(route = Screens.ReadingScreen.route) {
+            ReadingScreen(
                 navHostController = navHostController,
             )
         }
