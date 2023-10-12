@@ -9,6 +9,16 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.samwrotethecode.socialease.R
+import com.samwrotethecode.socialease.data.local_data.SubTopicsModel
+import com.samwrotethecode.socialease.data.local_data.assertivenessSubTopics
+import com.samwrotethecode.socialease.data.local_data.communicationSubTopics
+import com.samwrotethecode.socialease.data.local_data.conflictResolutionSubTopics
+import com.samwrotethecode.socialease.data.local_data.cooperationSubTopics
+import com.samwrotethecode.socialease.data.local_data.empathySubTopics
+import com.samwrotethecode.socialease.data.local_data.problemSolvingSubTopics
+import com.samwrotethecode.socialease.data.local_data.relationshipBuildingSubTopics
+import com.samwrotethecode.socialease.data.local_data.selfAwarenessSubTopics
+import com.samwrotethecode.socialease.data.local_data.selfManagementSubTopics
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -19,8 +29,16 @@ data class HomeUiStateModel(
     val displayName: String? = null,
     val email: String? = null,
     val showDropdownMenu: Boolean = false,
+
+    // SubTopicsScreen state
     val currentCategory: TopicCategories? = null,
-)
+    val currentSubTopicTitleId: Int? = null,
+    val currentSubTopicsList: List<SubTopicsModel>? = null,
+
+    // ReadingScreen state
+    val currentSubTopic: SubTopicsModel? = null,
+
+    )
 
 enum class TopicCategories {
     COMMUNICATION,
@@ -74,6 +92,91 @@ class HomeScreenViewModel : ViewModel() {
 
     fun updateTopicCategory(currentCategory: TopicCategories) {
         _uiState.update { it.copy(currentCategory = currentCategory) }
+
+        when (uiState.value.currentCategory) {
+            TopicCategories.COMMUNICATION -> {
+                _uiState.update {
+                    it.copy(
+                        currentSubTopicTitleId = R.string.communication,
+                        currentSubTopicsList = communicationSubTopics,
+                    )
+                }
+            }
+
+            TopicCategories.RELATIONSHIP_BUILDING -> {
+                _uiState.update {
+                    it.copy(
+                        currentSubTopicTitleId = R.string.relationship_building,
+                        currentSubTopicsList = relationshipBuildingSubTopics,
+                    )
+                }
+            }
+
+            TopicCategories.COOPERATION -> {
+                _uiState.update {
+                    it.copy(
+                        currentSubTopicTitleId = R.string.cooperation,
+                        currentSubTopicsList = cooperationSubTopics,
+                    )
+                }
+            }
+
+            TopicCategories.CONFLICT_RESOLUTION -> {
+                _uiState.update {
+                    it.copy(
+                        currentSubTopicTitleId = R.string.conflict_resolution,
+                        currentSubTopicsList = conflictResolutionSubTopics,
+                    )
+                }
+            }
+
+            TopicCategories.PROBLEM_SOLVING -> {
+                _uiState.update {
+                    it.copy(
+                        currentSubTopicTitleId = R.string.problem_solving,
+                        currentSubTopicsList = problemSolvingSubTopics,
+                    )
+                }
+            }
+
+            TopicCategories.SELF_AWARENESS -> {
+                _uiState.update {
+                    it.copy(
+                        currentSubTopicTitleId = R.string.self_awareness,
+                        currentSubTopicsList = selfAwarenessSubTopics,
+                    )
+                }
+            }
+
+            TopicCategories.SELF_MANAGEMENT -> {
+                _uiState.update {
+                    it.copy(
+                        currentSubTopicTitleId = R.string.self_management,
+                        currentSubTopicsList = selfManagementSubTopics,
+                    )
+                }
+            }
+
+            TopicCategories.EMPATHY -> {
+                _uiState.update {
+                    it.copy(
+                        currentSubTopicTitleId = R.string.empathy,
+                        currentSubTopicsList = empathySubTopics,
+                    )
+                }
+            }
+
+            TopicCategories.ASSERTIVENESS -> {
+                _uiState.update {
+                    it.copy(
+                        currentSubTopicTitleId = R.string.assertiveness,
+                        currentSubTopicsList = assertivenessSubTopics,
+                    )
+                }
+            }
+
+            else -> {}
+        }
     }
 
     fun logOut() {
