@@ -49,7 +49,7 @@ import com.samwrotethecode.socialease.ui.presentation.start.viewmodels.SignInScr
 @Composable
 fun ForgotPasswordScreen(
     navHostController: NavHostController,
-    viewModel: SignInScreenViewModel = viewModel<SignInScreenViewModel>(),
+    viewModel: SignInScreenViewModel,
 ) {
     val uiState = viewModel.uiState.collectAsState().value
 

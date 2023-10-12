@@ -32,11 +32,14 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SearchScreenViewModel
 
 @Composable
-fun SearchScreen(navHostController: NavHostController) {
-    val viewModel = viewModel<SearchScreenViewModel>()
+fun SearchScreen(
+    navHostController: NavHostController,
+    viewModel: SearchScreenViewModel,
+) {
     val uiState = viewModel.uiState.collectAsState().value
 
     Column(
@@ -114,5 +117,8 @@ fun SearchScreen(navHostController: NavHostController) {
 )
 @Composable
 fun SearchScreenPreview() {
-    SearchScreen(navHostController = rememberNavController())
+    SearchScreen(
+        navHostController = rememberNavController(),
+        viewModel = viewModel<SearchScreenViewModel>(),
+    )
 }

@@ -1,5 +1,6 @@
 package com.samwrotethecode.socialease.ui.presentation.home.content
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -27,16 +28,23 @@ import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SubTopicsScreen(navHostController: NavHostController) {
-    val viewModel = viewModel<HomeScreenViewModel>()
+fun SubTopicsScreen(
+    navHostController: NavHostController,
+    viewModel: HomeScreenViewModel
+) {
+
     val uiState = viewModel.uiState.collectAsState().value
-
-
 
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = stringResource(id = uiState.currentSubTopicTitleId!!)) },
+                title = {
+                    Log.d(
+                        "CURRENT SUB TOPIC TITLE ID",
+                        "ACCESSING: ${uiState.currentSubTopicTitleId} "
+                    )
+                    Text(text = stringResource(id = uiState.currentSubTopicTitleId!!))
+                },
                 navigationIcon = {
                     IconButton(onClick = { navHostController.navigateUp() }) {
                         Icon(
@@ -62,5 +70,8 @@ fun SubTopicsScreen(navHostController: NavHostController) {
 @Preview
 @Composable
 fun SubTopicsScreenPreview() {
-    SubTopicsScreen(navHostController = rememberNavController())
+    SubTopicsScreen(
+        navHostController = rememberNavController(),
+        viewModel = viewModel<HomeScreenViewModel>(),
+    )
 }

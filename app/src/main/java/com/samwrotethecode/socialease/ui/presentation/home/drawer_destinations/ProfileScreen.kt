@@ -42,8 +42,11 @@ import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileScreen(navHostController: NavHostController) {
-    val viewModel = viewModel<HomeScreenViewModel>()
+fun ProfileScreen(
+    navHostController: NavHostController,
+    viewModel: HomeScreenViewModel,
+) {
+
     val uiState = viewModel.uiState.collectAsState().value
 
     Scaffold(topBar = {
@@ -161,5 +164,6 @@ fun ProfileScreen(navHostController: NavHostController) {
 fun ProfileScreenPreview() {
     ProfileScreen(
         navHostController = rememberNavController(),
+        viewModel = viewModel<HomeScreenViewModel>(),
     )
 }

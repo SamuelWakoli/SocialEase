@@ -39,14 +39,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.ui.presentation.composables.CustomDialogBox
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.FeedbackScreenViewmodel
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FeedbackScreen(
     navHostController: NavHostController,
+    viewModel: FeedbackScreenViewmodel
 ) {
-    val viewmodel = viewModel<FeedbackScreenViewmodel>()
-    val uiState = viewmodel.uiState.collectAsState().value
+    val uiState = viewModel.uiState.collectAsState().value
 
     Scaffold(topBar = {
         CenterAlignedTopAppBar(
@@ -67,7 +68,7 @@ fun FeedbackScreen(
                         strokeWidth = 2.dp,
                     )
                     Spacer(modifier = Modifier.width(16.dp))
-                } else IconButton(onClick = { viewmodel.sendFeedback() }) {
+                } else IconButton(onClick = { viewModel.sendFeedback() }) {
                     Icon(imageVector = Icons.Outlined.Send, contentDescription = "Send")
                 }
             }
@@ -82,7 +83,7 @@ fun FeedbackScreen(
             TextField(
                 value = uiState.text,
                 onValueChange = {
-                    viewmodel.updateFeedbackText(it)
+                    viewModel.updateFeedbackText(it)
                 },
                 modifier = Modifier
                     .height(400.dp),
@@ -114,5 +115,8 @@ fun FeedbackScreen(
 @Preview
 @Composable
 fun FeedbackScreenPreview() {
-    FeedbackScreen(navHostController = rememberNavController())
+    FeedbackScreen(
+        navHostController = rememberNavController(),
+        viewModel = viewModel<FeedbackScreenViewmodel>(),
+    )
 }

@@ -24,8 +24,9 @@ import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreen
 @Composable
 fun ReadingScreen(
     navHostController: NavHostController,
+    viewModel: HomeScreenViewModel,
 ) {
-    val viewModel: HomeScreenViewModel = viewModel<HomeScreenViewModel>()
+
     val uiState = viewModel.uiState.collectAsState().value
 
     Scaffold(
@@ -55,5 +56,6 @@ fun ReadingScreen(
 fun ReadingScreenPreview() {
     ReadingScreen(
         navHostController = rememberNavController(),
+        viewModel = viewModel<HomeScreenViewModel>(),
     )
 }

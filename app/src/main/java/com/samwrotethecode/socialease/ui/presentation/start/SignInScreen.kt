@@ -63,6 +63,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.composables.GoogleSignInButton
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 import com.samwrotethecode.socialease.ui.presentation.start.viewmodels.SignInScreenViewModel
 
@@ -71,11 +72,11 @@ import com.samwrotethecode.socialease.ui.presentation.start.viewmodels.SignInScr
 fun SignInScreen(
     windowSize: WindowWidthSizeClass,
     navHostController: NavHostController,
+    viewModel: SignInScreenViewModel,
     onSignInWithGoogle: () -> Unit
 ) {
 
-    val signInViewModel: SignInScreenViewModel = viewModel<SignInScreenViewModel>()
-    val uiState = signInViewModel.uiState.collectAsState().value
+    val uiState = viewModel.uiState.collectAsState().value
 
     val context = LocalContext.current
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -145,7 +146,7 @@ fun SignInScreen(
                     Spacer(modifier = Modifier.height(8.dp))
                     OutlinedTextField(
                         value = uiState.email,
-                        onValueChange = { signInViewModel.updateEmail(it) },
+                        onValueChange = { viewModel.updateEmail(it) },
                         modifier = Modifier.fillMaxWidth(),
                         singleLine = true,
                         isError = uiState.showEmailError,
@@ -167,7 +168,7 @@ fun SignInScreen(
                     Spacer(modifier = Modifier.height(8.dp))
                     OutlinedTextField(
                         value = uiState.password,
-                        onValueChange = { signInViewModel.updatePassword(it) },
+                        onValueChange = { viewModel.updatePassword(it) },
                         modifier = Modifier.fillMaxWidth(),
                         singleLine = true,
                         isError = uiState.showPasswordError,
@@ -182,7 +183,7 @@ fun SignInScreen(
                         label = { Text(text = "Password") },
                         trailingIcon = {
                             IconButton(onClick = {
-                                signInViewModel.hideOrShowPassword()
+                                viewModel.hideOrShowPassword()
                             }) {
                                 Icon(
                                     imageVector = if (uiState.showPassword) Icons.Outlined.VisibilityOff
@@ -202,7 +203,7 @@ fun SignInScreen(
                             // first hide keyboard
                             keyboardController?.hide()
                             // then sign in
-                            signInViewModel.signInWithEmailPwd()
+                            viewModel.signInWithEmailPwd()
                         }),
                     )
                     Spacer(modifier = Modifier.height(16.dp))
@@ -226,7 +227,7 @@ fun SignInScreen(
                     ) {
                         Button(
                             onClick = {
-                                signInViewModel.signInWithEmailPwd()
+                                viewModel.signInWithEmailPwd()
                             },
                         ) {
                             Row {
@@ -278,8 +279,8 @@ fun SignInScreenPreview() {
             LocalContext.current as Activity
         ).widthSizeClass,
         navHostController = rememberNavController(),
-        onSignInWithGoogle = {},
-    )
+        viewModel = viewModel<SignInScreenViewModel>(),
+    ) {}
 }
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -293,6 +294,6 @@ fun SignInScreenPreviewRotated() {
             LocalContext.current as Activity
         ).widthSizeClass,
         navHostController = rememberNavController(),
-        onSignInWithGoogle = {},
-    )
+        viewModel = viewModel<SignInScreenViewModel>(),
+    ) {}
 }

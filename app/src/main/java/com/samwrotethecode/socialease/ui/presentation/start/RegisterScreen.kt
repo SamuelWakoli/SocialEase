@@ -67,6 +67,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.composables.GoogleSignInButton
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 import com.samwrotethecode.socialease.ui.presentation.start.viewmodels.SignInScreenViewModel
 
@@ -75,11 +76,11 @@ import com.samwrotethecode.socialease.ui.presentation.start.viewmodels.SignInScr
 fun RegisterScreen(
     windowSize: WindowWidthSizeClass,
     navHostController: NavHostController,
+    viewModel: SignInScreenViewModel,
     onSignInWithGoogle: () -> Unit
 ) {
 
-    val signInViewModel: SignInScreenViewModel = viewModel<SignInScreenViewModel>()
-    val uiState = signInViewModel.uiState.collectAsState().value
+    val uiState = viewModel.uiState.collectAsState().value
 
     val context = LocalContext.current
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -170,7 +171,7 @@ fun RegisterScreen(
                         Spacer(modifier = Modifier.height(8.dp))
                         OutlinedTextField(
                             value = uiState.name,
-                            onValueChange = { signInViewModel.updateName(it) },
+                            onValueChange = { viewModel.updateName(it) },
                             modifier = Modifier.fillMaxWidth(),
                             singleLine = true,
                             isError = uiState.showNameError,
@@ -193,7 +194,7 @@ fun RegisterScreen(
                         Spacer(modifier = Modifier.height(8.dp))
                         OutlinedTextField(
                             value = uiState.email,
-                            onValueChange = { signInViewModel.updateEmail(it) },
+                            onValueChange = { viewModel.updateEmail(it) },
                             modifier = Modifier.fillMaxWidth(),
                             singleLine = true,
                             isError = uiState.showEmailError,
@@ -215,7 +216,7 @@ fun RegisterScreen(
                         Spacer(modifier = Modifier.height(8.dp))
                         OutlinedTextField(
                             value = uiState.password,
-                            onValueChange = { signInViewModel.updatePassword(it) },
+                            onValueChange = { viewModel.updatePassword(it) },
                             modifier = Modifier.fillMaxWidth(),
                             singleLine = true,
                             isError = uiState.showPasswordError,
@@ -230,7 +231,7 @@ fun RegisterScreen(
                             label = { Text(text = "Password") },
                             trailingIcon = {
                                 IconButton(onClick = {
-                                    signInViewModel.hideOrShowPassword()
+                                    viewModel.hideOrShowPassword()
                                 }) {
                                     Icon(
                                         imageVector = if (uiState.showPassword) Icons.Outlined.VisibilityOff
@@ -250,7 +251,7 @@ fun RegisterScreen(
                                 // first hide keyboard
                                 keyboardController?.hide()
                                 // then sign in
-                                signInViewModel.registerWithEmailPwd()
+                                viewModel.registerWithEmailPwd()
                             }),
                         )
                         Spacer(modifier = Modifier.height(16.dp))
@@ -260,7 +261,7 @@ fun RegisterScreen(
                         Spacer(modifier = Modifier.height(4.dp))
                         OutlinedButton(
                             onClick = {
-                                signInViewModel.registerWithEmailPwd()
+                                viewModel.registerWithEmailPwd()
                             },
                             modifier = Modifier.fillMaxWidth()
                         ) {
@@ -298,8 +299,8 @@ fun RegisterScreenPreview() {
             LocalContext.current as Activity
         ).widthSizeClass,
         navHostController = rememberNavController(),
-        onSignInWithGoogle = {},
-    )
+        viewModel = viewModel<SignInScreenViewModel>(),
+    ) {}
 }
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -313,6 +314,6 @@ fun RegisterScreenPreviewRotated() {
             LocalContext.current as Activity
         ).widthSizeClass,
         navHostController = rememberNavController(),
-        onSignInWithGoogle = {},
-    )
+        viewModel = viewModel<SignInScreenViewModel>(),
+    ) {}
 }

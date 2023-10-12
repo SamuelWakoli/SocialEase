@@ -24,8 +24,10 @@ import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BookmarksScreen(navHostController: NavHostController) {
-    val viewModel = viewModel<HomeScreenViewModel>()
+fun BookmarksScreen(
+    navHostController: NavHostController,
+    viewModel: HomeScreenViewModel,
+) {
     val uiState = viewModel.uiState.collectAsState().value
 
     Scaffold(
@@ -60,5 +62,8 @@ fun BookmarksScreen(navHostController: NavHostController) {
 @Preview
 @Composable
 fun BookmarksScreenPreview() {
-    BookmarksScreen(navHostController = rememberNavController())
+    BookmarksScreen(
+        navHostController = rememberNavController(),
+        viewModel = viewModel<HomeScreenViewModel>(),
+    )
 }

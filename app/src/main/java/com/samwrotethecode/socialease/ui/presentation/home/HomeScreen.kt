@@ -36,8 +36,8 @@ import kotlinx.coroutines.launch
 fun HomeScreen(
     navHostController: NavHostController,
     windowSize: WindowWidthSizeClass,
+    viewModel: HomeScreenViewModel,
 ) {
-    val viewModel: HomeScreenViewModel = viewModel()
     val uiState = viewModel.uiState.collectAsState().value
     val drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val applicationContext = LocalContext.current.applicationContext
@@ -100,5 +100,6 @@ fun HomeScreenPreview() {
     HomeScreen(
         navHostController = rememberNavController(),
         windowSize = WindowWidthSizeClass.Compact,
+        viewModel = viewModel<HomeScreenViewModel>(),
     )
 }
