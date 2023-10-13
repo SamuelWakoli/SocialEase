@@ -113,6 +113,7 @@ fun NavGraph(
             SubTopicsScreen(
                 navHostController = navHostController,
                 viewModel = homeScreenViewModel,
+                windowWidthSize = windowSize
             )
         }
         composable(route = Screens.ReadingScreen.route) {

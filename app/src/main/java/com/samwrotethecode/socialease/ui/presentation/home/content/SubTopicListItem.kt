@@ -4,8 +4,12 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.BookmarkAdd
 import androidx.compose.material.icons.outlined.Share
@@ -17,6 +21,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,11 +39,18 @@ import com.samwrotethecode.socialease.R
 fun SubTopicListItem(
     title: String,
     generalDescription: String,
+    windowSize: WindowWidthSizeClass,
     onClick: () -> Unit = {},
 ) {
     Card(
         onClick = onClick,
-        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+        modifier = Modifier.widthIn(
+            max = when (windowSize) {
+                WindowWidthSizeClass.Compact -> 400.dp
+                WindowWidthSizeClass.Medium -> 300.dp
+                else -> 280.dp
+            }
+        ).padding(horizontal = 8.dp, vertical = 4.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -91,27 +103,133 @@ fun SubTopicListItem(
     }
 }
 
-@Preview(showSystemUi = false, showBackground = true)
+@Preview(showSystemUi = true, showBackground = true)
 @Composable
-fun SubTopicListItemPreview() {
+fun SubTopicListItemCompactPreview() {
     MaterialTheme {
-        SubTopicListItem(
-            title = "Title",
-            generalDescription = stringResource(id = R.string.lorem_ipsum)
-        )
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .fillMaxSize()
+        ) {
+            repeat(10) {
+                SubTopicListItem(
+                    title = "Title",
+                    generalDescription = stringResource(id = R.string.lorem_ipsum),
+                    windowSize = WindowWidthSizeClass.Compact,
+                )
+            }
+        }
     }
 }
 
 @Preview(
-    showBackground = true, showSystemUi = false,
+    showBackground = true, showSystemUi = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
 )
 @Composable
-fun SubTopicListItemDarkThemePreview() {
+fun SubTopicListItemDarkThemeCompactPreview() {
     MaterialTheme {
-        SubTopicListItem(
-            title = "Title",
-            generalDescription = stringResource(id = R.string.lorem_ipsum)
-        )
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .fillMaxSize()
+        ) {
+            repeat(10) {
+                SubTopicListItem(
+                    title = "Title",
+                    generalDescription = stringResource(id = R.string.lorem_ipsum),
+                    windowSize = WindowWidthSizeClass.Compact
+                )
+            }
+        }
+    }
+}
+
+
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun SubTopicListItemMediumPreview() {
+    MaterialTheme {
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .fillMaxSize()
+        ) {
+            repeat(10) {
+                SubTopicListItem(
+                    title = "Title",
+                    generalDescription = stringResource(id = R.string.lorem_ipsum),
+                    windowSize = WindowWidthSizeClass.Medium,
+                )
+            }
+        }
+    }
+}
+
+@Preview(
+    showBackground = true, showSystemUi = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
+)
+@Composable
+fun SubTopicListItemDarkThemeMediumPreview() {
+    MaterialTheme {
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .fillMaxSize()
+        ) {
+            repeat(10) {
+                SubTopicListItem(
+                    title = "Title",
+                    generalDescription = stringResource(id = R.string.lorem_ipsum),
+                    windowSize = WindowWidthSizeClass.Medium
+                )
+            }
+        }
+    }
+}
+
+
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun SubTopicListItemExpandedPreview() {
+    MaterialTheme {
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .fillMaxSize()
+        ) {
+            repeat(10) {
+                SubTopicListItem(
+                    title = "Title",
+                    generalDescription = stringResource(id = R.string.lorem_ipsum),
+                    windowSize = WindowWidthSizeClass.Expanded,
+                )
+            }
+        }
+    }
+}
+
+@Preview(
+    showBackground = true, showSystemUi = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
+)
+@Composable
+fun SubTopicListItemDarkThemeExpandedPreview() {
+    MaterialTheme {
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .fillMaxSize()
+        ) {
+            repeat(10) {
+                SubTopicListItem(
+                    title = "Title",
+                    generalDescription = stringResource(id = R.string.lorem_ipsum),
+                    windowSize = WindowWidthSizeClass.Expanded
+                )
+            }
+        }
     }
 }
