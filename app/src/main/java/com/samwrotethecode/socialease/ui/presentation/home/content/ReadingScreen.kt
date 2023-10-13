@@ -1,10 +1,10 @@
 package com.samwrotethecode.socialease.ui.presentation.home.content
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -32,8 +33,10 @@ fun ReadingScreen(
 ) {
 
     val uiState = viewModel.uiState.collectAsState().value
+    val contentModifier = Modifier
 
     Scaffold(
+        modifier = Modifier.widthIn(max = 800.dp),
         topBar = {
             CenterAlignedTopAppBar(
                 navigationIcon = {
@@ -50,17 +53,22 @@ fun ReadingScreen(
                     )
                 },
             )
-        }
+        },
     ) {
-        // TODO: Add Lazy Column here
-        Column(
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .padding(it)
-                .verticalScroll(rememberScrollState())
         ) {
-
+            items(count = uiState.currentSubTopic!!.content.size) { index ->
+                ReadingScreenListItem(
+                    modifier = contentModifier,
+                    title = stringResource(id = uiState.currentSubTopic.content[index].titleId!!),
+                    description = stringResource(id = uiState.currentSubTopic.content[index].descriptionId!!),
+                )
+            }
         }
     }
 }
