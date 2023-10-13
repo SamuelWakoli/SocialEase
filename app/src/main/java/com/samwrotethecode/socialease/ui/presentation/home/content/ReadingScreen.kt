@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -38,21 +40,27 @@ fun ReadingScreen(
     Scaffold(
         modifier = Modifier.widthIn(max = 800.dp),
         topBar = {
-            CenterAlignedTopAppBar(
-                navigationIcon = {
-                    IconButton(onClick = { navHostController.navigateUp() }) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Navigate back",
-                        )
-                    }
-                },
-                title = {
-                    Text(
-                        text = stringResource(id = uiState.currentSubTopic?.titleId!!)
+            CenterAlignedTopAppBar(navigationIcon = {
+                IconButton(onClick = { navHostController.navigateUp() }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Navigate back",
                     )
-                },
-            )
+                }
+            }, title = {
+                Text(
+                    text = stringResource(id = uiState.currentSubTopic?.titleId!!)
+                )
+            }, actions = {
+                IconButton(onClick = { viewModel.updateAppbarDropDownMenu() }) {
+                    Icon(imageVector = Icons.Default.MoreVert, contentDescription = "Options")
+                    ReadingScreenDropdownMenu(
+                        uiState = uiState,
+                        viewModel = viewModel,
+                        navHostController = navHostController
+                    )
+                }
+            })
         },
     ) {
         LazyColumn(
