@@ -50,7 +50,7 @@ fun SubTopicsScreen(
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop,
-            alpha = 0.2f
+            alpha = 0.2f,
         )
         Scaffold(
             modifier = Modifier.fillMaxSize(),
