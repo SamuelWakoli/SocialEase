@@ -1,6 +1,7 @@
 package com.samwrotethecode.socialease.ui.presentation.home.viewmodels
 
 import android.net.Uri
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
@@ -29,27 +30,19 @@ data class HomeUiStateModel(
     val displayName: String? = null,
     val email: String? = null,
     val showDropdownMenu: Boolean = false,
+    @DrawableRes val currentBackgroundImage: Int? = null,
 
     // SubTopicsScreen state
     val currentCategory: TopicCategories? = null,
-    val currentSubTopicTitleId: Int? = null,
+    @StringRes val currentSubTopicTitleId: Int? = null,
     val currentSubTopicsList: List<SubTopicsModel>? = null,
 
     // ReadingScreen state
     val currentSubTopic: SubTopicsModel? = null,
-
     )
 
 enum class TopicCategories {
-    COMMUNICATION,
-    RELATIONSHIP_BUILDING,
-    COOPERATION,
-    CONFLICT_RESOLUTION,
-    PROBLEM_SOLVING,
-    SELF_AWARENESS,
-    SELF_MANAGEMENT,
-    EMPATHY,
-    ASSERTIVENESS
+    COMMUNICATION, RELATIONSHIP_BUILDING, COOPERATION, CONFLICT_RESOLUTION, PROBLEM_SOLVING, SELF_AWARENESS, SELF_MANAGEMENT, EMPATHY, ASSERTIVENESS
 }
 
 class HomeScreenViewModel : ViewModel() {
@@ -60,7 +53,6 @@ class HomeScreenViewModel : ViewModel() {
     private val currentUser: FirebaseUser? = auth.currentUser
 
     init {
-        resetHomeState()
         getUserData()
     }
 
@@ -70,14 +62,6 @@ class HomeScreenViewModel : ViewModel() {
                 photoUrl = currentUser?.photoUrl,
                 displayName = currentUser?.displayName,
                 email = currentUser?.email,
-            )
-        }
-    }
-
-    private fun resetHomeState() {
-        _uiState.update {
-            it.copy(
-                showDropdownMenu = false,
             )
         }
     }
@@ -99,8 +83,13 @@ class HomeScreenViewModel : ViewModel() {
                     it.copy(
                         currentSubTopicTitleId = R.string.communication,
                         currentSubTopicsList = communicationSubTopics,
+                        currentBackgroundImage = R.drawable.communication,
                     )
                 }
+                Log.d(
+                    "CURRENT SUB TOPIC TITLE ID",
+                    "ASSIGNED: ${_uiState.value.currentSubTopicTitleId} "
+                )
             }
 
             TopicCategories.RELATIONSHIP_BUILDING -> {
@@ -108,6 +97,7 @@ class HomeScreenViewModel : ViewModel() {
                     it.copy(
                         currentSubTopicTitleId = R.string.relationship_building,
                         currentSubTopicsList = relationshipBuildingSubTopics,
+                        currentBackgroundImage = R.drawable.relationship_building,
                     )
                 }
             }
@@ -117,6 +107,7 @@ class HomeScreenViewModel : ViewModel() {
                     it.copy(
                         currentSubTopicTitleId = R.string.cooperation,
                         currentSubTopicsList = cooperationSubTopics,
+                        currentBackgroundImage = R.drawable.cooperation,
                     )
                 }
             }
@@ -126,6 +117,7 @@ class HomeScreenViewModel : ViewModel() {
                     it.copy(
                         currentSubTopicTitleId = R.string.conflict_resolution,
                         currentSubTopicsList = conflictResolutionSubTopics,
+                        currentBackgroundImage = R.drawable.conflict_resolution,
                     )
                 }
             }
@@ -135,6 +127,7 @@ class HomeScreenViewModel : ViewModel() {
                     it.copy(
                         currentSubTopicTitleId = R.string.problem_solving,
                         currentSubTopicsList = problemSolvingSubTopics,
+                        currentBackgroundImage = R.drawable.problem_solving,
                     )
                 }
             }
@@ -144,6 +137,7 @@ class HomeScreenViewModel : ViewModel() {
                     it.copy(
                         currentSubTopicTitleId = R.string.self_awareness,
                         currentSubTopicsList = selfAwarenessSubTopics,
+                        currentBackgroundImage = R.drawable.self_awareness,
                     )
                 }
             }
@@ -153,6 +147,7 @@ class HomeScreenViewModel : ViewModel() {
                     it.copy(
                         currentSubTopicTitleId = R.string.self_management,
                         currentSubTopicsList = selfManagementSubTopics,
+                        currentBackgroundImage = R.drawable.self_management,
                     )
                 }
             }
@@ -162,6 +157,7 @@ class HomeScreenViewModel : ViewModel() {
                     it.copy(
                         currentSubTopicTitleId = R.string.empathy,
                         currentSubTopicsList = empathySubTopics,
+                        currentBackgroundImage = R.drawable.empathy,
                     )
                 }
             }
@@ -171,12 +167,20 @@ class HomeScreenViewModel : ViewModel() {
                     it.copy(
                         currentSubTopicTitleId = R.string.assertiveness,
                         currentSubTopicsList = assertivenessSubTopics,
+                        currentBackgroundImage = R.drawable.assertiveness,
                     )
                 }
             }
 
             else -> {}
         }
+    }
+
+    /**
+     * This func updates the [ReadingScreen] data
+     */
+    fun updateReadingScreenState(currentSubTopic: SubTopicsModel) {
+        _uiState.update { it.copy(currentSubTopic = currentSubTopic) }
     }
 
     fun logOut() {

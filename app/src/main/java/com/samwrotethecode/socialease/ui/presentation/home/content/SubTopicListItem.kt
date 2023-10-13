@@ -1,5 +1,6 @@
 package com.samwrotethecode.socialease.ui.presentation.home.content
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +11,7 @@ import androidx.compose.material.icons.outlined.BookmarkAdd
 import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
@@ -27,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.samwrotethecode.socialease.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SubTopicListItem(
     title: String,
@@ -34,17 +37,18 @@ fun SubTopicListItem(
     onClick: () -> Unit = {},
 ) {
     Card(
+        onClick = onClick,
         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-            contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
         )
     ) {
         ListItem(
             headlineContent = {
                 Text(
                     text = title,
-                    color = MaterialTheme.colorScheme.onTertiaryContainer
+                    style = MaterialTheme.typography.titleMedium
                 )
             },
             supportingContent = {
@@ -90,6 +94,20 @@ fun SubTopicListItem(
 @Preview(showSystemUi = false, showBackground = true)
 @Composable
 fun SubTopicListItemPreview() {
+    MaterialTheme {
+        SubTopicListItem(
+            title = "Title",
+            generalDescription = stringResource(id = R.string.lorem_ipsum)
+        )
+    }
+}
+
+@Preview(
+    showBackground = true, showSystemUi = false,
+    uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
+)
+@Composable
+fun SubTopicListItemDarkThemePreview() {
     MaterialTheme {
         SubTopicListItem(
             title = "Title",

@@ -5,8 +5,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,11 +35,21 @@ fun ReadingScreen(
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(title = {
-                Text(
-                    text = stringResource(id = uiState.currentSubTopic!!.titleId)
-                )
-            })
+            CenterAlignedTopAppBar(
+                navigationIcon = {
+                    IconButton(onClick = { navHostController.navigateUp() }) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Navigate back",
+                        )
+                    }
+                },
+                title = {
+                    Text(
+                        text = stringResource(id = uiState.currentSubTopic?.titleId!!)
+                    )
+                },
+            )
         }
     ) {
         // TODO: Add Lazy Column here
