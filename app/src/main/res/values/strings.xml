@@ -3,32 +3,26 @@
     <string name="web_client_id">AIzaSyBuxhB_h_qWn8iOrR2Wn35SKxL00TtlWzk</string>
     <string name="lorem_ipsum"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend diam, vel rutrum tellus vulputate quis. </string>
 
-    <!--  Topics  -->
-    <string name="communication">Communication</string>
-    <string name="communication_description">This includes both verbal and nonverbal communication skills, such as speaking clearly and concisely, listening actively, and maintaining eye contact.</string>
+    <!--  APP UI STRING  -->
+    <string name="navigate_back">Navigate back</string>
 
-    <string name="cooperation">Cooperation</string>
-    <string name="cooperation_description">This is the ability to work with others towards a common goal, including being willing to share, compromise, and help others.</string>
-
-    <string name="conflict_resolution">Conflict Resolution</string>
-    <string name="conflict_resolution_description">This is the ability to resolve disagreements peacefully and respectfully.</string>
-
-    <string name="problem_solving">Problem Solving</string>
-    <string name="problem_solving_description">This is the ability to identify and solve problems in a systematic and effective way.</string>
-
-    <string name="self_awareness">Self Awareness</string>
-    <string name="self_awareness_description">This is the ability to understand your own thoughts, feelings, and behaviors.</string>
-
-    <string name="relationship_building">Relationship Building</string>
-    <string name="relationship_building_description">This involves the ability to develop and maintain positive relationships with others, including being friendly, supportive, and respectful.</string>
-
-    <string name="self_management">Self Management</string>
-    <string name="self_management_description">This is the ability to regulate your emotions and behaviors in a healthy way.</string>
-
-    <string name="empathy">Empathy</string>
-    <string name="empathy_description">This is the ability to understand and share the feelings of another person.</string>
-
-    <string name="assertiveness">Assertiveness</string>
-    <string name="assertiveness_description">This is the ability to express your needs and wants in a clear and direct way, while respecting the rights of others.</string>
+    <!--  INTRO SCREEN CONTENT  -->
+    <string name="skip">Skip</string>
+    <!--  PAGE 1  -->
+    <string name="welcome_to_socialease">Welcome to SocialEase</string>
+    <string name="enhance_your_social_skills">Enhance Your Social Skills</string>
+    <string name="welcome_to_socialease_content">"Welcome to SocialEase, your personal guide to improving your social skills and boosting your confidence in social situations.Whether you're looking to excel in networking, make new friends, or enhance your professional relationships, SocialEase has you covered.Swipe right to get started on your journey to becoming a more socially confident you!"</string>
+    <!--  PAGE 2  -->
+    <string name="what_socialease_offers">What SocialEase Offers</string>
+    <string name="your_comprehensive_social_skills_companion">Your Comprehensive Social Skills Companion</string>
+    <string name="what_socialease_offers_content">SocialEase offers a wealth of resources and guidance to help you navigate the intricacies of social interactions.\nExplore a wide range of topics, including effective communication, active listening, body language, and more.\nEach topic is packed with tips, real-life examples, and practical exercises to help you apply what you learn in real-world situations.</string>
+    <!--  PAGE 3  -->
+    <string name="how_it_works">How It Works</string>
+    <string name="simple_steps_to_success">Simple Steps to Success</string>
+    <string name="how_it_works_content">Using SocialEase is easy! Here\'s how it works:\\n\n- Browse our extensive library of social skills topics.\\n\n- Read insightful articles and tips to gain knowledge.\\n\n- Practice what you\'ve learned with interactive exercises.\\n\n- Track your progress and see your social skills flourish.\\n\nSwipe right to begin your journey towards becoming a more socially confident and skilled individual.</string>
+    <!--  PAGE 4  -->
+    <string name="start_your_journey">Start Your Journey</string>
+    <string name="let_s_get_started">Let\'s Get Started</string>
+    <string name="start_your_journey_content">It\'s time to embark on your journey to improved social skills and greater self-confidence.\nSwipe right to start exploring our comprehensive library and discover how SocialEase can make a positive impact on your social interactions.\nRemember, every interaction is an opportunity to grow, and SocialEase is here to support you every step of the way.</string>
 
 </resources>

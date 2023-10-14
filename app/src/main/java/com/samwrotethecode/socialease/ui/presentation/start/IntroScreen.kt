@@ -44,11 +44,13 @@ import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 import com.samwrotethecode.socialease.ui.presentation.start.models.IntroScreenData
 import kotlinx.coroutines.launch
@@ -95,7 +97,7 @@ fun IntroScreen(
                             ) {
                                 Spacer(modifier = Modifier.height(20.dp))
                                 Text(
-                                    text = IntroScreenData[currentPage].title,
+                                    text = stringResource(id = IntroScreenData[currentPage].title),
                                     style = TextStyle(
                                         color = Color.White,
                                         fontSize = MaterialTheme.typography.headlineLarge.fontSize,
@@ -105,7 +107,7 @@ fun IntroScreen(
                                 )
                                 Spacer(modifier = Modifier.height(20.dp))
                                 Text(
-                                    text = IntroScreenData[currentPage].subTitle,
+                                    text = stringResource(id = IntroScreenData[currentPage].subTitle),
                                     style = TextStyle(
                                         color = Color.White,
                                         fontSize = MaterialTheme.typography.headlineSmall.fontSize,
@@ -118,7 +120,7 @@ fun IntroScreen(
                             Column {
                                 Card {
                                     Text(
-                                        text = IntroScreenData[currentPage].content,
+                                        text = stringResource(id = IntroScreenData[currentPage].content),
                                         modifier = Modifier.padding(8.dp),
                                         style = TextStyle(
                                             fontSize = MaterialTheme.typography.bodyLarge.fontSize,
@@ -155,7 +157,7 @@ fun IntroScreen(
                             ) {
                                 Spacer(modifier = Modifier.height(20.dp))
                                 Text(
-                                    text = IntroScreenData[currentPage].title,
+                                    text = stringResource(id = IntroScreenData[currentPage].title),
                                     style = TextStyle(
                                         color = Color.White,
                                         fontSize = MaterialTheme.typography.headlineLarge.fontSize,
@@ -165,7 +167,7 @@ fun IntroScreen(
                                 )
                                 Spacer(modifier = Modifier.height(20.dp))
                                 Text(
-                                    text = IntroScreenData[currentPage].subTitle,
+                                    text = stringResource(id = IntroScreenData[currentPage].subTitle),
                                     style = TextStyle(
                                         color = Color.White,
                                         fontSize = MaterialTheme.typography.headlineSmall.fontSize,
@@ -183,7 +185,7 @@ fun IntroScreen(
                                     modifier = Modifier.widthIn(max = 400.dp)
                                 ) {
                                     Text(
-                                        text = IntroScreenData[currentPage].content,
+                                        text = stringResource(id = IntroScreenData[currentPage].content),
                                         modifier = Modifier.padding(8.dp),
                                         style = TextStyle(
                                             fontSize = MaterialTheme.typography.bodyLarge.fontSize,
@@ -214,7 +216,7 @@ fun IntroScreen(
                             launchSingleTop = true
                         }
                     }) {
-                        Text(text = "Skip")
+                        Text(text = stringResource(R.string.skip))
                     }
 
                     if (pagerState.currentPage != pagerState.initialPage) {
