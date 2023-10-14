@@ -12,9 +12,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.samwrotethecode.socialease.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,7 +26,7 @@ fun SettingsScreen(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = "Settings") },
+                title = { Text(text = stringResource(id = R.string.search)) },
                 navigationIcon = {
                     IconButton(onClick = {
                         // TODO: Navigate back, then save settings
@@ -32,7 +34,7 @@ fun SettingsScreen(
                     }) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Navigate back"
+                            contentDescription = stringResource(id = R.string.navigate_back)
                         )
                     }
 

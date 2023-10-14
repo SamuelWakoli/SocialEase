@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -50,7 +51,7 @@ fun ReadingScreen(
     Box {
         Log.d(readingScreenTag, "Image ID: ${uiState.currentBackgroundImage!!}")
         Image(
-            painterResource(id = uiState.currentBackgroundImage!!),
+            painterResource(id = uiState.currentBackgroundImage),
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop,
@@ -67,7 +68,7 @@ fun ReadingScreen(
                         IconButton(onClick = { navHostController.navigateUp() }) {
                             Icon(
                                 imageVector = Icons.Default.ArrowBack,
-                                contentDescription = "Navigate back",
+                                contentDescription = stringResource(id = R.string.navigate_back),
                             )
                         }
                     },

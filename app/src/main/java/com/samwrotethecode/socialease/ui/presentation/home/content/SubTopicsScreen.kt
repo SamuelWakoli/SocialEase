@@ -34,6 +34,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.data.local_data.SubTopicsModel
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
@@ -73,7 +74,7 @@ fun SubTopicsScreen(
                         IconButton(onClick = { navHostController.navigateUp() }) {
                             Icon(
                                 imageVector = Icons.Default.ArrowBack,
-                                contentDescription = "Navigate back"
+                                contentDescription = stringResource(id = R.string.navigate_back)
                             )
                         }
                     },

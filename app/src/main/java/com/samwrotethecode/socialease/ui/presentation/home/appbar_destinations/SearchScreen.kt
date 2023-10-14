@@ -26,13 +26,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
+import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SearchScreenViewModel
 
 @Composable
@@ -43,14 +44,12 @@ fun SearchScreen(
     val uiState = viewModel.uiState.collectAsState().value
 
     Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Card(
             modifier = Modifier.padding(16.dp)
         ) {
-            TextField(
-                value = uiState.query,
+            TextField(value = uiState.query,
                 onValueChange = {
                     viewModel.updateSearchQuery(it)
                 },
@@ -65,26 +64,24 @@ fun SearchScreen(
                     IconButton(onClick = { navHostController.navigateUp() }) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Navigate back"
+                            contentDescription = stringResource(id = R.string.navigate_back)
                         )
                     }
                 },
                 placeholder = {
-                    Text(text = "Search")
+                    Text(text = stringResource(id = R.string.search))
                 },
                 trailingIcon = {
                     IconButton(onClick = { /*TODO*/ }) {
                         Icon(imageVector = Icons.Outlined.Search, contentDescription = "Search")
                     }
-                }
-            )
+                })
         }
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
-            verticalArrangement =
-            if (uiState.noResults) Arrangement.Center else Arrangement.Top,
+            verticalArrangement = if (uiState.noResults) Arrangement.Center else Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             if (uiState.noResults) {
@@ -96,7 +93,7 @@ fun SearchScreen(
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(
-                    text = "No results found",
+                    text = stringResource(R.string.no_results_found),
                     style = TextStyle(
                         fontSize = MaterialTheme.typography.headlineSmall.fontSize,
                         fontWeight = MaterialTheme.typography.headlineSmall.fontWeight,

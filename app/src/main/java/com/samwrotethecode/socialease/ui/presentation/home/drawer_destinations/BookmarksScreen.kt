@@ -68,14 +68,14 @@ fun BookmarksScreen(
             containerColor = Color.Transparent,
             topBar = {
                 CenterAlignedTopAppBar(
-                    title = { Text(text = "Bookmarks") },
+                    title = { Text(text = stringResource(id = R.string.bookmarks)) },
                     navigationIcon = {
                         IconButton(
                             onClick = { navHostController.navigateUp() },
                         ) {
                             Icon(
                                 imageVector = Icons.Default.ArrowBack,
-                                contentDescription = "Navigate back"
+                                contentDescription = stringResource(id = R.string.navigate_back),
                             )
 
                         }
@@ -174,7 +174,7 @@ fun BookmarksScreen(
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        text = "No bookmarks added",
+                        text = stringResource(R.string.no_bookmarks_added),
                         style = MaterialTheme.typography.titleLarge,
                         color = MaterialTheme.colorScheme.primary,
                     )

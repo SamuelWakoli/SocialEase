@@ -64,4 +64,20 @@
     <string name="theme">Theme</string>
     <!--  DROPDOWN MENU  -->
     <string name="settings">Settings</string>
+    <!--  PROFILE SCREEN  -->
+    <string name="profile">Profile</string>
+    <string name="profile_display_name">%1$s</string>
+    <string name="profile_email">%1$s</string>
+    <string name="log_out">Log out</string>
+    <string name="delete_account">Delete account</string>
+    <!--  FEEDBACK SCREEN  -->
+    <string name="type_your_feedback_here">Type your feedback here</string>
+    <string name="feedback_sent">Feedback Sent</string>
+    <string name="the_app_developer_has_received_your_feedback_and_will_take_time_to_review_it_thank_you">The app developer has received your feedback and will take time to review it. Thank you.</string>
+    <!--  BOOKMARKS SCREEN  -->
+    <string name="no_bookmarks_added">No bookmarks added</string>
+
+    <!--  SEARCH SCREEN  -->
+    <string name="no_results_found">No results found</string>
+
 </resources>
