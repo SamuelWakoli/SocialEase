@@ -47,6 +47,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -63,7 +64,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.composables.GoogleSignInButton
-import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 import com.samwrotethecode.socialease.ui.presentation.start.viewmodels.SignInScreenViewModel
 
@@ -82,7 +82,10 @@ fun SignInScreen(
     val keyboardController = LocalSoftwareKeyboardController.current
     LaunchedEffect(key1 = uiState.isSignInSuccess, block = {
         if (uiState.isSignInSuccess) {
-            Toast.makeText(context, "Signed in Successfully", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                context,
+                R.string.signed_in_successfully, Toast.LENGTH_LONG
+            ).show()
 
             navHostController.navigate(Screens.HomeScreen.route) {
                 navHostController.popBackStack()
@@ -121,7 +124,7 @@ fun SignInScreen(
                     ) {
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        text = "SocialEase", style = TextStyle(
+                        text = stringResource(id = R.string.app_name), style = TextStyle(
                             color = MaterialTheme.colorScheme.primary,
                             fontSize = MaterialTheme.typography.headlineLarge.fontSize,
                             fontWeight = FontWeight.SemiBold,
@@ -136,7 +139,7 @@ fun SignInScreen(
                     Spacer(modifier = Modifier.height(32.dp))
                     Row(modifier = Modifier.fillMaxWidth()) {
                         Text(
-                            text = "Sign in",
+                            text = stringResource(R.string.sign_in),
                             style = TextStyle(
                                 fontSize = MaterialTheme.typography.headlineSmall.fontSize,
                                 fontWeight = MaterialTheme.typography.headlineSmall.fontWeight,
@@ -150,13 +153,13 @@ fun SignInScreen(
                         modifier = Modifier.fillMaxWidth(),
                         singleLine = true,
                         isError = uiState.showEmailError,
-                        supportingText = { if (uiState.showEmailError) Text(text = "Email cannot be empty") },
+                        supportingText = { if (uiState.showEmailError) Text(text = stringResource(R.string.email_cannot_be_empty)) },
                         leadingIcon = {
                             Icon(
                                 imageVector = Icons.Outlined.Email, contentDescription = null
                             )
                         },
-                        label = { Text(text = "Email") },
+                        label = { Text(text = stringResource(R.string.email)) },
                         shape = MaterialTheme.shapes.medium,
                         keyboardOptions = KeyboardOptions().copy(
                             imeAction = ImeAction.Next,
@@ -172,7 +175,13 @@ fun SignInScreen(
                         modifier = Modifier.fillMaxWidth(),
                         singleLine = true,
                         isError = uiState.showPasswordError,
-                        supportingText = { if (uiState.showPasswordError) Text(text = "Password cannot be empty") },
+                        supportingText = {
+                            if (uiState.showPasswordError) Text(
+                                text = stringResource(
+                                    R.string.password_cannot_be_empty
+                                )
+                            )
+                        },
                         visualTransformation = if (uiState.showPassword) VisualTransformation.None
                         else PasswordVisualTransformation(),
                         leadingIcon = {
@@ -180,7 +189,7 @@ fun SignInScreen(
                                 imageVector = Icons.Outlined.Lock, contentDescription = null
                             )
                         },
-                        label = { Text(text = "Password") },
+                        label = { Text(text = stringResource(R.string.password)) },
                         trailingIcon = {
                             IconButton(onClick = {
                                 viewModel.hideOrShowPassword()
@@ -188,7 +197,9 @@ fun SignInScreen(
                                 Icon(
                                     imageVector = if (uiState.showPassword) Icons.Outlined.VisibilityOff
                                     else Icons.Outlined.Visibility,
-                                    contentDescription = if (uiState.showPassword) "Hide password" else "Show"
+                                    contentDescription = if (uiState.showPassword) stringResource(R.string.hide_password) else stringResource(
+                                        R.string.show
+                                    )
                                 )
                             }
                         },
@@ -207,7 +218,7 @@ fun SignInScreen(
                         }),
                     )
                     Spacer(modifier = Modifier.height(16.dp))
-                    Text(text = " Forgot password? ", style = TextStyle(
+                    Text(text = stringResource(R.string.forgot_password), style = TextStyle(
                         color = MaterialTheme.colorScheme.secondary,
                         textDecoration = TextDecoration.Underline,
                     ), modifier = Modifier
@@ -232,7 +243,7 @@ fun SignInScreen(
                         ) {
                             Row {
                                 Text(
-                                    text = "Sign In",
+                                    text = stringResource(id = R.string.sign_in),
                                     modifier = Modifier.padding(horizontal = 24.dp)
                                 )
                                 if (uiState.isSignInButtonLoading) {
@@ -254,7 +265,7 @@ fun SignInScreen(
                             },
                         ) {
                             Row {
-                                Text(text = "Create Account")
+                                Text(text = stringResource(R.string.create_account))
                             }
                         }
                     }
