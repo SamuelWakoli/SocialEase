@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -67,12 +68,12 @@ fun ForgotPasswordScreen(
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(
-                    title = { Text(text = "Forgot Password") },
+                    title = { Text(text = stringResource(id = R.string.forgot_password)) },
                     navigationIcon = {
                         IconButton(onClick = { navHostController.navigateUp() }) {
                             Icon(
                                 imageVector = Icons.Outlined.ArrowBack,
-                                contentDescription = "Back"
+                                contentDescription = stringResource(id = R.string.navigate_back)
                             )
                         }
                     },
@@ -93,7 +94,7 @@ fun ForgotPasswordScreen(
                     .verticalScroll(rememberScrollState()),
             ) {
                 Text(
-                    "Enter your email to get password reset link",
+                    stringResource(R.string.enter_your_email_to_get_password_reset_link),
                     modifier = Modifier.padding(8.dp),
                 )
                 Spacer(modifier = Modifier.height(8.dp))
@@ -105,13 +106,13 @@ fun ForgotPasswordScreen(
                         .padding(8.dp),
                     singleLine = true,
                     isError = uiState.showEmailError,
-                    supportingText = { if (uiState.showEmailError) Text(text = "Email cannot be empty") },
+                    supportingText = { if (uiState.showEmailError) Text(text = stringResource(id = R.string.email_cannot_be_empty)) },
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Outlined.Email, contentDescription = null
                         )
                     },
-                    label = { Text(text = "Email") },
+                    label = { Text(text = stringResource(id = R.string.email)) },
                     trailingIcon = {
                         if (uiState.isSignInButtonLoading) CircularProgressIndicator(
                             strokeWidth = 2.dp,
@@ -120,7 +121,7 @@ fun ForgotPasswordScreen(
                         else IconButton(onClick = { viewModel.sendPwdResetLink() }) {
                             Icon(
                                 imageVector = Icons.Outlined.Send,
-                                contentDescription = "send"
+                                contentDescription = stringResource(R.string.send)
                             )
                         }
                     },
@@ -143,9 +144,9 @@ fun ForgotPasswordScreen(
                         icon = {
                             Icon(imageVector = Icons.Outlined.Email, contentDescription = null)
                         },
-                        title = "Email Sent",
-                        text = "An email containing password reset link has been sent to your email address.",
-                        confirmButtonText = "Okay",
+                        title = stringResource(R.string.email_sent),
+                        text = stringResource(R.string.an_email_containing_password_reset_link_has_been_sent_to_your_email_address),
+                        confirmButtonText = stringResource(R.string.okay),
                         dismissButtonText = null,
                         onConfirmClick = {
                             navHostController.navigateUp()

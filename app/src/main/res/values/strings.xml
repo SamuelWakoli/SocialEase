@@ -37,4 +37,15 @@
     <string name="show">Show</string>
     <string name="forgot_password">" Forgot password? "</string>
     <string name="create_account">Create Account</string>
+
+    <!--  REGISTER SCREEN CONTENT  -->
+    <string name="name">Name</string>
+    <string name="name_cannot_be_empty">Name cannot be empty</string>
+
+    <!--  FORGOT PASSWORD SCREEN CONTENT  -->
+    <string name="enter_your_email_to_get_password_reset_link">Enter your email to get password reset link</string>
+    <string name="send">send</string>
+    <string name="email_sent">Email Sent</string>
+    <string name="an_email_containing_password_reset_link_has_been_sent_to_your_email_address">An email containing password reset link has been sent to your email address.</string>
+    <string name="okay">Okay</string>
 </resources>

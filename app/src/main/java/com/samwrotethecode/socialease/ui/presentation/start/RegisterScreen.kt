@@ -52,6 +52,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -67,7 +68,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.composables.GoogleSignInButton
-import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 import com.samwrotethecode.socialease.ui.presentation.start.viewmodels.SignInScreenViewModel
 
@@ -86,7 +86,7 @@ fun RegisterScreen(
     val keyboardController = LocalSoftwareKeyboardController.current
     LaunchedEffect(key1 = uiState.isSignInSuccess, block = {
         if (uiState.isSignInSuccess) {
-            Toast.makeText(context, "Signed in Successfully", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, R.string.signed_in_successfully, Toast.LENGTH_LONG).show()
 
             navHostController.navigate(Screens.HomeScreen.route) {
                 navHostController.popBackStack()
@@ -94,30 +94,24 @@ fun RegisterScreen(
         }
     })
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { /*TODO*/ },
-                navigationIcon = {
-                    IconButton(
-                        onClick = { navHostController.navigateUp() }) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Navigate Back",
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.Transparent,
+    Scaffold(topBar = {
+        TopAppBar(title = { /*TODO*/ }, navigationIcon = {
+            IconButton(onClick = { navHostController.navigateUp() }) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = stringResource(id = R.string.navigate_back),
                 )
-            )
-        }
-    ) {
+            }
+        }, colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = Color.Transparent,
+        )
+        )
+    }) { paddingValues ->
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(it)
+                .padding(paddingValues)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.intro_img_1),
@@ -134,19 +128,17 @@ fun RegisterScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Box(
-                    modifier = Modifier
-                        .width(600.dp),
+                    modifier = Modifier.width(600.dp),
                 ) {
                     Column(
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier
-                            .padding(16.dp),
+                        modifier = Modifier.padding(16.dp),
 
                         ) {
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
-                            text = "SocialEase", style = TextStyle(
+                            text = stringResource(id = R.string.app_name), style = TextStyle(
                                 color = MaterialTheme.colorScheme.primary,
                                 fontSize = MaterialTheme.typography.headlineLarge.fontSize,
                                 fontWeight = FontWeight.SemiBold,
@@ -161,7 +153,7 @@ fun RegisterScreen(
                         Spacer(modifier = Modifier.height(32.dp))
                         Row(modifier = Modifier.fillMaxWidth()) {
                             Text(
-                                text = "Create Account",
+                                text = stringResource(id = R.string.create_account),
                                 style = TextStyle(
                                     fontSize = MaterialTheme.typography.headlineSmall.fontSize,
                                     fontWeight = MaterialTheme.typography.headlineSmall.fontWeight,
@@ -175,14 +167,20 @@ fun RegisterScreen(
                             modifier = Modifier.fillMaxWidth(),
                             singleLine = true,
                             isError = uiState.showNameError,
-                            supportingText = { if (uiState.showEmailError) Text(text = "Name cannot be empty") },
+                            supportingText = {
+                                if (uiState.showEmailError) Text(
+                                    text = stringResource(
+                                        R.string.name_cannot_be_empty
+                                    )
+                                )
+                            },
                             leadingIcon = {
                                 Icon(
                                     imageVector = Icons.Outlined.AccountCircle,
                                     contentDescription = null
                                 )
                             },
-                            label = { Text(text = "Name") },
+                            label = { Text(text = stringResource(R.string.name)) },
                             shape = MaterialTheme.shapes.medium,
                             keyboardOptions = KeyboardOptions().copy(
                                 imeAction = ImeAction.Next,
@@ -198,13 +196,19 @@ fun RegisterScreen(
                             modifier = Modifier.fillMaxWidth(),
                             singleLine = true,
                             isError = uiState.showEmailError,
-                            supportingText = { if (uiState.showEmailError) Text(text = "Email cannot be empty") },
+                            supportingText = {
+                                if (uiState.showEmailError) Text(
+                                    text = stringResource(
+                                        id = R.string.email_cannot_be_empty
+                                    )
+                                )
+                            },
                             leadingIcon = {
                                 Icon(
                                     imageVector = Icons.Outlined.Email, contentDescription = null
                                 )
                             },
-                            label = { Text(text = "Email") },
+                            label = { Text(text = stringResource(id = R.string.email)) },
                             shape = MaterialTheme.shapes.medium,
                             keyboardOptions = KeyboardOptions().copy(
                                 imeAction = ImeAction.Next,
@@ -220,7 +224,13 @@ fun RegisterScreen(
                             modifier = Modifier.fillMaxWidth(),
                             singleLine = true,
                             isError = uiState.showPasswordError,
-                            supportingText = { if (uiState.showPasswordError) Text(text = "Password cannot be empty") },
+                            supportingText = {
+                                if (uiState.showPasswordError) Text(
+                                    text = stringResource(
+                                        id = R.string.password_cannot_be_empty
+                                    )
+                                )
+                            },
                             visualTransformation = if (uiState.showPassword) VisualTransformation.None
                             else PasswordVisualTransformation(),
                             leadingIcon = {
@@ -228,7 +238,7 @@ fun RegisterScreen(
                                     imageVector = Icons.Outlined.Lock, contentDescription = null
                                 )
                             },
-                            label = { Text(text = "Password") },
+                            label = { Text(text = stringResource(id = R.string.password)) },
                             trailingIcon = {
                                 IconButton(onClick = {
                                     viewModel.hideOrShowPassword()
@@ -236,7 +246,9 @@ fun RegisterScreen(
                                     Icon(
                                         imageVector = if (uiState.showPassword) Icons.Outlined.VisibilityOff
                                         else Icons.Outlined.Visibility,
-                                        contentDescription = if (uiState.showPassword) "Hide password" else "Show"
+                                        contentDescription = if (uiState.showPassword) stringResource(
+                                            id = R.string.hide_password
+                                        ) else stringResource(id = R.string.show)
                                     )
                                 }
                             },
@@ -262,11 +274,10 @@ fun RegisterScreen(
                         OutlinedButton(
                             onClick = {
                                 viewModel.registerWithEmailPwd()
-                            },
-                            modifier = Modifier.fillMaxWidth()
+                            }, modifier = Modifier.fillMaxWidth()
                         ) {
                             Row {
-                                Text(text = "Create Account")
+                                Text(text = stringResource(id = R.string.create_account))
                                 if (uiState.isCreateAccountButtonLoading) {
                                     Spacer(modifier = Modifier.width(12.dp))
                                     CircularProgressIndicator(
@@ -278,10 +289,9 @@ fun RegisterScreen(
                             }
                         }
                         Spacer(modifier = Modifier.height(16.dp))
-                        GoogleSignInButton(
-                            modifier = Modifier
-                                .padding(8.dp)
-                                .width(600.dp),
+                        GoogleSignInButton(modifier = Modifier
+                            .padding(8.dp)
+                            .width(600.dp),
                             onClick = { onSignInWithGoogle() })
                     }
                 }
