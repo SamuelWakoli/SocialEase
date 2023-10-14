@@ -21,6 +21,7 @@ import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.A
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.BookmarksScreen
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.FeedbackScreen
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.ProfileScreen
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.BookmarksScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.FeedbackScreenViewmodel
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SearchScreenViewModel
@@ -41,6 +42,8 @@ fun NavGraph(
     val homeScreenViewModel = viewModel<HomeScreenViewModel>()
     val searchScreenViewModel = viewModel<SearchScreenViewModel>()
     val feedbackScreenViewModel = viewModel<FeedbackScreenViewmodel>()
+    val bookmarksScreenViewModel = viewModel<BookmarksScreenViewModel>()
+
 
     NavHost(navController = navHostController, startDestination = startDestination) {
         composable(route = Screens.IntroScreen.route) {
@@ -95,7 +98,8 @@ fun NavGraph(
         composable(route = Screens.BookmarksScreen.route) {
             BookmarksScreen(
                 navHostController = navHostController,
-                viewModel = homeScreenViewModel,
+                viewModel = bookmarksScreenViewModel,
+                windowWidthSize = windowSize
             )
         }
         composable(route = Screens.AboutScreen.route) {
