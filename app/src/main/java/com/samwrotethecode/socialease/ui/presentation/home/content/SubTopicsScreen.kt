@@ -155,7 +155,7 @@ fun SubTopicsScreen(
     }
 }
 
-@Preview
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun SubTopicsScreenPreview() {
     SubTopicsScreen(
