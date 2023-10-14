@@ -58,7 +58,7 @@ fun ReadingScreen(
         )
 
         Scaffold(
-            modifier = Modifier.widthIn(max = 800.dp),
+            modifier = Modifier.fillMaxSize(),
             containerColor = Color.Transparent,
             contentColor = Color.Transparent,
             topBar = {

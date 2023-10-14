@@ -97,7 +97,7 @@ fun BookmarksScreen(
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-                        items(uiState.topicsList!!.size) { index ->
+                        items(uiState.topicsList.size) { index ->
                             SubTopicListItem(
                                 title = stringResource(id = uiState.topicsList[index].titleId),
                                 generalDescription = stringResource(id = uiState.topicsList[index].generalDescriptionId),
@@ -131,9 +131,9 @@ fun BookmarksScreen(
                             horizontalArrangement = Arrangement.Center,
                             maxItemsInEachColumn = when (windowWidthSize) {
                                 //                      WindowWidthSizeClass.Compact has been used at the top outer if branch
-                                WindowWidthSizeClass.Medium -> uiState.topicsList!!.size / 2 + 1
-                                WindowWidthSizeClass.Expanded -> uiState.topicsList!!.size / 4 + 1
-                                else -> uiState.topicsList!!.size
+                                WindowWidthSizeClass.Medium -> uiState.topicsList.size / 2 + 1
+                                WindowWidthSizeClass.Expanded -> uiState.topicsList.size / 4 + 1
+                                else -> uiState.topicsList.size
                             }
                         ) {
                             for (item in uiState.topicsList) {

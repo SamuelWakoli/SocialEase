@@ -122,11 +122,11 @@ fun SubTopicsScreen(
                 ) {
                     FlowColumn(
                         verticalArrangement = Arrangement.Top,
-                        horizontalArrangement = Arrangement.Center,
+                        horizontalArrangement = Arrangement.SpaceEvenly,
                         maxItemsInEachColumn = when (windowWidthSize) {
                             //                      WindowWidthSizeClass.Compact has been used at the top outer if branch
                             WindowWidthSizeClass.Medium -> uiState.currentSubTopicsList!!.size / 2 + 1
-                            WindowWidthSizeClass.Expanded -> uiState.currentSubTopicsList!!.size / 4 + 1
+                            WindowWidthSizeClass.Expanded -> uiState.currentSubTopicsList!!.size / 4 + 3
                             else -> uiState.currentSubTopicsList!!.size
                         }
                     ) {
