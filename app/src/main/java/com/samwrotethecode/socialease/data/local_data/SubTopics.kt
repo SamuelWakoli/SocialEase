@@ -1,7 +1,5 @@
 package com.samwrotethecode.socialease.data.local_data
 
-import com.samwrotethecode.socialease.R
-
 /**
  * [SubTopicContentItemModel] is a single entity inside a sub topic.
  * It is used to describe a single subject in a sub topic, and can
@@ -22,7 +20,6 @@ data class SubTopicsModel(
     val content: List<SubTopicContentItemModel>
 )
 
-var communicationSubTopics = listOf<SubTopicsModel>()
 var cooperationSubTopics = listOf<SubTopicsModel>()
 var conflictResolutionSubTopics = listOf<SubTopicsModel>()
 var problemSolvingSubTopics = listOf<SubTopicsModel>()
