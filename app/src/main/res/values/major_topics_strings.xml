@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  Topics  -->
+    <string name="communication">Communication</string>
+    <string name="communication_description">This includes both verbal and nonverbal communication skills, such as speaking clearly and concisely, listening actively, and maintaining eye contact.</string>
+
+    <string name="cooperation">Cooperation</string>
+    <string name="cooperation_description">This is the ability to work with others towards a common goal, including being willing to share, compromise, and help others.</string>
+
+    <string name="conflict_resolution">Conflict Resolution</string>
+    <string name="conflict_resolution_description">This is the ability to resolve disagreements peacefully and respectfully.</string>
+
+    <string name="problem_solving">Problem Solving</string>
+    <string name="problem_solving_description">This is the ability to identify and solve problems in a systematic and effective way.</string>
+
+    <string name="self_awareness">Self Awareness</string>
+    <string name="self_awareness_description">This is the ability to understand your own thoughts, feelings, and behaviors.</string>
+
+    <string name="relationship_building">Relationship Building</string>
+    <string name="relationship_building_description">This involves the ability to develop and maintain positive relationships with others, including being friendly, supportive, and respectful.</string>
+
+    <string name="self_management">Self Management</string>
+    <string name="self_management_description">This is the ability to regulate your emotions and behaviors in a healthy way.</string>
+
+    <string name="empathy">Empathy</string>
+    <string name="empathy_description">This is the ability to understand and share the feelings of another person.</string>
+
+    <string name="assertiveness">Assertiveness</string>
+    <string name="assertiveness_description">This is the ability to express your needs and wants in a clear and direct way, while respecting the rights of others.</string>
+
+</resources>
