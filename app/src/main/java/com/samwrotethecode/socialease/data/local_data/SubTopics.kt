@@ -1,13 +1,15 @@
 package com.samwrotethecode.socialease.data.local_data
 
+import com.samwrotethecode.socialease.R
+
 /**
  * [SubTopicContentItemModel] is a single entity inside a sub topic.
  * It is used to describe a single subject in a sub topic, and can
  * hold a paragraph, if the title is null.
  */
 data class SubTopicContentItemModel(
-    val title: String?,
-    val description: String,
+    val titleId: Int?,
+    val descriptionId: Int?,
 )
 
 /**

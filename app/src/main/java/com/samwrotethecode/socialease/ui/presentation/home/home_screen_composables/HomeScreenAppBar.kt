@@ -42,7 +42,7 @@ fun HomeScreenAppBar(
             IconButton(onClick = { onNavigationClick() }) {
                 Icon(
                     imageVector = Icons.Default.Menu,
-                    contentDescription = "Open navigation menu"
+                    contentDescription = stringResource(R.string.open_navigation_menu)
                 )
             }
         },
@@ -50,13 +50,13 @@ fun HomeScreenAppBar(
             IconButton(onClick = { onSearchClick() }) {
                 Icon(
                     imageVector = Icons.Default.Search,
-                    contentDescription = "Search"
+                    contentDescription = stringResource(R.string.search)
                 )
             }
             IconButton(onClick = { viewModel.updateAppbarDropDownMenu() }) {
                 Icon(
                     imageVector = Icons.Default.MoreVert,
-                    contentDescription = "Show popup menu"
+                    contentDescription = stringResource(R.string.show_popup_menu)
                 )
                 HomeScreenDropdownMenu(
                     uiState = uiState,

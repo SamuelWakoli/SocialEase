@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -39,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.composables.CoilImage
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeUiStateModel
@@ -61,7 +63,7 @@ fun HomeScreenDrawer(
             contentAlignment = Alignment.Center,
         ) {
             Text(
-                text = "SocialEase", style = TextStyle(
+                text = stringResource(id = R.string.app_name), style = TextStyle(
                     color = MaterialTheme.colorScheme.primary,
                     fontSize = MaterialTheme.typography.headlineLarge.fontSize,
                     fontWeight = FontWeight.SemiBold,
@@ -89,10 +91,10 @@ fun HomeScreenDrawer(
         ) {
             ListItem(
                 headlineContent = {
-                    Text(text = uiState.displayName.toString())
+                    Text(text = stringResource(R.string.drawer_display_name, uiState.displayName!!))
                 },
                 supportingContent = {
-                    Text(text = uiState.email.toString())
+                    Text(text = stringResource(R.string.drawer_email, uiState.email!!))
                 },
                 leadingContent = {
                     CoilImage(photoUrl = uiState.photoUrl)
@@ -118,7 +120,7 @@ fun HomeScreenDrawer(
             ListItem(
                 headlineContent = {
                     Text(
-                        text = "Feedback",
+                        text = stringResource(R.string.feedback),
                         style = TextStyle(
                             fontSize = MaterialTheme.typography.bodyLarge.fontSize
                         ),
@@ -148,7 +150,7 @@ fun HomeScreenDrawer(
             ListItem(
                 headlineContent = {
                     Text(
-                        text = "About",
+                        text = stringResource(R.string.about),
                         style = TextStyle(
                             fontSize = MaterialTheme.typography.bodyLarge.fontSize
                         ),
@@ -178,7 +180,7 @@ fun HomeScreenDrawer(
             ListItem(
                 headlineContent = {
                     Text(
-                        text = "Bookmarks",
+                        text = stringResource(R.string.bookmarks),
                         style = TextStyle(
                             fontSize = MaterialTheme.typography.bodyLarge.fontSize
                         ),
@@ -206,7 +208,7 @@ fun HomeScreenDrawer(
             ListItem(
                 headlineContent = {
                     Text(
-                        text = "Theme",
+                        text = stringResource(R.string.theme),
                         style = TextStyle(
                             fontSize = MaterialTheme.typography.bodyLarge.fontSize
                         ),

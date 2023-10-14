@@ -48,4 +48,20 @@
     <string name="email_sent">Email Sent</string>
     <string name="an_email_containing_password_reset_link_has_been_sent_to_your_email_address">An email containing password reset link has been sent to your email address.</string>
     <string name="okay">Okay</string>
+
+    <!--  HOME SCREEN CONTENT  -->
+    <!--  APPBAR  -->
+    <string name="open_navigation_menu">Open navigation menu</string>
+    <string name="search">Search</string>
+    <string name="show_popup_menu">Show popup menu</string>
+    <!--  The body content is in another file  -->
+    <!--  DRAWER  -->
+    <string name="drawer_display_name">%1$s</string>
+    <string name="drawer_email">%1$s</string>
+    <string name="feedback">Feedback</string>
+    <string name="about">About</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="theme">Theme</string>
+    <!--  DROPDOWN MENU  -->
+    <string name="settings">Settings</string>
 </resources>
