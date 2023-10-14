@@ -2,8 +2,10 @@ package com.samwrotethecode.socialease.ui.presentation.home.content
 
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -96,22 +98,30 @@ fun ReadingScreen(
                 )
             },
         ) { paddingValues ->
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .widthIn(max = 800.dp)
-                    .padding(paddingValues)
-                    .clip(MaterialTheme.shapes.medium)
-                    .padding(16.dp),
+            Column(
+                Modifier
+                    .fillMaxSize()
+                    .background(color = MaterialTheme.colorScheme.surface)
+                    .clip(MaterialTheme.shapes.medium),
                 verticalArrangement = Arrangement.Top,
-                horizontalAlignment = Alignment.CenterHorizontally,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                items(count = uiState.currentSubTopic!!.content.size) { index ->
-                    ReadingScreenListItem(
-                        modifier = contentModifier,
-                        title = stringResource(id = uiState.currentSubTopic.content[index].titleId!!),
-                        description = stringResource(id = uiState.currentSubTopic.content[index].descriptionId!!),
-                    )
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(paddingValues = paddingValues)
+                        .widthIn(max = 800.dp)
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.Top,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    items(count = uiState.currentSubTopic!!.content.size) { index ->
+                        ReadingScreenListItem(
+                            modifier = contentModifier,
+                            title = stringResource(id = uiState.currentSubTopic.content[index].titleId!!),
+                            description = stringResource(id = uiState.currentSubTopic.content[index].descriptionId!!),
+                        )
+                    }
                 }
             }
         }
