@@ -91,10 +91,10 @@ fun HomeScreenDrawer(
         ) {
             ListItem(
                 headlineContent = {
-                    Text(text = stringResource(R.string.drawer_display_name, uiState.displayName!!))
+                    Text(text = uiState.displayName ?: "Profile")
                 },
                 supportingContent = {
-                    Text(text = stringResource(R.string.drawer_email, uiState.email!!))
+                    Text(text = uiState.email ?: "")
                 },
                 leadingContent = {
                     CoilImage(photoUrl = uiState.photoUrl)

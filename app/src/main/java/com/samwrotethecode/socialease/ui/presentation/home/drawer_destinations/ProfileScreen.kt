@@ -92,18 +92,13 @@ fun ProfileScreen(
                 ListItem(
                     headlineContent = {
                         Text(
-                            text = stringResource(
-                                R.string.profile_display_name,
-                                uiState.displayName!!
-                            )
+                            text = uiState.displayName ?: "No name"
                         )
                     },
                     supportingContent = {
                         Text(
-                            text = stringResource(
-                                R.string.profile_email,
-                                uiState.email!!
-                            )
+                            text =
+                            uiState.email ?: ""
                         )
                     },
                 )
@@ -114,11 +109,7 @@ fun ProfileScreen(
                     viewModel.logOut().also {
                         navHostController.navigate(
                             Screens.SignInScreen.route
-                        ) {
-                            navHostController.popBackStack(
-                                Screens.SignInScreen.route, inclusive = false
-                            )
-                        }
+                        )
                     }
                 }) {
                     ListItem(

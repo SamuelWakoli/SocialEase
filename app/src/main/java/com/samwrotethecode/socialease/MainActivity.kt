@@ -68,6 +68,7 @@ class MainActivity : ComponentActivity() {
                         if (currentUser == null) Screens.IntroScreen.route
                         else Screens.HomeScreen.route,
                         windowSize = windowSize.widthSizeClass,
+                        signInScreenViewModel = signInScreenViewModel,
                     ) {
                         // now Sign in with Google
                         lifecycleScope.launch {

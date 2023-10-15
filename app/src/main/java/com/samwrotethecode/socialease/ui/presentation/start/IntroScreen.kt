@@ -181,7 +181,7 @@ fun IntroScreen(
                             Column(
                                 modifier = Modifier.padding(32.dp)
                             ) {
-                                Card (
+                                Card(
                                     modifier = Modifier.widthIn(max = 400.dp)
                                 ) {
                                     Text(
@@ -214,6 +214,7 @@ fun IntroScreen(
                     TextButton(onClick = {
                         navHostController.navigate(Screens.SignInScreen.route) {
                             launchSingleTop = true
+                            navHostController.popBackStack()
                         }
                     }) {
                         Text(text = stringResource(R.string.skip))
@@ -254,6 +255,7 @@ fun IntroScreen(
                         Button(onClick = {
                             navHostController.navigate(Screens.SignInScreen.route) {
                                 launchSingleTop = true
+                                navHostController.popBackStack()
                             }
                         }) {
                             Text(text = "Sign in")

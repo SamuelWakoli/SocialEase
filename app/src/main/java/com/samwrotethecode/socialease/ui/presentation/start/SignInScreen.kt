@@ -88,6 +88,7 @@ fun SignInScreen(
             ).show()
 
             navHostController.navigate(Screens.HomeScreen.route) {
+                launchSingleTop = true
                 navHostController.popBackStack()
             }
         }

@@ -36,9 +36,9 @@ fun NavGraph(
     navHostController: NavHostController,
     startDestination: String,
     windowSize: WindowWidthSizeClass,
+    signInScreenViewModel: SignInScreenViewModel, //elevated this param to track GoogleSign in result
     onSignInWithGoogle: () -> Unit,
 ) {
-    val signInScreenViewModel = viewModel<SignInScreenViewModel>()
     val homeScreenViewModel = viewModel<HomeScreenViewModel>()
     val searchScreenViewModel = viewModel<SearchScreenViewModel>()
     val feedbackScreenViewModel = viewModel<FeedbackScreenViewmodel>()
@@ -144,6 +144,7 @@ fun NavGraphPreview() {
         windowSize = calculateWindowSizeClass(
             LocalContext.current as Activity
         ).widthSizeClass,
+        signInScreenViewModel = viewModel<SignInScreenViewModel>(),
         onSignInWithGoogle = {}
     )
 }
