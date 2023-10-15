@@ -13,11 +13,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForwardIos
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
@@ -29,7 +26,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -74,8 +74,13 @@ fun HomeScreenBodyItem(
         ListItem(headlineContent = { Text(text = stringResource(id = homeBodyItemModel.title)) },
             supportingContent = {
                 Text(
-                    text = stringResource(id = homeBodyItemModel.description),
-//                    maxLines = 5,
+                    text = buildAnnotatedString {
+                        append(stringResource(id = homeBodyItemModel.description),)
+                        append(" ")
+                        withStyle(SpanStyle(color = MaterialTheme.colorScheme.onPrimaryContainer)) {
+                            append(stringResource(R.string.read_more))
+                        }
+                    },
                     overflow = TextOverflow.Ellipsis,
                 )
             },
@@ -84,12 +89,6 @@ fun HomeScreenBodyItem(
                 supportingColor = MaterialTheme.colorScheme.onSecondaryContainer,
                 containerColor = MaterialTheme.colorScheme.secondaryContainer,
             ),
-            trailingContent = {
-                Icon(
-                    imageVector = Icons.Default.ArrowForwardIos,
-                    contentDescription = null,
-                )
-            },
             modifier = Modifier.clickable {
                 viewModel.updateTopicCategory(currentCategory = homeBodyItemModel.topicCategory)
                 navHostController.navigate(route = Screens.SubTopicsScreen.route) {

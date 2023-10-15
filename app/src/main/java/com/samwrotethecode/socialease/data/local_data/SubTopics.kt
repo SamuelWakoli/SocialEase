@@ -20,15 +20,6 @@ data class SubTopicsModel(
     val content: List<SubTopicContentItemModel>
 )
 
-var cooperationSubTopics = listOf<SubTopicsModel>()
-var conflictResolutionSubTopics = listOf<SubTopicsModel>()
-var problemSolvingSubTopics = listOf<SubTopicsModel>()
-var selfAwarenessSubTopics = listOf<SubTopicsModel>()
-var relationshipBuildingSubTopics = listOf<SubTopicsModel>()
-var selfManagementSubTopics = listOf<SubTopicsModel>()
-var empathySubTopics = listOf<SubTopicsModel>()
-var assertivenessSubTopics = listOf<SubTopicsModel>()
-
 /**
  * To provide subtopics for each of the nine major topics you've listed, I can suggest specific
  * areas of focus within each category. Here are subtopics for each of the main topics:
