@@ -71,23 +71,4 @@ class GoogleAuthUiClient(
             )
         }
     }
-
-    fun getSignedInUserData(): UserData? = auth.currentUser?.run {
-        UserData(
-            userID = uid,
-            displayName = displayName,
-            photoURL = photoUrl,
-            userEmail = email
-        )
-    }
-
-    suspend fun signOut() {
-        try {
-            auth.signOut()
-            oneTapClient.signOut().await()
-        } catch (e: Exception) {
-            e.printStackTrace()
-            if (e is CancellationException) throw e
-        }
-    }
 }
