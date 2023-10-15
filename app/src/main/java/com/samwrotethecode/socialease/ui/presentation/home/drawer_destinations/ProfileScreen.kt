@@ -31,6 +31,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -50,6 +51,7 @@ fun ProfileScreen(
 ) {
 
     val uiState = viewModel.uiState.collectAsState().value
+    val appContext = LocalContext.current.applicationContext
 
     Scaffold(topBar = {
         CenterAlignedTopAppBar(
@@ -103,15 +105,22 @@ fun ProfileScreen(
                     },
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Card(colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.tertiaryContainer
-                ), onClick = {
-                    viewModel.logOut().also {
-                        navHostController.navigate(
-                            Screens.SignInScreen.route
-                        )
-                    }
-                }) {
+                Card(
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.tertiaryContainer
+                    ),
+                    onClick = {
+                        viewModel.logOut().also {
+                            navHostController.navigate(
+                                Screens.SignInScreen.route
+                            ) {
+                                popUpTo(Screens.HomeScreen.route) {
+                                    inclusive = true
+                                }
+                            }
+                        }
+                    },
+                ) {
                     ListItem(
                         leadingContent = {
                             Icon(
@@ -136,12 +145,12 @@ fun ProfileScreen(
                             navHostController.navigate(
                                 Screens.SignInScreen.route
                             ) {
-                                navHostController.popBackStack(
-                                    Screens.SignInScreen.route, inclusive = false
-                                )
+                                popUpTo(Screens.HomeScreen.route) {
+                                    inclusive = true
+                                }
                             }
                         }
-                    }
+                    },
                 ) {
                     ListItem(
                         leadingContent = {
