@@ -1,5 +1,6 @@
 package com.samwrotethecode.socialease.ui.presentation.home.content
 
+import android.content.Intent
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.FlowColumn
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -28,9 +30,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.content.ContextCompat.getString
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -48,6 +52,29 @@ fun SubTopicsScreen(
 ) {
 
     val uiState = homeScreenViewModel.uiState.collectAsState().value
+    val context = LocalContext.current
+    val lazyListState: LazyListState
+
+    fun shareSubtopic(subTopicsModel: SubTopicsModel) {
+        Log.d("SHARE DATA", "Data title: ${getString(context, subTopicsModel.titleId)}")
+        val title = getString(context, subTopicsModel.titleId)
+        val generalDescription = getString(context, subTopicsModel.generalDescriptionId)
+        var message: String = ""
+        for (tile in subTopicsModel.content) {
+            message += getString(context, tile.titleId!!) + "\n" +
+                    getString(context, tile.descriptionId!!) + "\n\n"
+        }
+
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TITLE, title)
+            putExtra(Intent.EXTRA_TEXT, message)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        context.startActivity(shareIntent)
+    }
 
     Box {
         Image(
@@ -109,6 +136,7 @@ fun SubTopicsScreen(
                                     )
                                 }
                             },
+                            onClickShare = { shareSubtopic(uiState.currentSubTopicsList[index]) },
                         )
                     }
                 }

@@ -44,65 +44,61 @@ fun SubTopicListItem(
     onClickBookmark: () -> Unit = {},
     onClickShare: () -> Unit = {},
 
-) {
+    ) {
     Card(
-        onClick = onClick,
-        modifier = Modifier.widthIn(
-            max = when (windowSize) {
-                WindowWidthSizeClass.Compact -> 400.dp
-                WindowWidthSizeClass.Medium -> 300.dp
-                else -> 280.dp
-            }
-        ).padding(horizontal = 8.dp, vertical = 4.dp),
-        colors = CardDefaults.cardColors(
+        onClick = onClick, modifier = Modifier
+            .widthIn(
+                max = when (windowSize) {
+                    WindowWidthSizeClass.Compact -> 400.dp
+                    WindowWidthSizeClass.Medium -> 300.dp
+                    else -> 280.dp
+                }
+            )
+            .padding(horizontal = 8.dp, vertical = 4.dp), colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.secondaryContainer,
             contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
         )
     ) {
-        ListItem(
-            headlineContent = {
+        ListItem(headlineContent = {
+            Text(
+                text = title, style = MaterialTheme.typography.titleMedium
+            )
+        }, supportingContent = {
+            Column {
                 Text(
-                    text = title,
-                    style = MaterialTheme.typography.titleMedium
+                    text = buildAnnotatedString {
+                        withStyle(SpanStyle(color = MaterialTheme.colorScheme.onTertiaryContainer)) {
+                            append(generalDescription)
+                        }
+                        append(" ")
+                        withStyle(SpanStyle(color = MaterialTheme.colorScheme.secondary)) {
+                            append("read more")
+                        }
+                    },
+                    overflow = TextOverflow.Ellipsis,
                 )
-            },
-            supportingContent = {
-                Column {
-                    Text(
-                        text = buildAnnotatedString {
-                            withStyle(SpanStyle(color = MaterialTheme.colorScheme.onTertiaryContainer)) {
-                                append(generalDescription)
-                            }
-                            append(" ")
-                            withStyle(SpanStyle(color = MaterialTheme.colorScheme.secondary)) {
-                                append("read more")
-                            }
-                        },
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                    Row(
-                        horizontalArrangement = Arrangement.End,
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        IconButton(onClick = { /*TODO*/ }) {
-                            Icon(
-                                imageVector = Icons.Outlined.BookmarkAdd,
-                                contentDescription = "Add to bookmarks",
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                        IconButton(onClick = { /*TODO*/ }) {
-                            Icon(
-                                imageVector = Icons.Outlined.Share,
-                                contentDescription = "Share",
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                        }
+                Row(
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    IconButton(onClick = { onClickBookmark() }) {
+                        Icon(
+                            imageVector = Icons.Outlined.BookmarkAdd,
+                            contentDescription = "Add to bookmarks",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                    IconButton(onClick = { onClickShare() }) {
+                        Icon(
+                            imageVector = Icons.Outlined.Share,
+                            contentDescription = "Share",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
                     }
                 }
             }
-        )
+        })
     }
 }
 
@@ -127,7 +123,8 @@ fun SubTopicListItemCompactPreview() {
 }
 
 @Preview(
-    showBackground = true, showSystemUi = true,
+    showBackground = true,
+    showSystemUi = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
 )
 @Composable
@@ -171,7 +168,8 @@ fun SubTopicListItemMediumPreview() {
 }
 
 @Preview(
-    showBackground = true, showSystemUi = true,
+    showBackground = true,
+    showSystemUi = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
 )
 @Composable
@@ -215,7 +213,8 @@ fun SubTopicListItemExpandedPreview() {
 }
 
 @Preview(
-    showBackground = true, showSystemUi = true,
+    showBackground = true,
+    showSystemUi = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
 )
 @Composable
