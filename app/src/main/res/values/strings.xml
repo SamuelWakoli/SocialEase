@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
     <string name="app_name">SocialEase</string>
-    <string name="web_client_id">AIzaSyBuxhB_h_qWn8iOrR2Wn35SKxL00TtlWzk</string>
+    <string name="web_client_id">449280179493-uf86crdcbqgmii8fj7lpmfvv2kjtuank.apps.googleusercontent.com</string>
     <string name="lorem_ipsum"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend diam, vel rutrum tellus vulputate quis. </string>
 
     <!--  APP UI STRING  -->
