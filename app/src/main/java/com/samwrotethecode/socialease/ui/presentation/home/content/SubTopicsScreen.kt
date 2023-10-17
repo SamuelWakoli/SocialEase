@@ -43,11 +43,11 @@ import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 @Composable
 fun SubTopicsScreen(
     navHostController: NavHostController,
-    viewModel: HomeScreenViewModel,
+    homeScreenViewModel: HomeScreenViewModel,
     windowWidthSize: WindowWidthSizeClass,
 ) {
 
-    val uiState = viewModel.uiState.collectAsState().value
+    val uiState = homeScreenViewModel.uiState.collectAsState().value
 
     Box {
         Image(
@@ -100,7 +100,7 @@ fun SubTopicsScreen(
                             onClick = {
                                 navHostController.navigate(Screens.ReadingScreen.route) {
                                     launchSingleTop = true
-                                    viewModel.updateReadingScreenState(
+                                    homeScreenViewModel.updateReadingScreenState(
                                         SubTopicsModel(
                                             titleId = uiState.currentSubTopicsList[index].titleId,
                                             generalDescriptionId = uiState.currentSubTopicsList[index].generalDescriptionId,
@@ -108,7 +108,7 @@ fun SubTopicsScreen(
                                         )
                                     )
                                 }
-                            }
+                            },
                         )
                     }
                 }
@@ -139,7 +139,7 @@ fun SubTopicsScreen(
                                 onClick = {
                                     navHostController.navigate(Screens.ReadingScreen.route) {
                                         launchSingleTop = true
-                                        viewModel.updateReadingScreenState(
+                                        homeScreenViewModel.updateReadingScreenState(
                                             SubTopicsModel(
                                                 titleId = item.titleId,
                                                 generalDescriptionId = item.generalDescriptionId,
@@ -147,7 +147,8 @@ fun SubTopicsScreen(
                                             )
                                         )
                                     }
-                                })
+                                },
+                            )
                         }
                     }
                 }
@@ -161,7 +162,7 @@ fun SubTopicsScreen(
 fun SubTopicsScreenPreview() {
     SubTopicsScreen(
         navHostController = rememberNavController(),
-        viewModel = viewModel<HomeScreenViewModel>(),
+        homeScreenViewModel = viewModel<HomeScreenViewModel>(),
         windowWidthSize = WindowWidthSizeClass.Compact
     )
 }

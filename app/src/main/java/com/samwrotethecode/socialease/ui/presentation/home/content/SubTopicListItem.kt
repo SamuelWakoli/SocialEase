@@ -41,6 +41,9 @@ fun SubTopicListItem(
     generalDescription: String,
     windowSize: WindowWidthSizeClass,
     onClick: () -> Unit = {},
+    onClickBookmark: () -> Unit = {},
+    onClickShare: () -> Unit = {},
+
 ) {
     Card(
         onClick = onClick,
