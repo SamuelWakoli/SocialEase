@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -36,6 +37,24 @@ fun HomeScreenDropdownMenu(
         expanded = uiState.showDropdownMenu,
         onDismissRequest = { viewModel.updateAppbarDropDownMenu() }
     ) {
+        DropdownMenuItem(
+            text = {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                ) {
+                    Icon(imageVector = Icons.Outlined.Info, contentDescription = null)
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(text = stringResource(R.string.details))
+                }
+            },
+            onClick = {
+                viewModel.updateAppbarDropDownMenu()
+                navHostController.navigate(Screens.SettingsScreen.route) {
+                    launchSingleTop = true
+                }
+            }
+        )
         DropdownMenuItem(
             text = {
                 Row(

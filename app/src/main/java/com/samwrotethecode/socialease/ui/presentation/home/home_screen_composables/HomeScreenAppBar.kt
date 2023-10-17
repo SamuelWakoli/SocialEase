@@ -2,7 +2,6 @@ package com.samwrotethecode.socialease.ui.presentation.home.home_screen_composab
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Bookmarks
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -53,6 +52,12 @@ fun HomeScreenAppBar(
             }
         },
         actions = {
+            IconButton(onClick = { onSearchClick() }) {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = stringResource(R.string.search)
+                )
+            }
             IconButton(onClick = {
                 navHostController.navigate(Screens.BookmarksScreen.route) {
                     launchSingleTop = true
@@ -63,23 +68,17 @@ fun HomeScreenAppBar(
                     contentDescription = stringResource(R.string.bookmarks)
                 )
             }
-            IconButton(onClick = { onSearchClick() }) {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = stringResource(R.string.search)
-                )
-            }
-            IconButton(onClick = { viewModel.updateAppbarDropDownMenu() }) {
-                Icon(
-                    imageVector = Icons.Default.MoreVert,
-                    contentDescription = stringResource(R.string.show_popup_menu)
-                )
-                HomeScreenDropdownMenu(
-                    uiState = uiState,
-                    viewModel = viewModel,
-                    navHostController = navHostController,
-                )
-            }
+//            IconButton(onClick = { viewModel.updateAppbarDropDownMenu() }) {
+//                Icon(
+//                    imageVector = Icons.Default.MoreVert,
+//                    contentDescription = stringResource(R.string.show_popup_menu)
+//                )
+//                HomeScreenDropdownMenu(
+//                    uiState = uiState,
+//                    viewModel = viewModel,
+//                    navHostController = navHostController,
+//                )
+//            }
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = Color.Transparent,
