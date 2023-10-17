@@ -15,10 +15,12 @@ data class SubTopicContentItemModel(
  * since all Topics have a list or children Sub topics of <[SubTopicsModel]>
  */
 data class SubTopicsModel(
-    val titleId: Int,
-    val generalDescriptionId: Int,
-    val content: List<SubTopicContentItemModel>
+    val titleId: Int, val generalDescriptionId: Int, val content: List<SubTopicContentItemModel>
 )
+
+val allSubTopics =
+    communicationSubTopics + cooperationSubTopics + conflictResolutionSubTopics + problemSolvingSubTopics + selfAwarenessSubTopics + relationshipBuildingSubTopics + selfManagementSubTopics + empathySubTopics + assertivenessSubTopics
+
 
 /**
  * To provide subtopics for each of the nine major topics you've listed, I can suggest specific

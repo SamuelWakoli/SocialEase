@@ -26,6 +26,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -42,6 +43,7 @@ fun SearchScreen(
     viewModel: SearchScreenViewModel,
 ) {
     val uiState = viewModel.uiState.collectAsState().value
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally
@@ -52,6 +54,7 @@ fun SearchScreen(
             TextField(value = uiState.query,
                 onValueChange = {
                     viewModel.updateSearchQuery(it)
+                    viewModel.startSearch(context = context)
                 },
                 colors = TextFieldDefaults.colors(
                     focusedIndicatorColor = Color.Transparent,
@@ -72,7 +75,7 @@ fun SearchScreen(
                     Text(text = stringResource(id = R.string.search))
                 },
                 trailingIcon = {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = { viewModel.startSearch(context = context) }) {
                         Icon(imageVector = Icons.Outlined.Search, contentDescription = "Search")
                     }
                 })
@@ -81,10 +84,10 @@ fun SearchScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
-            verticalArrangement = if (uiState.noResults) Arrangement.Center else Arrangement.Top,
+            verticalArrangement = if (uiState.searchResults.isEmpty()) Arrangement.Center else Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            if (uiState.noResults) {
+            if (uiState.searchResults.isEmpty()) {
                 Icon(
                     imageVector = Icons.Outlined.SearchOff,
                     contentDescription = null,
@@ -101,7 +104,9 @@ fun SearchScreen(
                     ),
                 )
             } else {
-                // TODO: return search results
+                for (item in uiState.searchResults) {
+                    Text(text = stringResource(id = item.titleId))
+                }
             }
         }
     }
