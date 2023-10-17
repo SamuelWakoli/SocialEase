@@ -44,16 +44,18 @@ fun SubTopicListItem(
     onClickBookmark: () -> Unit = {},
     onClickShare: () -> Unit = {},
 
-) {
+    ) {
     Card(
         onClick = onClick,
-        modifier = Modifier.widthIn(
-            max = when (windowSize) {
-                WindowWidthSizeClass.Compact -> 400.dp
-                WindowWidthSizeClass.Medium -> 300.dp
-                else -> 280.dp
-            }
-        ).padding(horizontal = 8.dp, vertical = 4.dp),
+        modifier = Modifier
+            .widthIn(
+                max = when (windowSize) {
+                    WindowWidthSizeClass.Compact -> 400.dp
+                    WindowWidthSizeClass.Medium -> 300.dp
+                    else -> 280.dp
+                }
+            )
+            .padding(horizontal = 8.dp, vertical = 4.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.secondaryContainer,
             contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
@@ -92,7 +94,7 @@ fun SubTopicListItem(
                                 tint = MaterialTheme.colorScheme.primary
                             )
                         }
-                        IconButton(onClick = { /*TODO*/ }) {
+                        IconButton(onClick = { onClickShare() }) {
                             Icon(
                                 imageVector = Icons.Outlined.Share,
                                 contentDescription = "Share",
