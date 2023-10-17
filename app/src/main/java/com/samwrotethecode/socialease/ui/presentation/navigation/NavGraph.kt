@@ -110,7 +110,8 @@ fun NavGraph(
         composable(route = Screens.SearchScreen.route) {
             SearchScreen(
                 navHostController = navHostController,
-                viewModel = searchScreenViewModel,
+                searchScreenViewModel = searchScreenViewModel,
+                homeScreenViewModel = homeScreenViewModel,
             )
         }
         composable(route = Screens.SubTopicsScreen.route) {
@@ -123,7 +124,7 @@ fun NavGraph(
         composable(route = Screens.ReadingScreen.route) {
             ReadingScreen(
                 navHostController = navHostController,
-                viewModel = homeScreenViewModel,
+                homeScreenViewModel = homeScreenViewModel,
             )
         }
         composable(route = Screens.SettingsScreen.route) {

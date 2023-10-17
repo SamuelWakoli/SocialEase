@@ -43,17 +43,17 @@ import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreen
 @Composable
 fun ReadingScreen(
     navHostController: NavHostController,
-    viewModel: HomeScreenViewModel,
+    homeScreenViewModel: HomeScreenViewModel,
 ) {
 
-    val uiState = viewModel.uiState.collectAsState().value
+    val uiState = homeScreenViewModel.uiState.collectAsState().value
     val contentModifier = Modifier
     val readingScreenTag = "READING_SCREEN_TAG"
 
     Box {
-        Log.d(readingScreenTag, "Image ID: ${uiState.currentBackgroundImage!!}")
+        Log.d(readingScreenTag, "Image ID: ${uiState.currentBackgroundImage}")
         Image(
-            painterResource(id = uiState.currentBackgroundImage),
+            painterResource(id = uiState.currentBackgroundImage ?: R.drawable.intro_img_1),
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop,
@@ -80,14 +80,14 @@ fun ReadingScreen(
                         )
                     },
                     actions = {
-                        IconButton(onClick = { viewModel.updateAppbarDropDownMenu() }) {
+                        IconButton(onClick = { homeScreenViewModel.updateAppbarDropDownMenu() }) {
                             Icon(
                                 imageVector = Icons.Default.MoreVert,
                                 contentDescription = "Options"
                             )
                             ReadingScreenDropdownMenu(
                                 uiState = uiState,
-                                viewModel = viewModel,
+                                viewModel = homeScreenViewModel,
                                 navHostController = navHostController
                             )
                         }
@@ -133,6 +133,6 @@ fun ReadingScreen(
 fun ReadingScreenPreview() {
     ReadingScreen(
         navHostController = rememberNavController(),
-        viewModel = viewModel<HomeScreenViewModel>(),
+        homeScreenViewModel = viewModel<HomeScreenViewModel>(),
     )
 }

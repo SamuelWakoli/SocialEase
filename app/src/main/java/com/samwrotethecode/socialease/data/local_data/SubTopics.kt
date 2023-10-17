@@ -18,8 +18,15 @@ data class SubTopicsModel(
     val titleId: Int, val generalDescriptionId: Int, val content: List<SubTopicContentItemModel>
 )
 
-val allSubTopics =
-    communicationSubTopics + cooperationSubTopics + conflictResolutionSubTopics + problemSolvingSubTopics + selfAwarenessSubTopics + relationshipBuildingSubTopics + selfManagementSubTopics + empathySubTopics + assertivenessSubTopics
+val allSubTopics = communicationSubTopics +
+        cooperationSubTopics +
+        conflictResolutionSubTopics +
+        problemSolvingSubTopics +
+        selfAwarenessSubTopics +
+        relationshipBuildingSubTopics +
+        selfManagementSubTopics +
+        empathySubTopics +
+        assertivenessSubTopics
 
 
 /**

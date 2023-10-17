@@ -12,10 +12,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Bookmarks
 import androidx.compose.material.icons.outlined.Feedback
 import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.WbSunny
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -107,7 +105,6 @@ fun HomeScreenDrawer(
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
-//        Divider(modifier = Modifier.padding(horizontal = 32.dp, vertical = 8.dp))
         Card(
             modifier = Modifier.padding(horizontal = 16.dp),
             colors = CardDefaults.cardColors(
@@ -168,64 +165,64 @@ fun HomeScreenDrawer(
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
-        Card(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.secondaryContainer
-            ),
-            onClick = {
-                navHostController.navigate(Screens.BookmarksScreen.route)
-            }
-        ) {
-            ListItem(
-                headlineContent = {
-                    Text(
-                        text = stringResource(R.string.bookmarks),
-                        style = TextStyle(
-                            fontSize = MaterialTheme.typography.bodyLarge.fontSize
-                        ),
-                    )
-                },
-                leadingContent = {
-                    Icon(imageVector = Icons.Outlined.Bookmarks, contentDescription = null)
-                },
-                colors = ListItemDefaults.colors(
-                    containerColor = Color.Transparent,
-                    leadingIconColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                    headlineColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                    supportingColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                ),
-            )
-        }
-        Spacer(modifier = Modifier.height(8.dp))
-        Card(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.secondaryContainer
-            ),
-            onClick = {}
-        ) {
-            ListItem(
-                headlineContent = {
-                    Text(
-                        text = stringResource(R.string.theme),
-                        style = TextStyle(
-                            fontSize = MaterialTheme.typography.bodyLarge.fontSize
-                        ),
-                    )
-                },
-                leadingContent = {
-                    Icon(imageVector = Icons.Outlined.WbSunny, contentDescription = null)
-                },
-                colors = ListItemDefaults.colors(
-                    containerColor = Color.Transparent,
-                    leadingIconColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                    headlineColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                    supportingColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                ),
-            )
-        }
-        Spacer(modifier = Modifier.height(8.dp))
+//        Card(
+//            modifier = Modifier.padding(horizontal = 16.dp),
+//            colors = CardDefaults.cardColors(
+//                containerColor = MaterialTheme.colorScheme.secondaryContainer
+//            ),
+//            onClick = {
+//                navHostController.navigate(Screens.BookmarksScreen.route)
+//            }
+//        ) {
+//            ListItem(
+//                headlineContent = {
+//                    Text(
+//                        text = stringResource(R.string.bookmarks),
+//                        style = TextStyle(
+//                            fontSize = MaterialTheme.typography.bodyLarge.fontSize
+//                        ),
+//                    )
+//                },
+//                leadingContent = {
+//                    Icon(imageVector = Icons.Outlined.Bookmarks, contentDescription = null)
+//                },
+//                colors = ListItemDefaults.colors(
+//                    containerColor = Color.Transparent,
+//                    leadingIconColor = MaterialTheme.colorScheme.onSecondaryContainer,
+//                    headlineColor = MaterialTheme.colorScheme.onSecondaryContainer,
+//                    supportingColor = MaterialTheme.colorScheme.onSecondaryContainer,
+//                ),
+//            )
+//        }
+//        Spacer(modifier = Modifier.height(8.dp))
+//        Card(
+//            modifier = Modifier.padding(horizontal = 16.dp),
+//            colors = CardDefaults.cardColors(
+//                containerColor = MaterialTheme.colorScheme.secondaryContainer
+//            ),
+//            onClick = {}
+//        ) {
+//            ListItem(
+//                headlineContent = {
+//                    Text(
+//                        text = stringResource(R.string.theme),
+//                        style = TextStyle(
+//                            fontSize = MaterialTheme.typography.bodyLarge.fontSize
+//                        ),
+//                    )
+//                },
+//                leadingContent = {
+//                    Icon(imageVector = Icons.Outlined.WbSunny, contentDescription = null)
+//                },
+//                colors = ListItemDefaults.colors(
+//                    containerColor = Color.Transparent,
+//                    leadingIconColor = MaterialTheme.colorScheme.onSecondaryContainer,
+//                    headlineColor = MaterialTheme.colorScheme.onSecondaryContainer,
+//                    supportingColor = MaterialTheme.colorScheme.onSecondaryContainer,
+//                ),
+//            )
+//        }
+//        Spacer(modifier = Modifier.height(8.dp))
     }
 }
 
