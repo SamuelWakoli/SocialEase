@@ -1,4 +1,4 @@
-package com.samwrotethecode.socialease.ui.presentation.start.viewmodels
+package com.samwrotethecode.socialease.ui.presentation.home.viewmodels
 
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.ktx.auth
@@ -179,7 +179,7 @@ class SignInScreenViewModel : ViewModel() {
         } else {
             _uiState.update {
                 it.copy(
-                    isSignInButtonLoading = !it.isSignInButtonLoading
+                    isSignInButtonLoading = true
                 )
             }
         }
@@ -194,7 +194,7 @@ class SignInScreenViewModel : ViewModel() {
         }.addOnFailureListener { error ->
             _uiState.update {
                 it.copy(
-                    isSignInButtonLoading = !it.isSignInButtonLoading,
+                    isSignInButtonLoading = false,
                     showDialogPwdResetEmailSent = !it.showDialogPwdResetEmailSent,
                     errorMessage = error.message
                 )

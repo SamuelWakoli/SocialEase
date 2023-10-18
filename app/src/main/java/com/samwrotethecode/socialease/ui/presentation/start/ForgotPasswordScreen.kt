@@ -44,7 +44,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.composables.CustomDialogBox
-import com.samwrotethecode.socialease.ui.presentation.start.viewmodels.SignInScreenViewModel
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SignInScreenViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

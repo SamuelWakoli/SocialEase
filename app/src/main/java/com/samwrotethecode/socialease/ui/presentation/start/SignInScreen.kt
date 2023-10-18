@@ -65,7 +65,7 @@ import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.composables.GoogleSignInButton
 import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
-import com.samwrotethecode.socialease.ui.presentation.start.viewmodels.SignInScreenViewModel
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SignInScreenViewModel
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable

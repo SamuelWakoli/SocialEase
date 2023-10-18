@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.samwrotethecode.socialease.ui.presentation.navigation.NavGraph
 import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 import com.samwrotethecode.socialease.ui.presentation.start.GoogleAuthUiClient
-import com.samwrotethecode.socialease.ui.presentation.start.viewmodels.SignInScreenViewModel
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SignInScreenViewModel
 import com.samwrotethecode.socialease.ui.theme.SocialEaseTheme
 import kotlinx.coroutines.launch
 

@@ -29,7 +29,7 @@ import com.samwrotethecode.socialease.ui.presentation.start.ForgotPasswordScreen
 import com.samwrotethecode.socialease.ui.presentation.start.IntroScreen
 import com.samwrotethecode.socialease.ui.presentation.start.RegisterScreen
 import com.samwrotethecode.socialease.ui.presentation.start.SignInScreen
-import com.samwrotethecode.socialease.ui.presentation.start.viewmodels.SignInScreenViewModel
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SignInScreenViewModel
 
 @Composable
 fun NavGraph(
