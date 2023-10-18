@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -25,10 +27,18 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -38,13 +48,19 @@ import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.composables.CustomDialogBox
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.FeedbackScreenViewmodel
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun FeedbackScreen(
     navHostController: NavHostController,
     viewModel: FeedbackScreenViewmodel
 ) {
     val uiState = viewModel.uiState.collectAsState().value
+    val focusRequester = remember { FocusRequester() }
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+    LaunchedEffect(key1 = Unit, block = {
+        focusRequester.requestFocus()
+    })
 
     Scaffold(topBar = {
         CenterAlignedTopAppBar(
@@ -91,7 +107,11 @@ fun FeedbackScreen(
                     viewModel.updateFeedbackText(it)
                 },
                 modifier = Modifier
-                    .height(400.dp),
+                    .height(400.dp)
+                    .focusRequester(focusRequester = focusRequester)
+                    .onFocusChanged {
+                        if (it.isFocused) keyboardController?.show()
+                    },
                 placeholder = {
                     Text(text = stringResource(R.string.type_your_feedback_here))
                 },
@@ -102,6 +122,15 @@ fun FeedbackScreen(
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
                 ),
+                keyboardActions = KeyboardActions(
+                    onSend = {
+                        viewModel.sendFeedback()
+                    }
+                ),
+                keyboardOptions = KeyboardOptions(
+                    autoCorrect = true,
+                    imeAction = ImeAction.Send,
+                )
             )
             Spacer(modifier = Modifier.height(400.dp))
         }
