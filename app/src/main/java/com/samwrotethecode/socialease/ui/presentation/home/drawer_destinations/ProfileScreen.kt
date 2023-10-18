@@ -57,6 +57,7 @@ fun ProfileScreen(
 
     val uiState = viewModel.uiState.collectAsState().value
     var showLogOutDialog by remember { mutableStateOf(false) }
+    var showDeleteAccountDialog by remember { mutableStateOf(false) }
 
     Scaffold(topBar = {
         CenterAlignedTopAppBar(
@@ -143,15 +144,7 @@ fun ProfileScreen(
                         containerColor = MaterialTheme.colorScheme.errorContainer
                     ),
                     onClick = {
-                        viewModel.deleteAccount().also {
-                            navHostController.navigate(
-                                Screens.SignInScreen.route
-                            ) {
-                                popUpTo(Screens.HomeScreen.route) {
-                                    inclusive = true
-                                }
-                            }
-                        }
+                        showDeleteAccountDialog = !showDeleteAccountDialog
                     },
                 ) {
                     ListItem(
@@ -192,7 +185,25 @@ fun ProfileScreen(
                 onDismissClick = { showLogOutDialog = !showLogOutDialog },
             )
 
-
+            if (showDeleteAccountDialog) CustomDialogBox(
+                icon = { /*TODO*/ },
+                title = "Delete Account",
+                text = "Are you sure you want to delete your account? If you delete your account, you will permanently lose your cloud data such as Bookmarks.",
+                confirmButtonText = "Delete Account",
+                dismissButtonText = "Cancel",
+                onConfirmClick = {
+                    viewModel.deleteAccount().also {
+                        navHostController.navigate(
+                            Screens.SignInScreen.route
+                        ) {
+                            popUpTo(Screens.HomeScreen.route) {
+                                inclusive = true
+                            }
+                        }
+                    }
+                },
+                onDismissClick = { showDeleteAccountDialog = !showDeleteAccountDialog },
+            )
         }
     }
 }
