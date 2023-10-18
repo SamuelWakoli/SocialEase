@@ -60,10 +60,10 @@ fun HomeScreen(
             drawerContent = {
                 HomeScreenDrawer(
                     navHostController = navHostController,
-                    uiState = uiState,
+                    homeScreenViewModel = viewModel,
                 )
             },
-            gesturesEnabled = true, // TODO: allow user to edit this in settings
+            gesturesEnabled = true,
         ) {
             Scaffold(
                 topBar = {

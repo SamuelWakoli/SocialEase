@@ -68,6 +68,9 @@
     <string name="profile">Profile</string>
     <string name="log_out">Log out</string>
     <string name="delete_account">Delete account</string>
+    <string name="cancel">Cancel</string>
+    <string name="you_are_also_logged_out_from_your_personal_cloud_data">You are also logged out from your personal cloud data.</string>
+    <string name="are_you_sure_you_want_to_delete_your_account_if_you_delete_your_account_you_will_permanently_lose_your_cloud_data_such_as_bookmarks">Are you sure you want to delete your account? If you delete your account, you will permanently lose your cloud data such as Bookmarks.</string>
     <!--  FEEDBACK SCREEN  -->
     <string name="type_your_feedback_here">Type your feedback here</string>
     <string name="feedback_sent">Feedback Sent</string>
@@ -77,6 +80,5 @@
 
     <!--  SEARCH SCREEN  -->
     <string name="no_results_found">No results found</string>
-
 
 </resources>

@@ -167,10 +167,10 @@ fun ProfileScreen(
 
             if (showLogOutDialog) CustomDialogBox(
                 icon = { Icon(imageVector = Icons.Outlined.Logout, contentDescription = null) },
-                title = "Log Out",
-                text = "You are also logged out from your personal cloud data.",
-                confirmButtonText = "Log Out",
-                dismissButtonText = "Cancel",
+                title = stringResource(id = R.string.log_out),
+                text = stringResource(R.string.you_are_also_logged_out_from_your_personal_cloud_data),
+                confirmButtonText = stringResource(id = R.string.log_out),
+                dismissButtonText = stringResource(id = R.string.cancel),
                 onConfirmClick = {
                     viewModel.logOut().also {
                         navHostController.navigate(
@@ -187,10 +187,10 @@ fun ProfileScreen(
 
             if (showDeleteAccountDialog) CustomDialogBox(
                 icon = { /*TODO*/ },
-                title = "Delete Account",
-                text = "Are you sure you want to delete your account? If you delete your account, you will permanently lose your cloud data such as Bookmarks.",
-                confirmButtonText = "Delete Account",
-                dismissButtonText = "Cancel",
+                title = stringResource(id = R.string.delete_account),
+                text = stringResource(R.string.are_you_sure_you_want_to_delete_your_account_if_you_delete_your_account_you_will_permanently_lose_your_cloud_data_such_as_bookmarks),
+                confirmButtonText = stringResource(id = R.string.delete_account),
+                dismissButtonText = stringResource(id = R.string.cancel),
                 onConfirmClick = {
                     viewModel.deleteAccount().also {
                         navHostController.navigate(

@@ -41,14 +41,16 @@ import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.composables.CoilImage
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
-import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeUiStateModel
 import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreenDrawer(
-    navHostController: NavHostController, uiState: HomeUiStateModel
+    navHostController: NavHostController,
+    homeScreenViewModel: HomeScreenViewModel
 ) {
+    val uiState = homeScreenViewModel.uiState.collectAsState().value
+
     Column(
         modifier = Modifier
             .fillMaxHeight()
@@ -231,7 +233,7 @@ fun HomeScreenDrawer(
 fun HomeScreenDrawerPreview() {
     HomeScreenDrawer(
         navHostController = rememberNavController(),
-        uiState = viewModel<HomeScreenViewModel>().uiState.collectAsState().value,
+        homeScreenViewModel = viewModel<HomeScreenViewModel>(),
     )
 }
 

@@ -39,7 +39,7 @@ data class HomeUiStateModel(
 
     // ReadingScreen state
     val currentSubTopic: SubTopicsModel? = null,
-    )
+)
 
 enum class TopicCategories {
     COMMUNICATION, RELATIONSHIP_BUILDING, COOPERATION, CONFLICT_RESOLUTION, PROBLEM_SOLVING, SELF_AWARENESS, SELF_MANAGEMENT, EMPATHY, ASSERTIVENESS
@@ -188,6 +188,7 @@ class HomeScreenViewModel : ViewModel() {
     }
 
     fun deleteAccount() {
+        // TODO: Delete user data
         currentUser?.delete()
         logOut()
     }
