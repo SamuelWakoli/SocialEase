@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Bookmark
 import androidx.compose.material.icons.outlined.BookmarkAdd
-import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -24,7 +23,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeUiStateModel
-import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 
 
 @Composable
@@ -49,7 +47,7 @@ fun ReadingScreenDropdownMenu(
                         if (isCurrentSubtopicSaved) Icons.Outlined.Bookmark
                         else Icons.Outlined.BookmarkAdd, contentDescription = null
                     )
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(12.dp))
                     Text(
                         text =
                         if (isCurrentSubtopicSaved) "Remove from bookmarks"
@@ -72,7 +70,7 @@ fun ReadingScreenDropdownMenu(
                         imageVector =
                         Icons.Outlined.Share, contentDescription = null
                     )
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(12.dp))
                     Text(
                         text = "Share"
                     )

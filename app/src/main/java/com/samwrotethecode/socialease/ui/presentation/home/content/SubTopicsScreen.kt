@@ -61,8 +61,10 @@ fun SubTopicsScreen(
         val generalDescription = getString(context, subTopicsModel.generalDescriptionId)
         var message: String = ""
         for (tile in subTopicsModel.content) {
-            message += getString(context, tile.titleId!!) + "\n" +
-                    getString(context, tile.descriptionId!!) + "\n\n"
+            message += getString(context, tile.titleId!!) + "\n" + getString(
+                context,
+                tile.descriptionId!!
+            ) + "\n\n"
         }
 
         val sendIntent: Intent = Intent().apply {
@@ -84,8 +86,7 @@ fun SubTopicsScreen(
             contentScale = ContentScale.Crop,
             alpha = 0.2f,
         )
-        Scaffold(
-            modifier = Modifier.fillMaxSize(),
+        Scaffold(modifier = Modifier.fillMaxSize(),
             containerColor = Color.Transparent,
             contentColor = Color.Transparent,
             topBar = {
@@ -109,8 +110,7 @@ fun SubTopicsScreen(
                         containerColor = Color.Transparent,
                     ),
                 )
-            }
-        ) { paddingValues ->
+            }) { paddingValues ->
             if (windowWidthSize == WindowWidthSizeClass.Compact) {
                 LazyColumn(
                     modifier = Modifier
