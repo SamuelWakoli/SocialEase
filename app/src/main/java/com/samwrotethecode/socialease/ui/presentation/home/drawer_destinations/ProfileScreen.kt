@@ -29,6 +29,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,6 +44,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.composables.CoilImage
+import com.samwrotethecode.socialease.ui.presentation.composables.CustomDialogBox
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 
@@ -51,6 +56,7 @@ fun ProfileScreen(
 ) {
 
     val uiState = viewModel.uiState.collectAsState().value
+    var showLogOutDialog by remember { mutableStateOf(false) }
 
     Scaffold(topBar = {
         CenterAlignedTopAppBar(
@@ -114,15 +120,7 @@ fun ProfileScreen(
                         containerColor = MaterialTheme.colorScheme.tertiaryContainer
                     ),
                     onClick = {
-                        viewModel.logOut().also {
-                            navHostController.navigate(
-                                Screens.SignInScreen.route
-                            ) {
-                                popUpTo(Screens.HomeScreen.route) {
-                                    inclusive = true
-                                }
-                            }
-                        }
+                        showLogOutDialog = !showLogOutDialog
                     },
                 ) {
                     ListItem(
@@ -173,6 +171,28 @@ fun ProfileScreen(
                 }
                 Spacer(modifier = Modifier.height(8.dp))
             }
+
+            if (showLogOutDialog) CustomDialogBox(
+                icon = { Icon(imageVector = Icons.Outlined.Logout, contentDescription = null) },
+                title = "Log Out",
+                text = "You are also logged out from your personal cloud data.",
+                confirmButtonText = "Log Out",
+                dismissButtonText = "Cancel",
+                onConfirmClick = {
+                    viewModel.logOut().also {
+                        navHostController.navigate(
+                            Screens.SignInScreen.route
+                        ) {
+                            popUpTo(Screens.HomeScreen.route) {
+                                inclusive = true
+                            }
+                        }
+                    }
+                },
+                onDismissClick = { showLogOutDialog = !showLogOutDialog },
+            )
+
+
         }
     }
 }
