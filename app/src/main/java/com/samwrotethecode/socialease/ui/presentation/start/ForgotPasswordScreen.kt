@@ -118,7 +118,7 @@ fun ForgotPasswordScreen(
                             strokeWidth = 2.dp,
                             modifier = Modifier.size(20.dp),
                         )
-                        else IconButton(onClick = { viewModel.sendPwdResetLink() }) {
+                        else IconButton(onClick = { viewModel.sendPasswordResetEmail() }) {
                             Icon(
                                 imageVector = Icons.Outlined.Send,
                                 contentDescription = stringResource(R.string.send)

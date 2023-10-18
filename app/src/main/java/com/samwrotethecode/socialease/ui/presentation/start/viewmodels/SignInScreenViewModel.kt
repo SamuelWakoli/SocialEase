@@ -172,8 +172,34 @@ class SignInScreenViewModel : ViewModel() {
         }
     }
 
-    fun sendPwdResetLink() {
+    fun sendPasswordResetEmail() {
         val email = uiState.value.email
+        if (email.isEmpty()) {
+            _uiState.update { it.copy(showEmailError = true) }
+        } else {
+            _uiState.update {
+                it.copy(
+                    isSignInButtonLoading = !it.isSignInButtonLoading
+                )
+            }
+        }
+
+        Firebase.auth.sendPasswordResetEmail(email).addOnSuccessListener {
+            _uiState.update {
+                it.copy(
+                    isSignInButtonLoading = !it.isSignInButtonLoading,
+                    showDialogPwdResetEmailSent = !it.showDialogPwdResetEmailSent,
+                )
+            }
+        }.addOnFailureListener { error ->
+            _uiState.update {
+                it.copy(
+                    isSignInButtonLoading = !it.isSignInButtonLoading,
+                    showDialogPwdResetEmailSent = !it.showDialogPwdResetEmailSent,
+                    errorMessage = error.message
+                )
+            }
+        }
 
     }
 }
