@@ -50,9 +50,49 @@ class FeedbackScreenViewmodel : ViewModel() {
             it.copy(text = text, showError = false)
         }
     }
-    
+
     fun sendFeedback() {
-        // TODO:  
+        if (uiState.value.text == "") {
+            _uiState.update { it.copy(showError = !it.showError) }
+        } else {
+            _uiState.update {
+                it.copy(
+                    isSendingFeedback = true
+                )
+            }
+
+            val calender = Calendar.getInstance()
+            val time = "${calender.time}"
+
+            val data = hashMapOf(
+                "text" to uiState.value.text,
+                "time" to time,
+                "senderId" to userId,
+                "isRead" to false,
+            )
+
+            database.collection(FEEDBACKS_COLLECTION).document(time).set(data)
+                .addOnSuccessListener {
+                    _uiState.update {
+                        it.copy(
+                            isSendingFeedback = false,
+                            showError = false,
+                            feedbackSent = true,
+                            errorMessage = "",
+                            text = "",
+                        )
+                    }
+                }.addOnFailureListener { error ->
+                    _uiState.update {
+                        it.copy(
+                            isSendingFeedback = false,
+                            showError = false,
+                            feedbackSent = false,
+                            errorMessage = error.message.toString(),
+                        )
+                    }
+                }
+        }
     }
 
 }

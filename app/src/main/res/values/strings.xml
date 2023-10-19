@@ -74,6 +74,7 @@
     <!--  FEEDBACK SCREEN  -->
     <string name="type_your_feedback_here">Type your feedback here</string>
     <string name="feedback_sent">Feedback Sent</string>
+    <string name="feedback_text_cannot_be_empty">Feedback text cannot be empty</string>
     <string name="the_app_developer_has_received_your_feedback_and_will_take_time_to_review_it_thank_you">The app developer has received your feedback and will take time to review it. Thank you.</string>
     <!--  BOOKMARKS SCREEN  -->
     <string name="no_bookmarks_added">No bookmarks added</string>
