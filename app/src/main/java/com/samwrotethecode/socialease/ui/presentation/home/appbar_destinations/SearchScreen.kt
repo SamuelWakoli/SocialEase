@@ -29,12 +29,19 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -51,7 +58,7 @@ import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreen
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SearchScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun SearchScreen(
     navHostController: NavHostController,
@@ -60,6 +67,12 @@ fun SearchScreen(
 ) {
     val uiState = searchScreenViewModel.uiState.collectAsState().value
     val context = LocalContext.current
+    val focusRequester = remember { FocusRequester() }
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+    LaunchedEffect(key1 = Unit, block = {
+        focusRequester.requestFocus()
+    })
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -89,7 +102,11 @@ fun SearchScreen(
                     ),
                     modifier = Modifier
                         .align(alignment = Alignment.CenterHorizontally)
-                        .widthIn(max = 600.dp, min = 420.dp),
+                        .widthIn(max = 600.dp, min = 420.dp)
+                        .focusRequester(focusRequester = focusRequester)
+                        .onFocusChanged {
+                            if (it.isFocused) keyboardController?.show()
+                        },
                     leadingIcon = {
                         IconButton(onClick = { navHostController.navigateUp() }) {
                             Icon(
