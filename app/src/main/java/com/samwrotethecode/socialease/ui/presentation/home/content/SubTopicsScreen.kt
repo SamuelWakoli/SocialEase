@@ -62,8 +62,7 @@ fun SubTopicsScreen(
         var message: String = ""
         for (tile in subTopicsModel.content) {
             message += getString(context, tile.titleId!!) + "\n" + getString(
-                context,
-                tile.descriptionId!!
+                context, tile.descriptionId!!
             ) + "\n\n"
         }
 
@@ -121,8 +120,9 @@ fun SubTopicsScreen(
                 ) {
                     items(uiState.currentSubTopicsList!!.size) { index ->
                         SubTopicListItem(
-                            title = stringResource(id = uiState.currentSubTopicsList[index].titleId),
-                            generalDescription = stringResource(id = uiState.currentSubTopicsList[index].generalDescriptionId),
+                            bookmarksIds = uiState.bookmarksIds,
+                            titleId = uiState.currentSubTopicsList[index].titleId,
+                            generalDescriptionId = uiState.currentSubTopicsList[index].generalDescriptionId,
                             windowSize = windowWidthSize,
                             onClick = {
                                 navHostController.navigate(Screens.ReadingScreen.route) {
@@ -137,6 +137,11 @@ fun SubTopicsScreen(
                                 }
                             },
                             onClickShare = { shareSubtopic(uiState.currentSubTopicsList[index]) },
+                            onClickBookmark = {
+                                homeScreenViewModel.updateBookmark(
+                                    uiState.currentSubTopicsList[index].titleId
+                                )
+                            },
                         )
                     }
                 }
@@ -161,8 +166,9 @@ fun SubTopicsScreen(
                     ) {
                         for (item in uiState.currentSubTopicsList) {
                             SubTopicListItem(
-                                title = stringResource(id = item.titleId),
-                                generalDescription = stringResource(id = item.generalDescriptionId),
+                                bookmarksIds = uiState.bookmarksIds,
+                                titleId = item.titleId,
+                                generalDescriptionId = item.generalDescriptionId,
                                 windowSize = windowWidthSize,
                                 onClick = {
                                     navHostController.navigate(Screens.ReadingScreen.route) {
@@ -175,6 +181,10 @@ fun SubTopicsScreen(
                                             )
                                         )
                                     }
+                                },
+                                onClickShare = { shareSubtopic(item) },
+                                onClickBookmark = {
+                                    homeScreenViewModel.updateBookmark(item.titleId)
                                 },
                             )
                         }
