@@ -1,5 +1,6 @@
 package com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -21,15 +23,16 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -81,7 +84,10 @@ fun FeedbackScreen(
                         strokeWidth = 2.dp,
                     )
                     Spacer(modifier = Modifier.width(16.dp))
-                } else IconButton(onClick = { viewModel.sendFeedback() }) {
+                } else IconButton(onClick = {
+                    keyboardController?.hide()
+                    viewModel.sendFeedback()
+                }) {
                     Icon(
                         imageVector = Icons.Outlined.Send,
                         contentDescription = stringResource(id = R.string.send)
@@ -99,21 +105,29 @@ fun FeedbackScreen(
             modifier = Modifier
                 .padding(paddingValues = paddingValues)
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top,
         ) {
-            TextField(
+            OutlinedTextField(
                 value = uiState.text,
                 onValueChange = {
                     viewModel.updateFeedbackText(it)
                 },
+                shape = MaterialTheme.shapes.large,
                 modifier = Modifier
-                    .height(400.dp)
+                    .widthIn(max = 600.dp)
+                    .padding(8.dp)
                     .focusRequester(focusRequester = focusRequester)
                     .onFocusChanged {
                         if (it.isFocused) keyboardController?.show()
+                        else keyboardController?.hide()
                     },
                 placeholder = {
                     Text(text = stringResource(R.string.type_your_feedback_here))
+                },
+                supportingText = {
+                    if (uiState.showError) Text(text = stringResource(id = R.string.feedback_text_cannot_be_empty))
                 },
                 isError = uiState.showError,
                 colors = TextFieldDefaults.colors(
@@ -121,9 +135,11 @@ fun FeedbackScreen(
                     unfocusedContainerColor = Color.Transparent,
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
+                    errorContainerColor = Color.Transparent,
                 ),
                 keyboardActions = KeyboardActions(
                     onSend = {
+                        keyboardController?.hide()
                         viewModel.sendFeedback()
                     }
                 ),
@@ -132,6 +148,8 @@ fun FeedbackScreen(
                     imeAction = ImeAction.Send,
                 )
             )
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(text = uiState.errorMessage)
             Spacer(modifier = Modifier.height(400.dp))
         }
 
@@ -142,8 +160,15 @@ fun FeedbackScreen(
                 text = stringResource(R.string.the_app_developer_has_received_your_feedback_and_will_take_time_to_review_it_thank_you),
                 confirmButtonText = stringResource(id = R.string.okay),
                 dismissButtonText = "",
-                onConfirmClick = { navHostController.navigateUp() },
-                onDismissClick = { navHostController.navigateUp() })
+                onConfirmClick = {
+                    viewModel.resetState()
+                    navHostController.navigateUp()
+                },
+                onDismissClick = {
+                    viewModel.resetState()
+                    navHostController.navigateUp()
+                },
+            )
         }
     }
 }
