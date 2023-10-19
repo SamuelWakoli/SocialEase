@@ -1,6 +1,7 @@
 package com.samwrotethecode.socialease.ui.presentation.home.content
 
 import android.content.res.Configuration
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.outlined.BookmarkAdd
 import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material3.Card
@@ -25,6 +27,7 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -32,19 +35,26 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import com.samwrotethecode.socialease.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SubTopicListItem(
-    title: String,
-    generalDescription: String,
+    bookmarksIds: MutableList<Int>,
+    titleId: Int,
+    generalDescriptionId: Int,
     windowSize: WindowWidthSizeClass,
     onClick: () -> Unit = {},
     onClickBookmark: () -> Unit = {},
     onClickShare: () -> Unit = {},
+) {
+    // Check if the subtopic is bookmarked
+    val isBookmarked =
+        bookmarksIds.any { it == titleId }
 
-    ) {
+    val context = LocalContext.current
+
     Card(
         onClick = onClick, modifier = Modifier
             .widthIn(
@@ -61,14 +71,14 @@ fun SubTopicListItem(
     ) {
         ListItem(headlineContent = {
             Text(
-                text = title, style = MaterialTheme.typography.titleMedium
+                text = stringResource(titleId), style = MaterialTheme.typography.titleMedium
             )
         }, supportingContent = {
             Column {
                 Text(
                     text = buildAnnotatedString {
                         withStyle(SpanStyle(color = MaterialTheme.colorScheme.onTertiaryContainer)) {
-                            append(generalDescription)
+                            append(stringResource(generalDescriptionId))
                         }
                         append(" ")
                         withStyle(SpanStyle(color = MaterialTheme.colorScheme.secondary)) {
@@ -82,10 +92,27 @@ fun SubTopicListItem(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.fillMaxWidth(),
                 ) {
-                    IconButton(onClick = { onClickBookmark() }) {
+                    IconButton(onClick = {
+                        onClickBookmark()
+                        val message = if (!isBookmarked) "added to" else "removed from"
+                        Toast.makeText(
+                            context,
+                            "${
+                                ContextCompat.getString(
+                                    context,
+                                    titleId
+                                )
+                            } has been $message bookmarks",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }) {
                         Icon(
-                            imageVector = Icons.Outlined.BookmarkAdd,
-                            contentDescription = "Add to bookmarks",
+                            imageVector =
+                            if (isBookmarked) Icons.Filled.Bookmark
+                            else Icons.Outlined.BookmarkAdd,
+                            contentDescription =
+                            if (isBookmarked) "Remove from bookmarks"
+                            else "Add to bookmarks",
                             tint = MaterialTheme.colorScheme.primary
                         )
                     }
@@ -102,6 +129,7 @@ fun SubTopicListItem(
     }
 }
 
+
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun SubTopicListItemCompactPreview() {
@@ -113,8 +141,9 @@ fun SubTopicListItemCompactPreview() {
         ) {
             repeat(10) {
                 SubTopicListItem(
-                    title = "Title",
-                    generalDescription = stringResource(id = R.string.lorem_ipsum),
+                    bookmarksIds = mutableListOf(),
+                    titleId = R.string.app_name,
+                    generalDescriptionId = R.string.lorem_ipsum,
                     windowSize = WindowWidthSizeClass.Compact,
                 )
             }
@@ -137,8 +166,9 @@ fun SubTopicListItemDarkThemeCompactPreview() {
         ) {
             repeat(10) {
                 SubTopicListItem(
-                    title = "Title",
-                    generalDescription = stringResource(id = R.string.lorem_ipsum),
+                    bookmarksIds = mutableListOf(),
+                    titleId = R.string.app_name,
+                    generalDescriptionId = R.string.lorem_ipsum,
                     windowSize = WindowWidthSizeClass.Compact
                 )
             }
@@ -158,8 +188,9 @@ fun SubTopicListItemMediumPreview() {
         ) {
             repeat(10) {
                 SubTopicListItem(
-                    title = "Title",
-                    generalDescription = stringResource(id = R.string.lorem_ipsum),
+                    bookmarksIds = mutableListOf(),
+                    titleId = R.string.app_name,
+                    generalDescriptionId = R.string.lorem_ipsum,
                     windowSize = WindowWidthSizeClass.Medium,
                 )
             }
@@ -182,8 +213,9 @@ fun SubTopicListItemDarkThemeMediumPreview() {
         ) {
             repeat(10) {
                 SubTopicListItem(
-                    title = "Title",
-                    generalDescription = stringResource(id = R.string.lorem_ipsum),
+                    bookmarksIds = mutableListOf(),
+                    titleId = R.string.app_name,
+                    generalDescriptionId = R.string.lorem_ipsum,
                     windowSize = WindowWidthSizeClass.Medium
                 )
             }
@@ -203,8 +235,9 @@ fun SubTopicListItemExpandedPreview() {
         ) {
             repeat(10) {
                 SubTopicListItem(
-                    title = "Title",
-                    generalDescription = stringResource(id = R.string.lorem_ipsum),
+                    bookmarksIds = mutableListOf(),
+                    titleId = R.string.app_name,
+                    generalDescriptionId = R.string.lorem_ipsum,
                     windowSize = WindowWidthSizeClass.Expanded,
                 )
             }
@@ -227,8 +260,9 @@ fun SubTopicListItemDarkThemeExpandedPreview() {
         ) {
             repeat(10) {
                 SubTopicListItem(
-                    title = "Title",
-                    generalDescription = stringResource(id = R.string.lorem_ipsum),
+                    bookmarksIds = mutableListOf(),
+                    titleId = R.string.app_name,
+                    generalDescriptionId = R.string.lorem_ipsum,
                     windowSize = WindowWidthSizeClass.Expanded
                 )
             }
