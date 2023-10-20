@@ -5,15 +5,10 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowColumn
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -53,7 +48,6 @@ fun SubTopicsScreen(
 
     val uiState = homeScreenViewModel.uiState.collectAsState().value
     val context = LocalContext.current
-    val lazyListState: LazyListState
 
     fun shareSubtopic(subTopicsModel: SubTopicsModel) {
         Log.d("SHARE DATA", "Data title: ${getString(context, subTopicsModel.titleId)}")
@@ -110,87 +104,42 @@ fun SubTopicsScreen(
                     ),
                 )
             }) { paddingValues ->
-            if (windowWidthSize == WindowWidthSizeClass.Compact) {
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues),
-                    verticalArrangement = Arrangement.Top,
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    items(uiState.currentSubTopicsList!!.size) { index ->
-                        SubTopicListItem(
-                            bookmarksIds = uiState.bookmarksIds,
-                            titleId = uiState.currentSubTopicsList[index].titleId,
-                            generalDescriptionId = uiState.currentSubTopicsList[index].generalDescriptionId,
-                            windowSize = windowWidthSize,
-                            onClick = {
-                                navHostController.navigate(Screens.ReadingScreen.route) {
-                                    launchSingleTop = true
-                                    homeScreenViewModel.updateReadingScreenState(
-                                        SubTopicsModel(
-                                            titleId = uiState.currentSubTopicsList[index].titleId,
-                                            generalDescriptionId = uiState.currentSubTopicsList[index].generalDescriptionId,
-                                            content = uiState.currentSubTopicsList[index].content,
-                                        )
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                items(uiState.currentSubTopicsList!!.size) { index ->
+                    SubTopicListItem(
+                        bookmarksIds = uiState.bookmarksIds,
+                        titleId = uiState.currentSubTopicsList[index].titleId,
+                        generalDescriptionId = uiState.currentSubTopicsList[index].generalDescriptionId,
+                        windowSize = windowWidthSize,
+                        onClick = {
+                            navHostController.navigate(Screens.ReadingScreen.route) {
+                                launchSingleTop = true
+                                homeScreenViewModel.updateReadingScreenState(
+                                    SubTopicsModel(
+                                        titleId = uiState.currentSubTopicsList[index].titleId,
+                                        generalDescriptionId = uiState.currentSubTopicsList[index].generalDescriptionId,
+                                        content = uiState.currentSubTopicsList[index].content,
                                     )
-                                }
-                            },
-                            onClickShare = { shareSubtopic(uiState.currentSubTopicsList[index]) },
-                            onClickBookmark = {
-                                homeScreenViewModel.updateBookmark(
-                                    uiState.currentSubTopicsList[index].titleId
                                 )
-                            },
-                        )
-                    }
-                }
-            } else {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues)
-                        .verticalScroll(rememberScrollState()),
-                    verticalArrangement = Arrangement.Top,
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    FlowColumn(
-                        verticalArrangement = Arrangement.Top,
-                        horizontalArrangement = Arrangement.SpaceEvenly,
-                        maxItemsInEachColumn = when (windowWidthSize) {
-                            //                      WindowWidthSizeClass.Compact has been used at the top outer if branch
-                            WindowWidthSizeClass.Medium -> uiState.currentSubTopicsList!!.size / 2 + 1
-                            WindowWidthSizeClass.Expanded -> uiState.currentSubTopicsList!!.size / 4 + 3
-                            else -> uiState.currentSubTopicsList!!.size
-                        }
-                    ) {
-                        for (item in uiState.currentSubTopicsList) {
-                            SubTopicListItem(
-                                bookmarksIds = uiState.bookmarksIds,
-                                titleId = item.titleId,
-                                generalDescriptionId = item.generalDescriptionId,
-                                windowSize = windowWidthSize,
-                                onClick = {
-                                    navHostController.navigate(Screens.ReadingScreen.route) {
-                                        launchSingleTop = true
-                                        homeScreenViewModel.updateReadingScreenState(
-                                            SubTopicsModel(
-                                                titleId = item.titleId,
-                                                generalDescriptionId = item.generalDescriptionId,
-                                                content = item.content,
-                                            )
-                                        )
-                                    }
-                                },
-                                onClickShare = { shareSubtopic(item) },
-                                onClickBookmark = {
-                                    homeScreenViewModel.updateBookmark(item.titleId)
-                                },
+                            }
+                        },
+                        onClickShare = { shareSubtopic(uiState.currentSubTopicsList[index]) },
+                        onClickBookmark = {
+                            homeScreenViewModel.updateBookmark(
+                                subtopic = uiState.currentSubTopicsList[index],
+                                isBookmarked = it
                             )
-                        }
-                    }
+                        },
+                    )
                 }
             }
+
         }
     }
 }
