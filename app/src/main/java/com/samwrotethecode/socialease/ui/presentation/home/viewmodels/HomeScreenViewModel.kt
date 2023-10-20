@@ -82,29 +82,41 @@ class HomeScreenViewModel : ViewModel() {
                 email = currentUser?.email,
             )
         }
+        if (currentUser?.email != null) {
+            userDataReference.get().addOnSuccessListener { documentSnapshot ->
+                _uiState.update {
+                    it.copy(bookmarksIds = documentSnapshot.data?.get(USERS_BOOKMARKS_FIELD) as MutableList<Int>)
+                }
+            }
+        }
     }
 
     fun updateBookmark(subtopicId: Int) {
-        _uiState.update { it.copy(updatingBookmarkStatus = true) }
-        val bookmarksIds = uiState.value.bookmarksIds
+        if (currentUser?.email != null) {
+            _uiState.update { it.copy(updatingBookmarkStatus = true) }
+            val bookmarksIds = uiState.value.bookmarksIds
 
-        if (bookmarksIds.contains(subtopicId)) {
-            bookmarksIds.remove(subtopicId)
-        } else {
-            bookmarksIds.add(subtopicId)
-        }
+            if (bookmarksIds.contains(subtopicId)) {
+                bookmarksIds.remove(subtopicId)
+            } else {
+                bookmarksIds.add(subtopicId)
+            }
 
-        val data = mapOf<String, List<Int>>(
-            USERS_BOOKMARKS_FIELD to bookmarksIds
-        )
-        userDataReference.set(data as Map<String, Any>, SetOptions.merge()).addOnSuccessListener {
-            _uiState.update { it.copy(updatingBookmarkStatus = false) }
-        }.addOnFailureListener { e ->
-            _uiState.update {
-                it.copy(
-                    updatingBookmarkStatus = false,
-                    updatingBookmarkStatusError = e.message.toString(),
-                )
+            val data = mapOf<String, List<Int>>(
+                USERS_BOOKMARKS_FIELD to bookmarksIds
+            )
+            userDataReference.set(
+                data as Map<String, Any>,
+                SetOptions.merge()
+            ).addOnSuccessListener {
+                _uiState.update { it.copy(updatingBookmarkStatus = false) }
+            }.addOnFailureListener { e ->
+                _uiState.update {
+                    it.copy(
+                        updatingBookmarkStatus = false,
+                        updatingBookmarkStatusError = e.message.toString(),
+                    )
+                }
             }
         }
     }

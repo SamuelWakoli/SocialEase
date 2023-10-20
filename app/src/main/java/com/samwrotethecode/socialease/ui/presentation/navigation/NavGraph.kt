@@ -38,6 +38,10 @@ fun NavGraph(
     signInScreenViewModel: SignInScreenViewModel, //elevated this param to track GoogleSign in result
     onSignInWithGoogle: () -> Unit,
 ) {
+
+    /**
+     * Used single instances of the view models at the top level so as to preserve state
+     */
     val homeScreenViewModel = viewModel<HomeScreenViewModel>()
     val searchScreenViewModel = viewModel<SearchScreenViewModel>()
     val feedbackScreenViewModel = viewModel<FeedbackScreenViewmodel>()
