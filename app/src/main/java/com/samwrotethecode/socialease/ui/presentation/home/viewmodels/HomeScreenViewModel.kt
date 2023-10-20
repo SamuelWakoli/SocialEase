@@ -45,7 +45,7 @@ data class HomeUiStateModel(
     val currentSubTopic: SubTopicsModel? = null,
 
     // Bookmarking state
-    var bookmarksIds: MutableList<Int> = mutableListOf(),
+    var bookmarksIds: MutableList<Int>? = mutableListOf(),
     var bookmarks: MutableList<SubTopicsModel> = mutableListOf(),
     val updatingBookmarkStatus: Boolean = false,
     val updatingBookmarkStatusError: String = "",
@@ -86,7 +86,12 @@ class HomeScreenViewModel : ViewModel() {
         if (currentUser?.email != null) {
             userDataReference.get().addOnSuccessListener { documentSnapshot ->
                 _uiState.update {
-                    it.copy(bookmarksIds = documentSnapshot.data?.get(USERS_BOOKMARKS_FIELD) as MutableList<Int>)
+                    it.copy(
+                        // check for null before performing the cast. You can use the safe
+                        // cast operator as? and provide a default value in case it's null
+                        bookmarksIds = documentSnapshot.data?.get(USERS_BOOKMARKS_FIELD) as? MutableList<Int>
+                            ?: mutableListOf()
+                    )
                 }
             }
         }
@@ -95,7 +100,7 @@ class HomeScreenViewModel : ViewModel() {
     fun updateBookmark(subtopicId: Int) {
         if (currentUser?.email != null) {
             _uiState.update { it.copy(updatingBookmarkStatus = true) }
-            val bookmarksIds = uiState.value.bookmarksIds
+            val bookmarksIds = uiState.value.bookmarksIds ?: mutableListOf()
 
             if (bookmarksIds.contains(subtopicId)) {
                 bookmarksIds.remove(subtopicId)
@@ -245,9 +250,14 @@ class HomeScreenViewModel : ViewModel() {
 
     fun deleteAccount() {
         viewModelScope.launch {
-            userDataReference.delete()
+            userDataReference.delete().addOnSuccessListener {
+                currentUser?.delete()
+                logOut()
+            }.addOnFailureListener {
+                // failed to delete user data if it does not exist or no internet
+                // the user is aware that internet connection is needed for this event
+                logOut()
+            }
         }
-        currentUser?.delete()
-        logOut()
     }
 }

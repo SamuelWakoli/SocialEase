@@ -21,7 +21,7 @@ import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.A
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.BookmarksScreen
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.FeedbackScreen
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.ProfileScreen
-import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.FeedbackScreenViewmodel
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.FeedbackScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SearchScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SignInScreenViewModel
@@ -41,10 +41,11 @@ fun NavGraph(
 
     /**
      * Used single instances of the view models at the top level so as to preserve state
+     * Late initialized the view models, so that when created, after auth, the current user is not null
      */
-    val homeScreenViewModel = viewModel<HomeScreenViewModel>()
-    val searchScreenViewModel = viewModel<SearchScreenViewModel>()
-    val feedbackScreenViewModel = viewModel<FeedbackScreenViewmodel>()
+    lateinit var homeScreenViewModel: HomeScreenViewModel
+    lateinit var searchScreenViewModel: SearchScreenViewModel
+    lateinit var feedbackScreenViewModel: FeedbackScreenViewModel
 
 
     NavHost(navController = navHostController, startDestination = startDestination) {
@@ -79,6 +80,7 @@ fun NavGraph(
             )
         }
         composable(route = Screens.HomeScreen.route) {
+            homeScreenViewModel = viewModel()
             HomeScreen(
                 navHostController = navHostController,
                 windowSize = windowSize,
@@ -92,6 +94,7 @@ fun NavGraph(
             )
         }
         composable(route = Screens.FeedbackScreen.route) {
+            feedbackScreenViewModel = viewModel()
             FeedbackScreen(
                 navHostController = navHostController,
                 viewModel = feedbackScreenViewModel,
@@ -110,6 +113,7 @@ fun NavGraph(
             )
         }
         composable(route = Screens.SearchScreen.route) {
+            searchScreenViewModel = viewModel()
             SearchScreen(
                 navHostController = navHostController,
                 searchScreenViewModel = searchScreenViewModel,
