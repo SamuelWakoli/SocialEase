@@ -50,7 +50,17 @@ class HomeScreenViewModel : ViewModel() {
     val uiState: StateFlow<HomeUiStateModel> = _uiState.asStateFlow()
 
     private val auth: FirebaseAuth = Firebase.auth
-    private val currentUser: FirebaseUser? = auth.currentUser
+    private var currentUser: FirebaseUser? = auth.currentUser
+
+    companion object {
+        const val USERS_COLLECTION = "users"
+        const val USERS_BOOKMARKS_FIELD = "bookmarks"
+        const val TAG = "Home Screen Viewmodel"
+    }
+
+    private val database = Firebase.firestore
+    private val userDataReference =
+        database.collection(USERS_COLLECTION).document(currentUser?.email ?: "anonymous")
 
     init {
         getUserData()

@@ -23,7 +23,7 @@ class FeedbackScreenViewmodel : ViewModel() {
     val uiState = _uiState.asStateFlow()
 
     val database = Firebase.firestore
-    val userId = Firebase.auth.currentUser!!.email
+    val userId = Firebase.auth.currentUser?.email ?: "anonymous"
 
     companion object {
         const val FEEDBACKS_COLLECTION = "feedbacks"

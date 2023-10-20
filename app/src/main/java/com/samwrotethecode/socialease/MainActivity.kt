@@ -16,18 +16,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.auth.api.identity.Identity
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SignInScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.navigation.NavGraph
 import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 import com.samwrotethecode.socialease.ui.presentation.start.GoogleAuthUiClient
-import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SignInScreenViewModel
 import com.samwrotethecode.socialease.ui.theme.SocialEaseTheme
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-
-    private val currentUser = FirebaseAuth.getInstance().currentUser
-
     private val googleAuthUiClient by lazy {
         GoogleAuthUiClient(
             context = applicationContext,
@@ -38,6 +36,8 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val currentUser = Firebase.auth.currentUser
+
         setContent {
             SocialEaseTheme {
                 // A surface container using the 'background' color from the theme
