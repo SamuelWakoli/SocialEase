@@ -25,6 +25,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -46,12 +50,13 @@ fun SubTopicListItem(
     generalDescriptionId: Int,
     windowSize: WindowWidthSizeClass,
     onClick: () -> Unit = {},
-    onClickBookmark: () -> Unit = {},
+    onClickBookmark: (isBookmarked: Boolean) -> Unit = {},
     onClickShare: () -> Unit = {},
 ) {
     // Check if the subtopic is bookmarked
-    var isBookmarked = false
-    isBookmarked = bookmarksIds?.any { it == titleId } ?: false
+    var isBookmarked: Boolean by remember {
+        mutableStateOf(bookmarksIds?.any { it == titleId } ?: false)
+    }
 
     val context = LocalContext.current
 
@@ -60,8 +65,7 @@ fun SubTopicListItem(
             .widthIn(
                 max = when (windowSize) {
                     WindowWidthSizeClass.Compact -> 400.dp
-                    WindowWidthSizeClass.Medium -> 300.dp
-                    else -> 280.dp
+                    else -> 680.dp
                 }
             )
             .padding(horizontal = 8.dp, vertical = 4.dp), colors = CardDefaults.cardColors(
@@ -93,7 +97,8 @@ fun SubTopicListItem(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     IconButton(onClick = {
-                        onClickBookmark()
+                        isBookmarked = !isBookmarked
+                        onClickBookmark(isBookmarked)
                         val message = if (!isBookmarked) "added to" else "removed from"
                         Toast.makeText(
                             context,

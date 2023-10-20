@@ -14,6 +14,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.data.local_data.SubTopicsModel
+import com.samwrotethecode.socialease.data.local_data.allSubTopics
 import com.samwrotethecode.socialease.data.local_data.assertivenessSubTopics
 import com.samwrotethecode.socialease.data.local_data.communicationSubTopics
 import com.samwrotethecode.socialease.data.local_data.conflictResolutionSubTopics
@@ -47,7 +48,6 @@ data class HomeUiStateModel(
     // Bookmarking state
     var bookmarksIds: MutableList<Int>? = mutableListOf(),
     var bookmarks: MutableList<SubTopicsModel> = mutableListOf(),
-    val updatingBookmarkStatus: Boolean = false,
     val updatingBookmarkStatusError: String = "",
 )
 
@@ -83,43 +83,50 @@ class HomeScreenViewModel : ViewModel() {
                 email = currentUser?.email,
             )
         }
-        if (currentUser?.email != null) {
+        currentUser?.email?.let { userEmail ->
             userDataReference.get().addOnSuccessListener { documentSnapshot ->
+                // update bookmark ids
+                val bookmarksIdsFromDB =
+                    (documentSnapshot.data?.get(USERS_BOOKMARKS_FIELD)) as? MutableList<Int>
+                        ?: mutableListOf()
                 _uiState.update {
                     it.copy(
-                        // check for null before performing the cast. You can use the safe
-                        // cast operator as? and provide a default value in case it's null
-                        bookmarksIds = documentSnapshot.data?.get(USERS_BOOKMARKS_FIELD) as? MutableList<Int>
-                            ?: mutableListOf()
+                        bookmarksIds = bookmarksIdsFromDB,
+                        bookmarks =
+                        allSubTopics.filter { subtopic ->
+                            bookmarksIdsFromDB.any { id -> id == subtopic.titleId }
+                        }.toMutableList()
                     )
                 }
             }
         }
     }
 
-    fun updateBookmark(subtopicId: Int) {
-        if (currentUser?.email != null) {
-            _uiState.update { it.copy(updatingBookmarkStatus = true) }
-            val bookmarksIds = uiState.value.bookmarksIds ?: mutableListOf()
+    fun updateBookmark(subtopic: SubTopicsModel, isBookmarked: Boolean) {
+        val bookmarksIds = mutableListOf<Int>()
 
-            if (bookmarksIds.contains(subtopicId)) {
-                bookmarksIds.remove(subtopicId)
+        /**
+         * using bookmarksIds directly from the ui state doesn't update on being reassigned
+         */
+
+        val bookmarks = uiState.value.bookmarks
+        if (currentUser?.email != null) {
+
+            if (!isBookmarked) { //not bookmarked because it is updated on click
+                bookmarks.remove(subtopic)
             } else {
-                bookmarksIds.add(subtopicId)
+                bookmarks.add(subtopic)
             }
+
+            bookmarks.forEach { bookmarksIds.add(it.titleId) }
+            _uiState.update { it.copy(bookmarks = bookmarks, bookmarksIds = bookmarksIds) }
 
             val data = mapOf<String, List<Int>>(
                 USERS_BOOKMARKS_FIELD to bookmarksIds
             )
-            userDataReference.set(
-                data as Map<String, Any>,
-                SetOptions.merge()
-            ).addOnSuccessListener {
-                _uiState.update { it.copy(updatingBookmarkStatus = false) }
-            }.addOnFailureListener { e ->
+            userDataReference.set(data, SetOptions.merge()).addOnFailureListener { e ->
                 _uiState.update {
                     it.copy(
-                        updatingBookmarkStatus = false,
                         updatingBookmarkStatusError = e.message.toString(),
                     )
                 }
