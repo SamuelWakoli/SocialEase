@@ -11,13 +11,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -38,9 +36,7 @@ fun HomeScreen(
     windowSize: WindowWidthSizeClass,
     viewModel: HomeScreenViewModel,
 ) {
-    val uiState = viewModel.uiState.collectAsState().value
     val drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val applicationContext = LocalContext.current.applicationContext
     val coroutineScope = rememberCoroutineScope()
 
     Box(
@@ -68,18 +64,15 @@ fun HomeScreen(
             Scaffold(
                 topBar = {
                     HomeScreenAppBar(
-                        uiState = uiState,
-                        viewModel = viewModel,
                         navHostController = navHostController,
                         onNavigationClick = {
                             coroutineScope.launch {
                                 drawerState.open()
                             }
                         },
-                        onSearchClick = {
-                            navHostController.navigate(Screens.SearchScreen.route)
-                        },
-                    )
+                    ) {
+                        navHostController.navigate(Screens.SearchScreen.route)
+                    }
                 },
                 containerColor = Color.Transparent,
             ) {

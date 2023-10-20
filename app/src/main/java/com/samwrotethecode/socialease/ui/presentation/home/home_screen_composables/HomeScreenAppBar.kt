@@ -12,17 +12,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.R
-import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
-import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeUiStateModel
 import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 import kotlinx.coroutines.launch
 
@@ -32,9 +28,6 @@ fun HomeScreenAppBar(
     navHostController: NavHostController,
     onNavigationClick: () -> Unit,
     onSearchClick: () -> Unit,
-    uiState: HomeUiStateModel,
-    viewModel: HomeScreenViewModel,
-
     ) {
     CenterAlignedTopAppBar(
         title = {
@@ -99,8 +92,5 @@ fun HomeScreenAppBarPreview() {
         onNavigationClick = {
             coroutineScope.launch { }
         },
-        onSearchClick = {},
-        uiState = viewModel<HomeScreenViewModel>().uiState.collectAsState().value,
-        viewModel = viewModel<HomeScreenViewModel>(),
-    )
+    ) {}
 }

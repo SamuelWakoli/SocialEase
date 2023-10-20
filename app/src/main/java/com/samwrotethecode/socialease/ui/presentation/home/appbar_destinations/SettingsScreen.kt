@@ -29,7 +29,7 @@ fun SettingsScreen(
                 title = { Text(text = stringResource(id = R.string.search)) },
                 navigationIcon = {
                     IconButton(onClick = {
-                        // TODO: Navigate back, then save settings
+                        //Navigate back, then save settings
                         navHostController.navigateUp()
                     }) {
                         Icon(
