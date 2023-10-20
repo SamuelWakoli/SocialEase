@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -26,6 +27,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 data class HomeUiStateModel(
     val photoUrl: Uri? = null,
@@ -63,7 +65,6 @@ class HomeScreenViewModel : ViewModel() {
     companion object {
         const val USERS_COLLECTION = "users"
         const val USERS_BOOKMARKS_FIELD = "bookmarks"
-        const val TAG = "Home Screen Viewmodel"
     }
 
     private val database = Firebase.firestore
@@ -82,29 +83,41 @@ class HomeScreenViewModel : ViewModel() {
                 email = currentUser?.email,
             )
         }
+        if (currentUser?.email != null) {
+            userDataReference.get().addOnSuccessListener { documentSnapshot ->
+                _uiState.update {
+                    it.copy(bookmarksIds = documentSnapshot.data?.get(USERS_BOOKMARKS_FIELD) as MutableList<Int>)
+                }
+            }
+        }
     }
 
     fun updateBookmark(subtopicId: Int) {
-        _uiState.update { it.copy(updatingBookmarkStatus = true) }
-        val bookmarksIds = uiState.value.bookmarksIds
+        if (currentUser?.email != null) {
+            _uiState.update { it.copy(updatingBookmarkStatus = true) }
+            val bookmarksIds = uiState.value.bookmarksIds
 
-        if (bookmarksIds.contains(subtopicId)) {
-            bookmarksIds.remove(subtopicId)
-        } else {
-            bookmarksIds.add(subtopicId)
-        }
+            if (bookmarksIds.contains(subtopicId)) {
+                bookmarksIds.remove(subtopicId)
+            } else {
+                bookmarksIds.add(subtopicId)
+            }
 
-        val data = mapOf<String, List<Int>>(
-            USERS_BOOKMARKS_FIELD to bookmarksIds
-        )
-        userDataReference.set(data as Map<String, Any>, SetOptions.merge()).addOnSuccessListener {
-            _uiState.update { it.copy(updatingBookmarkStatus = false) }
-        }.addOnFailureListener { e ->
-            _uiState.update {
-                it.copy(
-                    updatingBookmarkStatus = false,
-                    updatingBookmarkStatusError = e.message.toString(),
-                )
+            val data = mapOf<String, List<Int>>(
+                USERS_BOOKMARKS_FIELD to bookmarksIds
+            )
+            userDataReference.set(
+                data as Map<String, Any>,
+                SetOptions.merge()
+            ).addOnSuccessListener {
+                _uiState.update { it.copy(updatingBookmarkStatus = false) }
+            }.addOnFailureListener { e ->
+                _uiState.update {
+                    it.copy(
+                        updatingBookmarkStatus = false,
+                        updatingBookmarkStatusError = e.message.toString(),
+                    )
+                }
             }
         }
     }
@@ -231,7 +244,9 @@ class HomeScreenViewModel : ViewModel() {
     }
 
     fun deleteAccount() {
-        // TODO: Delete user data
+        viewModelScope.launch {
+            userDataReference.delete()
+        }
         currentUser?.delete()
         logOut()
     }

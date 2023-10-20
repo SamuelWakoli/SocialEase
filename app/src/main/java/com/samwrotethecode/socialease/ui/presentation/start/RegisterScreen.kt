@@ -68,7 +68,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.composables.GoogleSignInButton
-import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SignInScreenViewModel
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
@@ -87,10 +86,24 @@ fun RegisterScreen(
     LaunchedEffect(key1 = uiState.isSignInSuccess, block = {
         if (uiState.isSignInSuccess) {
             Toast.makeText(context, R.string.signed_in_successfully, Toast.LENGTH_LONG).show()
+            
+            /**
+             * On sign in success, the app should recreate the activity. The reason is to recreate
+             * the view models, fetching them with the new user data.
+             * Why so:
+             *      - There are no auth state change listeners at the view models.
+             *      - The recreation is only done once, that is during auth. if the user is not null,
+             *          we navigate to the HomeScreen.
+             *      - The view models are only created once, then inherited to the children, so as
+             *          to preserve state by avoiding various instances of the view models.
+             */
+            val activity = context as Activity
+            activity.recreate()
 
-            navHostController.navigate(Screens.HomeScreen.route) {
-                navHostController.popBackStack()
-            }
+//
+//            navHostController.navigate(Screens.HomeScreen.route) {
+//                navHostController.popBackStack()
+//            }
         }
     })
 
@@ -128,7 +141,8 @@ fun RegisterScreen(
             Column(
                 modifier = Modifier
                     .verticalScroll(rememberScrollState())
-                    .fillMaxSize().padding(paddingValues),
+                    .fillMaxSize()
+                    .padding(paddingValues),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
