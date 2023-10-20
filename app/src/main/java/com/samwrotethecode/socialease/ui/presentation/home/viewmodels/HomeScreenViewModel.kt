@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.data.local_data.SubTopicsModel
@@ -39,6 +41,12 @@ data class HomeUiStateModel(
 
     // ReadingScreen state
     val currentSubTopic: SubTopicsModel? = null,
+
+    // Bookmarking state
+    var bookmarksIds: MutableList<Int> = mutableListOf(),
+    var bookmarks: MutableList<SubTopicsModel> = mutableListOf(),
+    val updatingBookmarkStatus: Boolean = false,
+    val updatingBookmarkStatusError: String = "",
 )
 
 enum class TopicCategories {
@@ -73,6 +81,31 @@ class HomeScreenViewModel : ViewModel() {
                 displayName = currentUser?.displayName,
                 email = currentUser?.email,
             )
+        }
+    }
+
+    fun updateBookmark(subtopicId: Int) {
+        _uiState.update { it.copy(updatingBookmarkStatus = true) }
+        val bookmarksIds = uiState.value.bookmarksIds
+
+        if (bookmarksIds.contains(subtopicId)) {
+            bookmarksIds.remove(subtopicId)
+        } else {
+            bookmarksIds.add(subtopicId)
+        }
+
+        val data = mapOf<String, List<Int>>(
+            USERS_BOOKMARKS_FIELD to bookmarksIds
+        )
+        userDataReference.set(data as Map<String, Any>, SetOptions.merge()).addOnSuccessListener {
+            _uiState.update { it.copy(updatingBookmarkStatus = false) }
+        }.addOnFailureListener { e ->
+            _uiState.update {
+                it.copy(
+                    updatingBookmarkStatus = false,
+                    updatingBookmarkStatusError = e.message.toString(),
+                )
+            }
         }
     }
 
