@@ -21,15 +21,14 @@ import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.A
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.BookmarksScreen
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.FeedbackScreen
 import com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations.ProfileScreen
-import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.BookmarksScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.FeedbackScreenViewmodel
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SearchScreenViewModel
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SignInScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.start.ForgotPasswordScreen
 import com.samwrotethecode.socialease.ui.presentation.start.IntroScreen
 import com.samwrotethecode.socialease.ui.presentation.start.RegisterScreen
 import com.samwrotethecode.socialease.ui.presentation.start.SignInScreen
-import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SignInScreenViewModel
 
 @Composable
 fun NavGraph(
@@ -42,7 +41,6 @@ fun NavGraph(
     val homeScreenViewModel = viewModel<HomeScreenViewModel>()
     val searchScreenViewModel = viewModel<SearchScreenViewModel>()
     val feedbackScreenViewModel = viewModel<FeedbackScreenViewmodel>()
-    val bookmarksScreenViewModel = viewModel<BookmarksScreenViewModel>()
 
 
     NavHost(navController = navHostController, startDestination = startDestination) {
@@ -98,7 +96,7 @@ fun NavGraph(
         composable(route = Screens.BookmarksScreen.route) {
             BookmarksScreen(
                 navHostController = navHostController,
-                viewModel = bookmarksScreenViewModel,
+                viewModel = homeScreenViewModel,
                 windowWidthSize = windowSize
             )
         }

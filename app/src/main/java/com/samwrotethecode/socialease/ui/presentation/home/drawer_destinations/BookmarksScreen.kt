@@ -42,14 +42,14 @@ import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.data.local_data.SubTopicsModel
 import com.samwrotethecode.socialease.ui.presentation.home.content.SubTopicListItem
-import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.BookmarksScreenViewModel
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun BookmarksScreen(
     navHostController: NavHostController,
-    viewModel: BookmarksScreenViewModel,
+    viewModel: HomeScreenViewModel,
     windowWidthSize: WindowWidthSizeClass,
 ) {
     val uiState = viewModel.uiState.collectAsState().value
@@ -90,7 +90,7 @@ fun BookmarksScreen(
             }
         ) { paddingValues ->
 
-            if (uiState.topicsList != null) {
+            if (uiState.bookmarksIds.isNotEmpty()) {
 
                 if (windowWidthSize == WindowWidthSizeClass.Compact) {
                     LazyColumn(
@@ -100,19 +100,20 @@ fun BookmarksScreen(
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-                        items(uiState.topicsList.size) { index ->
+                        items(uiState.bookmarks.size) { index ->
                             SubTopicListItem(
-                                title = stringResource(id = uiState.topicsList[index].titleId),
-                                generalDescription = stringResource(id = uiState.topicsList[index].generalDescriptionId),
+                                bookmarksIds = uiState.bookmarksIds,
+                                titleId = uiState.bookmarks[index].titleId,
+                                generalDescriptionId =  uiState.bookmarks[index].generalDescriptionId,
                                 windowSize = windowWidthSize,
                                 onClick = {
                                     navHostController.navigate(Screens.ReadingScreen.route) {
                                         launchSingleTop = true
                                         viewModel.updateReadingScreenState(
                                             SubTopicsModel(
-                                                titleId = uiState.topicsList[index].titleId,
-                                                generalDescriptionId = uiState.topicsList[index].generalDescriptionId,
-                                                content = uiState.topicsList[index].content,
+                                                titleId = uiState.bookmarks[index].titleId,
+                                                generalDescriptionId = uiState.bookmarks[index].generalDescriptionId,
+                                                content = uiState.bookmarks[index].content,
                                             )
                                         )
                                     }
@@ -134,15 +135,16 @@ fun BookmarksScreen(
                             horizontalArrangement = Arrangement.Center,
                             maxItemsInEachColumn = when (windowWidthSize) {
                                 //                      WindowWidthSizeClass.Compact has been used at the top outer if branch
-                                WindowWidthSizeClass.Medium -> uiState.topicsList.size / 2 + 1
-                                WindowWidthSizeClass.Expanded -> uiState.topicsList.size / 4 + 1
-                                else -> uiState.topicsList.size
+                                WindowWidthSizeClass.Medium -> uiState.bookmarks.size / 2 + 1
+                                WindowWidthSizeClass.Expanded -> uiState.bookmarks.size / 4 + 1
+                                else -> uiState.bookmarks.size
                             }
                         ) {
-                            for (item in uiState.topicsList) {
+                            for (item in uiState.bookmarks) {
                                 SubTopicListItem(
-                                    title = stringResource(id = item.titleId),
-                                    generalDescription = stringResource(id = item.generalDescriptionId),
+                                    bookmarksIds = uiState.bookmarksIds,
+                                    titleId = item.titleId,
+                                    generalDescriptionId = item.generalDescriptionId,
                                     windowSize = windowWidthSize,
                                     onClick = {
                                         navHostController.navigate(Screens.ReadingScreen.route) {
@@ -193,7 +195,7 @@ fun BookmarksScreen(
 fun BookmarksScreenPreview() {
     BookmarksScreen(
         navHostController = rememberNavController(),
-        viewModel = viewModel<BookmarksScreenViewModel>(),
+        viewModel = viewModel<HomeScreenViewModel>(),
         windowWidthSize = WindowWidthSizeClass.Compact
     )
 }
