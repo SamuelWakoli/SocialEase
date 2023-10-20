@@ -186,7 +186,10 @@ fun ProfileScreen(
             )
 
             if (showDeleteAccountDialog) CustomDialogBox(
-                icon = { /*TODO*/ },
+                icon = { Icon(
+                    imageVector = Icons.Outlined.PersonRemoveAlt1,
+                    contentDescription = null
+                ) },
                 title = stringResource(id = R.string.delete_account),
                 text = stringResource(R.string.are_you_sure_you_want_to_delete_your_account_if_you_delete_your_account_you_will_permanently_lose_your_cloud_data_such_as_bookmarks),
                 confirmButtonText = stringResource(id = R.string.delete_account),

@@ -49,13 +49,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.composables.CustomDialogBox
-import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.FeedbackScreenViewmodel
+import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.FeedbackScreenViewModel
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun FeedbackScreen(
     navHostController: NavHostController,
-    viewModel: FeedbackScreenViewmodel
+    viewModel: FeedbackScreenViewModel
 ) {
     val uiState = viewModel.uiState.collectAsState().value
     val focusRequester = remember { FocusRequester() }
@@ -178,6 +178,6 @@ fun FeedbackScreen(
 fun FeedbackScreenPreview() {
     FeedbackScreen(
         navHostController = rememberNavController(),
-        viewModel = viewModel<FeedbackScreenViewmodel>(),
+        viewModel = viewModel<FeedbackScreenViewModel>(),
     )
 }

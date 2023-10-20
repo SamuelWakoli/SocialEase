@@ -17,7 +17,7 @@ data class FeedbackScreenState(
     val errorMessage: String = "",
 )
 
-class FeedbackScreenViewmodel : ViewModel() {
+class FeedbackScreenViewModel : ViewModel() {
     private var _uiState: MutableStateFlow<FeedbackScreenState> =
         MutableStateFlow(FeedbackScreenState())
     val uiState = _uiState.asStateFlow()

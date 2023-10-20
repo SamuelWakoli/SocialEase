@@ -86,7 +86,7 @@ fun RegisterScreen(
     LaunchedEffect(key1 = uiState.isSignInSuccess, block = {
         if (uiState.isSignInSuccess) {
             Toast.makeText(context, R.string.signed_in_successfully, Toast.LENGTH_LONG).show()
-            
+
             /**
              * On sign in success, the app should recreate the activity. The reason is to recreate
              * the view models, fetching them with the new user data.

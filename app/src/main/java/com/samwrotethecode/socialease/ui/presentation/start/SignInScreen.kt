@@ -97,14 +97,14 @@ fun SignInScreen(
              *      - The view models are only created once, then inherited to the children, so as
              *          to preserve state by avoiding various instances of the view models.
              */
-            val activity = context as Activity
-            activity.recreate()
 
-//
-//            navHostController.navigate(Screens.HomeScreen.route) {
-//                launchSingleTop = true
-//                navHostController.popBackStack()
-//            }
+            navHostController.navigate(Screens.HomeScreen.route) {
+                launchSingleTop = true
+                navHostController.popBackStack()
+
+                val activity = context as Activity
+                activity.recreate()
+            }
         }
     })
 

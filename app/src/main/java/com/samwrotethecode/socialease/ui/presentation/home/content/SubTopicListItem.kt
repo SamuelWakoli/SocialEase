@@ -41,7 +41,7 @@ import com.samwrotethecode.socialease.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SubTopicListItem(
-    bookmarksIds: MutableList<Int>,
+    bookmarksIds: MutableList<Int>?,
     titleId: Int,
     generalDescriptionId: Int,
     windowSize: WindowWidthSizeClass,
@@ -50,8 +50,8 @@ fun SubTopicListItem(
     onClickShare: () -> Unit = {},
 ) {
     // Check if the subtopic is bookmarked
-    val isBookmarked =
-        bookmarksIds.any { it == titleId }
+    var isBookmarked = false
+    isBookmarked = bookmarksIds?.any { it == titleId } ?: false
 
     val context = LocalContext.current
 

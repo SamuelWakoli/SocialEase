@@ -90,7 +90,7 @@ fun BookmarksScreen(
             }
         ) { paddingValues ->
 
-            if (uiState.bookmarksIds.isNotEmpty()) {
+            if (!uiState.bookmarksIds.isNullOrEmpty()) {
 
                 if (windowWidthSize == WindowWidthSizeClass.Compact) {
                     LazyColumn(
