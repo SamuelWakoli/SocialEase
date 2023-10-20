@@ -1,11 +1,12 @@
 package com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations
 
+import android.content.Intent
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowColumn
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -32,10 +33,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -53,6 +56,35 @@ fun BookmarksScreen(
     windowWidthSize: WindowWidthSizeClass,
 ) {
     val uiState = viewModel.uiState.collectAsState().value
+    val context = LocalContext.current
+    fun shareSubtopic(subTopicsModel: SubTopicsModel) {
+        Log.d(
+            "SHARE DATA",
+            "Data title: ${ContextCompat.getString(context, subTopicsModel.titleId)}"
+        )
+        val title = ContextCompat.getString(context, subTopicsModel.titleId)
+        val generalDescription =
+            ContextCompat.getString(context, subTopicsModel.generalDescriptionId)
+        var message: String = ""
+        for (tile in subTopicsModel.content) {
+            message += ContextCompat.getString(
+                context,
+                tile.titleId!!
+            ) + "\n" + ContextCompat.getString(
+                context, tile.descriptionId!!
+            ) + "\n\n"
+        }
+
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TITLE, title)
+            putExtra(Intent.EXTRA_TEXT, message)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        context.startActivity(shareIntent)
+    }
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -90,76 +122,44 @@ fun BookmarksScreen(
             }
         ) { paddingValues ->
 
-            if (!uiState.bookmarksIds.isNullOrEmpty()) {
+            Log.d("BOOKMARKS", "Size of Ids: ${uiState.bookmarksIds!!.size}")
+            Log.d("BOOKMARKS", "Size of Bookmarks: ${uiState.bookmarks.size}")
 
-                if (windowWidthSize == WindowWidthSizeClass.Compact) {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(paddingValues),
-                        verticalArrangement = Arrangement.Top,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        items(uiState.bookmarks.size) { index ->
-                            SubTopicListItem(
-                                bookmarksIds = uiState.bookmarksIds,
-                                titleId = uiState.bookmarks[index].titleId,
-                                generalDescriptionId =  uiState.bookmarks[index].generalDescriptionId,
-                                windowSize = windowWidthSize,
-                                onClick = {
-                                    navHostController.navigate(Screens.ReadingScreen.route) {
-                                        launchSingleTop = true
-                                        viewModel.updateReadingScreenState(
-                                            SubTopicsModel(
-                                                titleId = uiState.bookmarks[index].titleId,
-                                                generalDescriptionId = uiState.bookmarks[index].generalDescriptionId,
-                                                content = uiState.bookmarks[index].content,
-                                            )
+            if (!uiState.bookmarksIds.isNullOrEmpty() && uiState.bookmarks.isNotEmpty()) {
+
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues),
+                    verticalArrangement = Arrangement.Top,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    items(uiState.bookmarksIds!!.size) { index ->
+                        SubTopicListItem(
+                            bookmarksIds = uiState.bookmarksIds,
+                            titleId = uiState.bookmarks[index].titleId,
+                            generalDescriptionId = uiState.bookmarks[index].generalDescriptionId,
+                            windowSize = windowWidthSize,
+                            onClick = {
+                                navHostController.navigate(Screens.ReadingScreen.route) {
+                                    launchSingleTop = true
+                                    viewModel.updateReadingScreenState(
+                                        SubTopicsModel(
+                                            titleId = uiState.bookmarks[index].titleId,
+                                            generalDescriptionId = uiState.bookmarks[index].generalDescriptionId,
+                                            content = uiState.bookmarks[index].content,
                                         )
-                                    }
+                                    )
                                 }
-                            )
-                        }
-                    }
-                } else {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(paddingValues)
-                            .verticalScroll(rememberScrollState()),
-                        verticalArrangement = Arrangement.Top,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        FlowColumn(
-                            verticalArrangement = Arrangement.Top,
-                            horizontalArrangement = Arrangement.Center,
-                            maxItemsInEachColumn = when (windowWidthSize) {
-                                //                      WindowWidthSizeClass.Compact has been used at the top outer if branch
-                                WindowWidthSizeClass.Medium -> uiState.bookmarks.size / 2 + 1
-                                WindowWidthSizeClass.Expanded -> uiState.bookmarks.size / 4 + 1
-                                else -> uiState.bookmarks.size
-                            }
-                        ) {
-                            for (item in uiState.bookmarks) {
-                                SubTopicListItem(
-                                    bookmarksIds = uiState.bookmarksIds,
-                                    titleId = item.titleId,
-                                    generalDescriptionId = item.generalDescriptionId,
-                                    windowSize = windowWidthSize,
-                                    onClick = {
-                                        navHostController.navigate(Screens.ReadingScreen.route) {
-                                            launchSingleTop = true
-                                            viewModel.updateReadingScreenState(
-                                                SubTopicsModel(
-                                                    titleId = item.titleId,
-                                                    generalDescriptionId = item.generalDescriptionId,
-                                                    content = item.content,
-                                                )
-                                            )
-                                        }
-                                    })
-                            }
-                        }
+                            },
+                            onClickShare = { shareSubtopic(uiState.bookmarks[index]) },
+                            onClickBookmark = {
+                                viewModel.updateBookmark(
+                                    subtopic = uiState.bookmarks[index],
+                                    isBookmarked = it
+                                )
+                            },
+                        )
                     }
                 }
             } else {
