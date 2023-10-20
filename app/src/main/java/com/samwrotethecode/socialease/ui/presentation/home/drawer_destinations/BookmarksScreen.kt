@@ -1,7 +1,6 @@
 package com.samwrotethecode.socialease.ui.presentation.home.drawer_destinations
 
 import android.content.Intent
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -58,14 +57,9 @@ fun BookmarksScreen(
     val uiState = viewModel.uiState.collectAsState().value
     val context = LocalContext.current
     fun shareSubtopic(subTopicsModel: SubTopicsModel) {
-        Log.d(
-            "SHARE DATA",
-            "Data title: ${ContextCompat.getString(context, subTopicsModel.titleId)}"
-        )
         val title = ContextCompat.getString(context, subTopicsModel.titleId)
-        val generalDescription =
-            ContextCompat.getString(context, subTopicsModel.generalDescriptionId)
-        var message: String = ""
+        ContextCompat.getString(context, subTopicsModel.generalDescriptionId)
+        var message = ""
         for (tile in subTopicsModel.content) {
             message += ContextCompat.getString(
                 context,
@@ -121,10 +115,6 @@ fun BookmarksScreen(
                 )
             }
         ) { paddingValues ->
-
-            Log.d("BOOKMARKS", "Size of Ids: ${uiState.bookmarksIds!!.size}")
-            Log.d("BOOKMARKS", "Size of Bookmarks: ${uiState.bookmarks.size}")
-
             if (!uiState.bookmarksIds.isNullOrEmpty() && uiState.bookmarks.isNotEmpty()) {
 
                 LazyColumn(

@@ -1,6 +1,6 @@
 package com.samwrotethecode.socialease.ui.presentation.home.content
 
-import android.util.Log
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -29,14 +29,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.R
+import com.samwrotethecode.socialease.data.local_data.SubTopicsModel
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -48,10 +51,34 @@ fun ReadingScreen(
 
     val uiState = homeScreenViewModel.uiState.collectAsState().value
     val contentModifier = Modifier
-    val readingScreenTag = "READING_SCREEN_TAG"
+
+    val context = LocalContext.current
+    fun shareSubtopic(subTopicsModel: SubTopicsModel) {
+        val title = ContextCompat.getString(context, subTopicsModel.titleId)
+        ContextCompat.getString(context, subTopicsModel.generalDescriptionId)
+        var message = ""
+        for (tile in subTopicsModel.content) {
+            message += ContextCompat.getString(
+                context,
+                tile.titleId!!
+            ) + "\n" + ContextCompat.getString(
+                context, tile.descriptionId!!
+            ) + "\n\n"
+        }
+
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TITLE, title)
+            putExtra(Intent.EXTRA_TEXT, message)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        context.startActivity(shareIntent)
+    }
+
 
     Box {
-        Log.d(readingScreenTag, "Image ID: ${uiState.currentBackgroundImage}")
         Image(
             painterResource(id = uiState.currentBackgroundImage ?: R.drawable.intro_img_1),
             contentDescription = null,
@@ -88,12 +115,24 @@ fun ReadingScreen(
                             ReadingScreenDropdownMenu(
                                 uiState = uiState,
                                 viewModel = homeScreenViewModel,
-                                navHostController = navHostController
+                                navHostController = navHostController,
+                                titleId = uiState.currentSubTopic?.titleId!!,
+                                bookmarksIds = uiState.bookmarksIds,
+                                onClickShare = { shareSubtopic(uiState.currentSubTopic) },
+                                onClickBookmark = {
+                                    homeScreenViewModel.updateBookmark(
+                                        subtopic = uiState.currentSubTopic,
+                                        isBookmarked = it
+                                    )
+                                },
                             )
                         }
                     },
                     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                        containerColor = Color.Transparent
+                        navigationIconContentColor = MaterialTheme.colorScheme.primary,
+                        titleContentColor = MaterialTheme.colorScheme.primary,
+                        actionIconContentColor = MaterialTheme.colorScheme.primary,
+                        containerColor = Color.Transparent,
                     ),
                 )
             },

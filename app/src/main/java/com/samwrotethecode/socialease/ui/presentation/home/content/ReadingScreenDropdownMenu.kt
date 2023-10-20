@@ -1,5 +1,6 @@
 package com.samwrotethecode.socialease.ui.presentation.home.content
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,10 +15,16 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -29,9 +36,19 @@ import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeUiStat
 fun ReadingScreenDropdownMenu(
     uiState: HomeUiStateModel,
     viewModel: HomeScreenViewModel,
+    bookmarksIds: MutableList<Int>?,
+    titleId: Int,
     navHostController: NavHostController,
-    isCurrentSubtopicSaved: Boolean = false,
+    onClickBookmark: (isBookmarked: Boolean) -> Unit = {},
+    onClickShare: () -> Unit = {},
 ) {
+    // Check if the subtopic is bookmarked
+    var isBookmarked: Boolean by remember {
+        mutableStateOf(bookmarksIds?.any { it == uiState.currentSubTopic?.titleId!! } ?: false)
+    }
+
+    val context = LocalContext.current
+
     DropdownMenu(
         expanded = uiState.showDropdownMenu,
         onDismissRequest = { viewModel.updateAppbarDropDownMenu() }
@@ -44,20 +61,32 @@ fun ReadingScreenDropdownMenu(
                 ) {
                     Icon(
                         imageVector =
-                        if (isCurrentSubtopicSaved) Icons.Outlined.Bookmark
+                        if (isBookmarked) Icons.Outlined.Bookmark
                         else Icons.Outlined.BookmarkAdd, contentDescription = null
                     )
                     Spacer(modifier = Modifier.width(12.dp))
                     Text(
                         text =
-                        if (isCurrentSubtopicSaved) "Remove from bookmarks"
+                        if (isBookmarked) "Remove from bookmarks"
                         else "Add to bookmarks"
                     )
                 }
             },
             onClick = {
                 viewModel.updateAppbarDropDownMenu()
-                // TODO: Implement bookmarking logic
+                isBookmarked = !isBookmarked
+                onClickBookmark(isBookmarked)
+                val message = if (!isBookmarked) "added to" else "removed from"
+                Toast.makeText(
+                    context,
+                    "${
+                        ContextCompat.getString(
+                            context,
+                            titleId
+                        )
+                    } has been $message bookmarks",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         )
         DropdownMenuItem(
@@ -78,7 +107,7 @@ fun ReadingScreenDropdownMenu(
             },
             onClick = {
                 viewModel.updateAppbarDropDownMenu()
-                // TODO: Implement share logic
+                onClickShare()
             }
         )
     }
@@ -90,6 +119,8 @@ fun ReadingScreenDropdownMenuPreview() {
     ReadingScreenDropdownMenu(
         uiState = viewModel<HomeScreenViewModel>().uiState.collectAsState().value,
         viewModel = viewModel<HomeScreenViewModel>(),
+        bookmarksIds = mutableListOf(),
+        titleId = 0,
         navHostController = rememberNavController(),
     )
 }
