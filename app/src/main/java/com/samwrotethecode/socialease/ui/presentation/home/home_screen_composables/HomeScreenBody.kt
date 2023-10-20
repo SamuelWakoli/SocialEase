@@ -18,9 +18,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeBodyItemModel
+import com.samwrotethecode.socialease.data.local_data.HomeBodyItemModel
+import com.samwrotethecode.socialease.data.local_data.homeScreenBodyData
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
-import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.homeScreenBodyData
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
