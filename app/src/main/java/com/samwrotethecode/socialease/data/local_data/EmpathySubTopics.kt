@@ -99,6 +99,4 @@ var empathySubTopics = listOf<SubTopicsModel>(
             )
         )
     ),
-
-
     )

@@ -117,4 +117,4 @@ var conflictResolutionSubTopics = listOf<SubTopicsModel>(
             )
         )
     ),
-)
+    )

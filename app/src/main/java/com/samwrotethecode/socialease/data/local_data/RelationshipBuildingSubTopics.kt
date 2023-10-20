@@ -103,5 +103,4 @@ var relationshipBuildingSubTopics = listOf<SubTopicsModel>(
             )
         )
     ),
-
     )

@@ -136,8 +136,5 @@ var communicationSubTopics = listOf(
                 descriptionId = R.string.maintaining_eye_contact_conclusion_description,
             )
         )
+    ),
     )
-
-
-
-)

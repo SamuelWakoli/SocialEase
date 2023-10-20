@@ -23,8 +23,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.HomeUiStateModel
 
@@ -35,7 +33,6 @@ fun ReadingScreenDropdownMenu(
     viewModel: HomeScreenViewModel,
     bookmarksIds: MutableList<Int>?,
     titleId: Int,
-    navHostController: NavHostController,
     onClickBookmark: (isBookmarked: Boolean) -> Unit = {},
     onClickShare: () -> Unit = {},
 ) {
@@ -120,6 +117,5 @@ fun ReadingScreenDropdownMenuPreview() {
         viewModel = viewModel<HomeScreenViewModel>(),
         bookmarksIds = mutableListOf(),
         titleId = 0,
-        navHostController = rememberNavController(),
     )
 }

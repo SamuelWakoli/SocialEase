@@ -111,6 +111,4 @@ var selfManagementSubTopics = listOf<SubTopicsModel>(
             )
         )
     ),
-
-
     )

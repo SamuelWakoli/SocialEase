@@ -18,6 +18,10 @@ data class SubTopicsModel(
     val titleId: Int, val generalDescriptionId: Int, val content: List<SubTopicContentItemModel>
 )
 
+/**
+ * Holds all the sub topics inside the app.
+ * Has been used to filter bookmarks.
+ */
 val allSubTopics = communicationSubTopics +
         cooperationSubTopics +
         conflictResolutionSubTopics +

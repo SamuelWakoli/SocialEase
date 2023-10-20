@@ -159,5 +159,4 @@ var cooperationSubTopics = listOf<SubTopicsModel>(
             )
         )
     ),
-
-)
+    )

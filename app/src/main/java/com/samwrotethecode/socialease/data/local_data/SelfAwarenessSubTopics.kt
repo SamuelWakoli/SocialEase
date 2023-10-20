@@ -111,5 +111,4 @@ var selfAwarenessSubTopics = listOf<SubTopicsModel>(
             )
         )
     ),
-
-)
+    )

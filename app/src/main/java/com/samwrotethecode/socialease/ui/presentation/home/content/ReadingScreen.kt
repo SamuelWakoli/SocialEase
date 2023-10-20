@@ -115,17 +115,15 @@ fun ReadingScreen(
                             ReadingScreenDropdownMenu(
                                 uiState = uiState,
                                 viewModel = homeScreenViewModel,
-                                navHostController = navHostController,
-                                titleId = uiState.currentSubTopic?.titleId!!,
                                 bookmarksIds = uiState.bookmarksIds,
-                                onClickShare = { shareSubtopic(uiState.currentSubTopic) },
+                                titleId = uiState.currentSubTopic?.titleId!!,
                                 onClickBookmark = {
                                     homeScreenViewModel.updateBookmark(
                                         subtopic = uiState.currentSubTopic,
                                         isBookmarked = it
                                     )
                                 },
-                            )
+                            ) { shareSubtopic(uiState.currentSubTopic) }
                         }
                     },
                     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(

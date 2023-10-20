@@ -99,6 +99,4 @@ var assertivenessSubTopics = listOf<SubTopicsModel>(
             )
         )
     ),
-
-
     )
