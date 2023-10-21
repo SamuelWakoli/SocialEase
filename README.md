@@ -1,4 +1,4 @@
-<img  width="80" height="80"  src="/home/sam/StudioProjects/SocialEase/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" title="SocialEase Logo"/>
+<img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" title="SocialEase Logo" alt="SocialEase Logo"/>
 
 # SocialEase
 
@@ -7,33 +7,33 @@
 ## Screenshots (Compact)
 
 ### Introduction
-<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/intro_screen_1.png"/>
-<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/intro_screen_2.png"/>
-<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/intro_screen_3.png"/>
-<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/intro_screen_4.png"/>
+<img src="screenshots/compact/intro_screen_1.png" alt="intro screen 1"/>
+<img src="screenshots/compact/intro_screen_2.png" alt="intro screen 2"/>
+<img src="screenshots/compact/intro_screen_3.png" alt="intro screen 3"/>
+<img src="screenshots/compact/intro_screen_4.png" alt="intro screen 4"/>
 
 ### Authentication
-<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/sign_in_screen.png"/>
-<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/create_account_screen.png"/>
-<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/forgot_password_screen.png"/>
+<img src="screenshots/compact/sign_in_screen.png" alt="sign in screen"/>
+<img src="screenshots/compact/create_account_screen.png" alt="create account screen"/>
+<img src="screenshots/compact/forgot_password_screen.png" alt="forgot password screen"/>
 
 ### Home
-<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/home_screen.png"/>
-<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/drawer.png"/>
-<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/sub_topics_screen.png"/>
-<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/search_screen.png"/>
-<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/search_screen_2.png"/>
-<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/reading_screen.png"/>
-<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/reading_screen_2.png"/>
-<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/bookmarks_screen.png"/>
-<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/share_intent.png"/>
+<img src="screenshots/compact/home_screen.png" alt="home screen"/>
+<img src="screenshots/compact/drawer.png" alt="drawer"/>
+<img src="screenshots/compact/sub_topics_screen.png" alt="subtopics screen"/>
+<img src="screenshots/compact/search_screen.png" alt="search screen"/>
+<img src="screenshots/compact/search_screen_2.png" alt="search screen 2"/>
+<img src="screenshots/compact/reading_screen.png" alt="reading screen"/>
+<img src="screenshots/compact/reading_screen_2.png" alt="reading screen 2"/>
+<img src="screenshots/compact/bookmarks_screen.png" alt="bookmarks screen"/>
+<img src="screenshots/compact/share_intent.png" alt="share intent"/>
 
 ### Profile and Others
-![](/home/sam/StudioProjects/SocialEase/screenshots/compact/profile_screen.png)
-![](/home/sam/StudioProjects/SocialEase/screenshots/compact/logout_dialog.png)
-![](/home/sam/StudioProjects/SocialEase/screenshots/compact/delete_account_dialog.png)
-![](/home/sam/StudioProjects/SocialEase/screenshots/compact/feedback_screen.png)
-![](/home/sam/StudioProjects/SocialEase/screenshots/compact/about_screen.png)
+<img src="screenshots/compact/profile_screen.png" alt="profile screen"/>
+<img src="screenshots/compact/logout_dialog.png" alt="logout dialog"/>
+<img src="screenshots/compact/delete_account_dialog.png" alt="delete account dialog"/>
+<img src="screenshots/compact/feedback_screen.png" alt="feedback screen"/>
+<img src="screenshots/compact/about_screen.png" alt="about screen"/>
 
 ## Features
 
