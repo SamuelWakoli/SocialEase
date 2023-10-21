@@ -1,6 +1,40 @@
+
+![](/home/sam/StudioProjects/SocialEase/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp "SocialEase Logo")
+
 # SocialEase
 
 **SocialEase** is a native Android app built with Jetpack Compose, designed to help users improve their social skills by providing content on various topics. It includes features such as an Introduction Screen, Authentication and Profiles, and Bookmarks functionality.
+
+## Screenshots (Compact)
+
+### Introduction
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/intro_screen_1.png)
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/intro_screen_2.png)
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/intro_screen_3.png)
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/intro_screen_4.png)
+
+### Authentication
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/sign_in_screen.png)
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/create_account_screen.png)
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/forgot_password_screen.png)
+
+### Home
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/home_screen.png)
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/drawer.png)
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/sub_topics_screen.png)
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/search_screen.png)
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/search_screen_2.png)
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/reading_screen.png)
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/reading_screen_2.png)
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/bookmarks_screen.png)
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/share_intent.png)
+
+### Profile and Others
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/profile_screen.png)
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/logout_dialog.png)
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/delete_account_dialog.png)
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/feedback_screen.png)
+![](/home/sam/StudioProjects/SocialEase/screenshots/compact/about_screen.png)
 
 ## Features
 
