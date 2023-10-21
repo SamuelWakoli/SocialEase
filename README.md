@@ -25,32 +25,32 @@
 ## Screenshots (Expanded)
 
 ### Introduction
-<img width="1280" height="800" src="screenshots/expanded/intro_screen_1.png" alt="intro screen 1"/>
-<img width="1280" height="800" src="screenshots/expanded/intro_screen_2.png" alt="intro screen 2"/>
-<img width="1280" height="800" src="screenshots/expanded/intro_screen_3.png" alt="intro screen 3"/>
-<img width="1280" height="800" src="screenshots/expanded/intro_screen_4.png" alt="intro screen 4"/>
+<img width="1920" height="1200" src="screenshots/expanded/intro_screen_1.png" alt="intro screen 1"/>
+<img width="1920" height="1200" src="screenshots/expanded/intro_screen_2.png" alt="intro screen 2"/>
+<img width="1920" height="1200" src="screenshots/expanded/intro_screen_3.png" alt="intro screen 3"/>
+<img width="1920" height="1200" src="screenshots/expanded/intro_screen_4.png" alt="intro screen 4"/>
 
 ### Authentication
-<img width="1280" height="800" src="screenshots/expanded/sign_in_screen.png" alt="sign in screen"/>
-<img width="1280" height="800" src="screenshots/expanded/create_account_screen.png" alt="create account screen"/>
-<img width="1280" height="800" src="screenshots/expanded/forgot_password_screen.png" alt="forgot password screen"/>
+<img width="1920" height="1200" src="screenshots/expanded/sign_in_screen.png" alt="sign in screen"/>
+<img width="1920" height="1200" src="screenshots/expanded/create_account_screen.png" alt="create account screen"/>
+<img width="1920" height="1200" src="screenshots/expanded/forgot_password_screen.png" alt="forgot password screen"/>
 
 ### Home
-<img width="1280" height="800" src="screenshots/expanded/home_screen.png" alt="home screen"/>
-<img width="1280" height="800" src="screenshots/expanded/drawer.png" alt="drawer"/>
-<img width="1280" height="800" src="screenshots/expanded/sub_topics_screen.png" alt="subtopics screen"/>
-<img width="1280" height="800" src="screenshots/expanded/search_screen.png" alt="search screen"/>
-<img width="1280" height="800" src="screenshots/expanded/search_screen_2.png" alt="search screen 2"/>
-<img width="1280" height="800" src="screenshots/expanded/reading_screen.png" alt="reading screen"/>
-<img width="1280" height="800" src="screenshots/expanded/bookmarks_screen.png" alt="bookmarks screen"/>
-<img width="1280" height="800" src="screenshots/expanded/share_intent.png" alt="share intent"/>
+<img width="1920" height="1200" src="screenshots/expanded/home_screen.png" alt="home screen"/>
+<img width="1920" height="1200" src="screenshots/expanded/drawer.png" alt="drawer"/>
+<img width="1920" height="1200" src="screenshots/expanded/sub_topics_screen.png" alt="subtopics screen"/>
+<img width="1920" height="1200" src="screenshots/expanded/search_screen.png" alt="search screen"/>
+<img width="1920" height="1200" src="screenshots/expanded/search_screen_2.png" alt="search screen 2"/>
+<img width="1920" height="1200" src="screenshots/expanded/reading_screen.png" alt="reading screen"/>
+<img width="1920" height="1200" src="screenshots/expanded/bookmarks_screen.png" alt="bookmarks screen"/>
+<img width="1920" height="1200" src="screenshots/expanded/share_intent.png" alt="share intent"/>
 
 ### Profile and Others
-<img width="1280" height="800" src="screenshots/expanded/profile_screen.png" alt="profile screen"/>
-<img width="1280" height="800" src="screenshots/expanded/logout_dialog.png" alt="logout dialog"/>
-<img width="1280" height="800" src="screenshots/expanded/delete_account_dialog.png" alt="delete account dialog"/>
-<img width="1280" height="800" src="screenshots/expanded/feedback_screen.png" alt="feedback screen"/>
-<img width="1280" height="800" src="screenshots/expanded/about_screen.png" alt="about screen"/>
+<img width="1920" height="1200" src="screenshots/expanded/profile_screen.png" alt="profile screen"/>
+<img width="1920" height="1200" src="screenshots/expanded/logout_dialog.png" alt="logout dialog"/>
+<img width="1920" height="1200" src="screenshots/expanded/delete_account_dialog.png" alt="delete account dialog"/>
+<img width="1920" height="1200" src="screenshots/expanded/feedback_screen.png" alt="feedback screen"/>
+<img width="1920" height="1200" src="screenshots/expanded/about_screen.png" alt="about screen"/>
 
 ## Features
 
