@@ -1,7 +1,6 @@
 package com.samwrotethecode.socialease.ui.presentation.home.viewmodels
 
 import android.net.Uri
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
@@ -83,7 +82,7 @@ class HomeScreenViewModel : ViewModel() {
                 email = currentUser?.email,
             )
         }
-        currentUser?.email?.let { userEmail ->
+        currentUser?.email?.let {
             userDataReference.get().addOnSuccessListener { documentSnapshot ->
                 // update bookmark ids
                 val bookmarksIdsFromDB =
@@ -154,10 +153,10 @@ class HomeScreenViewModel : ViewModel() {
                         currentBackgroundImage = R.drawable.communication,
                     )
                 }
-                Log.d(
-                    "CURRENT SUB TOPIC TITLE ID",
-                    "ASSIGNED: ${_uiState.value.currentSubTopicTitleId} "
-                )
+//                Log.d(
+//                    "CURRENT SUB TOPIC TITLE ID",
+//                    "ASSIGNED: ${_uiState.value.currentSubTopicTitleId} "
+//                )
             }
 
             TopicCategories.RELATIONSHIP_BUILDING -> {

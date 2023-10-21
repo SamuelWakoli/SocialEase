@@ -52,8 +52,8 @@ fun SubTopicsScreen(
     fun shareSubtopic(subTopicsModel: SubTopicsModel) {
         Log.d("SHARE DATA", "Data title: ${getString(context, subTopicsModel.titleId)}")
         val title = getString(context, subTopicsModel.titleId)
-        val generalDescription = getString(context, subTopicsModel.generalDescriptionId)
-        var message: String = ""
+        getString(context, subTopicsModel.generalDescriptionId)
+        var message = ""
         for (tile in subTopicsModel.content) {
             message += getString(context, tile.titleId!!) + "\n" + getString(
                 context, tile.descriptionId!!
@@ -85,10 +85,10 @@ fun SubTopicsScreen(
             topBar = {
                 CenterAlignedTopAppBar(
                     title = {
-                        Log.d(
-                            "CURRENT SUB TOPIC TITLE ID",
-                            "ACCESSING: ${uiState.currentSubTopicTitleId} "
-                        )
+//                        Log.d(
+//                            "CURRENT SUB TOPIC TITLE ID",
+//                            "ACCESSING: ${uiState.currentSubTopicTitleId} "
+//                        )
                         Text(text = stringResource(id = uiState.currentSubTopicTitleId!!))
                     },
                     navigationIcon = {
