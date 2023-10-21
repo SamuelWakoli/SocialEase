@@ -89,7 +89,9 @@ fun RegisterScreen(
             Toast.makeText(context, R.string.signed_in_successfully, Toast.LENGTH_LONG).show()
 
             navHostController.navigate(Screens.HomeScreen.route) {
-                navHostController.popBackStack()
+                popUpTo(Screens.SignInScreen.route) {
+                    inclusive = true
+                }
             }
         }
     })
