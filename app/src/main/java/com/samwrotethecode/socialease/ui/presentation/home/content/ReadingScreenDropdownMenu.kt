@@ -72,7 +72,7 @@ fun ReadingScreenDropdownMenu(
                 viewModel.updateAppbarDropDownMenu()
                 isBookmarked = !isBookmarked
                 onClickBookmark(isBookmarked)
-                val message = if (!isBookmarked) "added to" else "removed from"
+                val message = if (isBookmarked) "added to" else "removed from"
                 Toast.makeText(
                     context,
                     "${
@@ -81,7 +81,7 @@ fun ReadingScreenDropdownMenu(
                             titleId
                         )
                     } has been $message bookmarks",
-                    Toast.LENGTH_LONG
+                    Toast.LENGTH_SHORT
                 ).show()
             }
         )

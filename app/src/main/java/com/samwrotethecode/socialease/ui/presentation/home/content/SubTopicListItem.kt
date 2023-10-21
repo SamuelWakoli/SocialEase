@@ -108,7 +108,7 @@ fun SubTopicListItem(
                                     titleId
                                 )
                             } has been $message bookmarks",
-                            Toast.LENGTH_LONG
+                            Toast.LENGTH_SHORT
                         ).show()
                     }) {
                         Icon(
