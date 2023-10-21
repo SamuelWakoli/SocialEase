@@ -1,4 +1,4 @@
-<img src="/home/sam/StudioProjects/SocialEase/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" title="SocialEase Logo"/>
+<img  width="80" height="80"  src="/home/sam/StudioProjects/SocialEase/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" title="SocialEase Logo"/>
 
 # SocialEase
 
@@ -7,26 +7,26 @@
 ## Screenshots (Compact)
 
 ### Introduction
-<img src="/home/sam/StudioProjects/SocialEase/screenshots/compact/intro_screen_1.png"/>
-<img src="/home/sam/StudioProjects/SocialEase/screenshots/compact/intro_screen_2.png"/>
-<img src="/home/sam/StudioProjects/SocialEase/screenshots/compact/intro_screen_3.png"/>
-<img src="/home/sam/StudioProjects/SocialEase/screenshots/compact/intro_screen_4.png"/>
+<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/intro_screen_1.png"/>
+<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/intro_screen_2.png"/>
+<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/intro_screen_3.png"/>
+<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/intro_screen_4.png"/>
 
 ### Authentication
-<img src="/home/sam/StudioProjects/SocialEase/screenshots/compact/sign_in_screen.png"/>
-<img src="/home/sam/StudioProjects/SocialEase/screenshots/compact/create_account_screen.png"/>
-<img src="/home/sam/StudioProjects/SocialEase/screenshots/compact/forgot_password_screen.png"/>
+<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/sign_in_screen.png"/>
+<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/create_account_screen.png"/>
+<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/forgot_password_screen.png"/>
 
 ### Home
-<img src="/home/sam/StudioProjects/SocialEase/screenshots/compact/home_screen.png"/>
-<img src="/home/sam/StudioProjects/SocialEase/screenshots/compact/drawer.png"/>
-<img src="/home/sam/StudioProjects/SocialEase/screenshots/compact/sub_topics_screen.png"/>
-<img src="/home/sam/StudioProjects/SocialEase/screenshots/compact/search_screen.png"/>
-<img src="/home/sam/StudioProjects/SocialEase/screenshots/compact/search_screen_2.png"/>
-<img src="/home/sam/StudioProjects/SocialEase/screenshots/compact/reading_screen.png"/>
-<img src="/home/sam/StudioProjects/SocialEase/screenshots/compact/reading_screen_2.png"/>
-<img src="/home/sam/StudioProjects/SocialEase/screenshots/compact/bookmarks_screen.png"/>
-<img src="/home/sam/StudioProjects/SocialEase/screenshots/compact/share_intent.png"/>
+<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/home_screen.png"/>
+<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/drawer.png"/>
+<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/sub_topics_screen.png"/>
+<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/search_screen.png"/>
+<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/search_screen_2.png"/>
+<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/reading_screen.png"/>
+<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/reading_screen_2.png"/>
+<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/bookmarks_screen.png"/>
+<img width="250" height="520" src="/home/sam/StudioProjects/SocialEase/screenshots/compact/share_intent.png"/>
 
 ### Profile and Others
 ![](/home/sam/StudioProjects/SocialEase/screenshots/compact/profile_screen.png)
