@@ -99,7 +99,7 @@ fun SubTopicListItem(
                     IconButton(onClick = {
                         isBookmarked = !isBookmarked
                         onClickBookmark(isBookmarked)
-                        val message = if (!isBookmarked) "added to" else "removed from"
+                        val message = if (isBookmarked) "added to" else "removed from"
                         Toast.makeText(
                             context,
                             "${

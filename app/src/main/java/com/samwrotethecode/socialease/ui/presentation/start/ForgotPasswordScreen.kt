@@ -1,14 +1,17 @@
 package com.samwrotethecode.socialease.ui.presentation.start
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -85,74 +88,82 @@ fun ForgotPasswordScreen(
             containerColor = Color.Transparent
         ) { padding ->
 
-            Column(
+            Column (
                 Modifier
                     .padding(
                         padding
                     )
                     .fillMaxSize()
                     .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Text(
-                    stringResource(R.string.enter_your_email_to_get_password_reset_link),
-                    modifier = Modifier.padding(8.dp),
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = uiState.email,
-                    onValueChange = { viewModel.updateEmail(it) },
-                    modifier = Modifier
-                        .width(600.dp)
-                        .padding(8.dp),
-                    singleLine = true,
-                    isError = uiState.showEmailError,
-                    supportingText = { if (uiState.showEmailError) Text(text = stringResource(id = R.string.email_cannot_be_empty)) },
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Outlined.Email, contentDescription = null
-                        )
-                    },
-                    label = { Text(text = stringResource(id = R.string.email)) },
-                    trailingIcon = {
-                        if (uiState.isSignInButtonLoading) CircularProgressIndicator(
-                            strokeWidth = 2.dp,
-                            modifier = Modifier.size(20.dp),
-                        )
-                        else IconButton(onClick = { viewModel.sendPasswordResetEmail() }) {
-                            Icon(
-                                imageVector = Icons.Outlined.Send,
-                                contentDescription = stringResource(R.string.send)
-                            )
-                        }
-                    },
-                    shape = MaterialTheme.shapes.medium,
-                    keyboardOptions = KeyboardOptions().copy(
-                        imeAction = ImeAction.Next,
-                        keyboardType = KeyboardType.Email,
-                        autoCorrect = false,
-                        capitalization = KeyboardCapitalization.None,
-                    ),
-                )
-                if (!uiState.errorMessage.isNullOrEmpty()) Text(
-                    text = uiState.errorMessage,
-                    color = MaterialTheme.colorScheme.error,
-                    modifier = Modifier.padding(8.dp),
-                )
-
-                if (uiState.showDialogPwdResetEmailSent) {
-                    CustomDialogBox(
-                        icon = {
-                            Icon(imageVector = Icons.Outlined.Email, contentDescription = null)
-                        },
-                        title = stringResource(R.string.email_sent),
-                        text = stringResource(R.string.an_email_containing_password_reset_link_has_been_sent_to_your_email_address),
-                        confirmButtonText = stringResource(R.string.okay),
-                        dismissButtonText = null,
-                        onConfirmClick = {
-                            navHostController.navigateUp()
-                        },
-                        onDismissClick = { },
+                Column(
+                    Modifier
+                        .fillMaxHeight()
+                        .widthIn(max = 600.dp),
+                ) {
+                    Text(
+                        stringResource(R.string.enter_your_email_to_get_password_reset_link),
+                        modifier = Modifier.padding(8.dp),
                     )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    OutlinedTextField(
+                        value = uiState.email,
+                        onValueChange = { viewModel.updateEmail(it) },
+                        modifier = Modifier
+                            .width(600.dp)
+                            .padding(8.dp),
+                        singleLine = true,
+                        isError = uiState.showEmailError,
+                        supportingText = { if (uiState.showEmailError) Text(text = stringResource(id = R.string.email_cannot_be_empty)) },
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Outlined.Email, contentDescription = null
+                            )
+                        },
+                        label = { Text(text = stringResource(id = R.string.email)) },
+                        trailingIcon = {
+                            if (uiState.isSignInButtonLoading) CircularProgressIndicator(
+                                strokeWidth = 2.dp,
+                                modifier = Modifier.size(20.dp),
+                            )
+                            else IconButton(onClick = { viewModel.sendPasswordResetEmail() }) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Send,
+                                    contentDescription = stringResource(R.string.send)
+                                )
+                            }
+                        },
+                        shape = MaterialTheme.shapes.medium,
+                        keyboardOptions = KeyboardOptions().copy(
+                            imeAction = ImeAction.Next,
+                            keyboardType = KeyboardType.Email,
+                            autoCorrect = false,
+                            capitalization = KeyboardCapitalization.None,
+                        ),
+                    )
+                    if (!uiState.errorMessage.isNullOrEmpty()) Text(
+                        text = uiState.errorMessage,
+                        color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.padding(8.dp),
+                    )
+
+                    if (uiState.showDialogPwdResetEmailSent) {
+                        CustomDialogBox(
+                            icon = {
+                                Icon(imageVector = Icons.Outlined.Email, contentDescription = null)
+                            },
+                            title = stringResource(R.string.email_sent),
+                            text = stringResource(R.string.an_email_containing_password_reset_link_has_been_sent_to_your_email_address),
+                            confirmButtonText = stringResource(R.string.okay),
+                            dismissButtonText = null,
+                            onConfirmClick = {
+                                navHostController.navigateUp()
+                            },
+                            onDismissClick = { },
+                        )
+                    }
                 }
             }
         }
