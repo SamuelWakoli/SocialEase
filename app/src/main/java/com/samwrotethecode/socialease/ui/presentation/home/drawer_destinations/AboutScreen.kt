@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -38,6 +39,9 @@ import com.samwrotethecode.socialease.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutScreen(navHostController: NavHostController) {
+
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -49,8 +53,11 @@ fun AboutScreen(navHostController: NavHostController) {
             alpha = 0.2f
         )
         Scaffold(
+            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
             topBar = {
-                CenterAlignedTopAppBar(navigationIcon = {
+                CenterAlignedTopAppBar(
+                    scrollBehavior = scrollBehavior,
+                    navigationIcon = {
                     IconButton(onClick = { navHostController.navigateUp() }) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,

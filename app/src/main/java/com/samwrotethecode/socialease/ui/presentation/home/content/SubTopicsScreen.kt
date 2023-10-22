@@ -24,6 +24,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -46,6 +47,7 @@ fun SubTopicsScreen(
     windowWidthSize: WindowWidthSizeClass,
 ) {
 
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val uiState = homeScreenViewModel.uiState.collectAsState().value
     val context = LocalContext.current
 
@@ -79,11 +81,13 @@ fun SubTopicsScreen(
             contentScale = ContentScale.Crop,
             alpha = 0.2f,
         )
-        Scaffold(modifier = Modifier.fillMaxSize(),
+        Scaffold(
+            modifier = Modifier.fillMaxSize().nestedScroll(scrollBehavior.nestedScrollConnection),
             containerColor = Color.Transparent,
             contentColor = Color.Transparent,
             topBar = {
                 CenterAlignedTopAppBar(
+                    scrollBehavior = scrollBehavior,
                     title = {
 //                        Log.d(
 //                            "CURRENT SUB TOPIC TITLE ID",

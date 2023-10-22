@@ -31,6 +31,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -54,6 +55,7 @@ fun BookmarksScreen(
     viewModel: HomeScreenViewModel,
     windowWidthSize: WindowWidthSizeClass,
 ) {
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val uiState = viewModel.uiState.collectAsState().value
     val context = LocalContext.current
     fun shareSubtopic(subTopicsModel: SubTopicsModel) {
@@ -91,9 +93,11 @@ fun BookmarksScreen(
             alpha = 0.2f,
         )
         Scaffold(
+            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
             containerColor = Color.Transparent,
             topBar = {
                 CenterAlignedTopAppBar(
+                    scrollBehavior = scrollBehavior,
                     title = { Text(text = stringResource(id = R.string.bookmarks)) },
                     navigationIcon = {
                         IconButton(

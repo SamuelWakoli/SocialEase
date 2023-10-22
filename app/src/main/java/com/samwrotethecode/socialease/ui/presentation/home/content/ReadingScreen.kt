@@ -28,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -48,7 +49,7 @@ fun ReadingScreen(
     navHostController: NavHostController,
     homeScreenViewModel: HomeScreenViewModel,
 ) {
-
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val uiState = homeScreenViewModel.uiState.collectAsState().value
     val contentModifier = Modifier
 
@@ -88,11 +89,14 @@ fun ReadingScreen(
         )
 
         Scaffold(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .nestedScroll(scrollBehavior.nestedScrollConnection),
             containerColor = Color.Transparent,
             contentColor = Color.Transparent,
             topBar = {
                 CenterAlignedTopAppBar(
+                    scrollBehavior = scrollBehavior,
                     navigationIcon = {
                         IconButton(onClick = { navHostController.navigateUp() }) {
                             Icon(

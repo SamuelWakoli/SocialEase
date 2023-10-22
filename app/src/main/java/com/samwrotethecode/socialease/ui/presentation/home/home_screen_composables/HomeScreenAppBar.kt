@@ -11,6 +11,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
@@ -25,11 +26,13 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreenAppBar(
+    scrollBehavior: TopAppBarScrollBehavior,
     navHostController: NavHostController,
     onNavigationClick: () -> Unit,
     onSearchClick: () -> Unit,
     ) {
     CenterAlignedTopAppBar(
+        scrollBehavior = scrollBehavior,
         title = {
             Text(
                 text = stringResource(id = R.string.app_name),
@@ -82,12 +85,14 @@ fun HomeScreenAppBar(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenAppBarPreview() {
     val coroutineScope = rememberCoroutineScope()
 
     HomeScreenAppBar(
+        scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(),
         navHostController = rememberNavController(),
         onNavigationClick = {
             coroutineScope.launch { }
