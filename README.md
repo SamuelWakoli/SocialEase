@@ -4,6 +4,8 @@
 
 <img width="250" height="520" src="screenshots/compact/intro_screen_1.png" alt="intro screen 1"/> <img width="250" height="520" src="screenshots/compact/home_screen.png" alt="home screen"/> <img width="250" height="520" src="screenshots/compact/sub_topics_screen.png" alt="subtopics screen"/>
 
+[<img height="120" src="screenshots/compact/google-play-png-logo-3799.png">](https://play.google.com/store/apps/details?id=com.samwrotethecode.socialease)
+
 ## Features
 
 - **Introduction Screen:** Engage users with an informative introduction.
