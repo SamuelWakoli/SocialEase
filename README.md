@@ -19,9 +19,28 @@
 - Easily access and organize saved content for future reference.
 
 ## Technologies
-- **Firebase**: Employ Firebase Authentication for user sign-up and login, ensuring data security and access control. Firebase Realtime Database or Firestore can be used to store user profiles and bookmarks.
 
-- **Jetpack Compose**: Implement the latest Android UI toolkit for building native user interfaces, enabling a modern and flexible UI design.
+### Firebase
+
+#### Firebase Authentication
+Utilize Firebase Authentication to implement secure user sign-up and login functionalities, ensuring robust data security and access control. This service provides various authentication methods, including email/password, phone number, and third-party identity providers such as Google, facilitating a seamless and secure authentication process.
+
+#### Firebase Realtime Database or Firestore
+Choose between Firebase Realtime Database and Firestore to store user profiles and bookmarks. Both databases offer real-time data synchronization and scalability. Firebase Realtime Database is a NoSQL cloud database that enables the synchronization of data in real-time, while Firestore provides a more flexible and scalable NoSQL database with additional features like richer queries and built-in offline support.
+
+### Jetpack Compose
+
+Implement the latest Android UI toolkit, Jetpack Compose, for building native user interfaces. Jetpack Compose allows for a more modern and flexible UI design approach, leveraging a declarative syntax to simplify UI development. It enhances code readability and maintainability, providing a more efficient way to create and update user interfaces.
+
+### Coroutines
+
+Incorporate Kotlin Coroutines into your application for asynchronous programming. Coroutines simplify the management of asynchronous tasks, making it easier to write and maintain asynchronous code. They provide a structured concurrency model, making it more straightforward to handle background tasks without compromising code readability or performance.
+
+### Google Identity Integration
+
+Integrate Google Identity for a seamless and secure authentication experience. Google Identity allows users to sign in using their Google accounts, enhancing user convenience and providing a trusted authentication method. By leveraging Google Identity, you can extend authentication capabilities beyond email/password combinations, offering users a familiar and reliable sign-in option.
+
+Feel free to customize the descriptions based on your specific use case and preferences.
 
 ## Installation
 
@@ -60,19 +79,6 @@ We welcome contributions from the open-source community. If you'd like to contri
 
 ## Screenshots (Compact)
 
-### Introduction
-<img width="250" height="520" src="screenshots/compact/intro_screen_1.png" alt="intro screen 1"/> <img width="250" height="520" src="screenshots/compact/intro_screen_2.png" alt="intro screen 2"/> <img width="250" height="520" src="screenshots/compact/intro_screen_3.png" alt="intro screen 3"/> 
-<img width="250" height="520" src="screenshots/compact/intro_screen_4.png" alt="intro screen 4"/>
-
-### Authentication
-<img width="250" height="520" src="screenshots/compact/sign_in_screen.png" alt="sign in screen"/> <img width="250" height="520" src="screenshots/compact/create_account_screen.png" alt="create account screen"/> <img width="250" height="520" src="screenshots/compact/forgot_password_screen.png" alt="forgot password screen"/>
-
-### Home
-<img width="250" height="520" src="screenshots/compact/home_screen.png" alt="home screen"/> <img width="250" height="520" src="screenshots/compact/drawer.png" alt="drawer"/> <img width="250" height="520" src="screenshots/compact/sub_topics_screen.png" alt="subtopics screen"/> 
-<img width="250" height="520" src="screenshots/compact/search_screen.png" alt="search screen"/> <img width="250" height="520" src="screenshots/compact/search_screen_2.png" alt="search screen 2"/> <img width="250" height="520" src="screenshots/compact/reading_screen.png" alt="reading screen"/>
-<img width="250" height="520" src="screenshots/compact/reading_screen_2.png" alt="reading screen 2"/> <img width="250" height="520" src="screenshots/compact/bookmarks_screen.png" alt="bookmarks screen"/> <img width="250" height="520" src="screenshots/compact/share_intent.png" alt="share intent"/>
-
-### Profile and Others
-<img width="250" height="520" src="screenshots/compact/profile_screen.png" alt="profile screen"/> <img width="250" height="520" src="screenshots/compact/logout_dialog.png" alt="logout dialog"/> <img width="250" height="520" src="screenshots/compact/delete_account_dialog.png" alt="delete account dialog"/> 
-<img width="250" height="520" src="screenshots/compact/feedback_screen.png" alt="feedback screen"/> <img width="250" height="520" src="screenshots/compact/about_screen.png" alt="about screen"/>
+<img width="250" height="520" src="screenshots/compact/intro_screen_1.png" alt="intro screen 1"/> <img width="250" height="520" src="screenshots/compact/home_screen.png" alt="home screen"/> 
+<img width="250" height="520" src="screenshots/compact/sub_topics_screen.png" alt="subtopics screen"/>
 
