@@ -4,6 +4,11 @@
 
 **SocialEase** is a native Android app built with Jetpack Compose, designed to help users improve their social skills by providing content on various topics. It includes features such as an Introduction Screen, Authentication and Profiles, and Bookmarks functionality.
 
+
+<img width="250" height="520" src="screenshots/compact/intro_screen_1.png" alt="intro screen 1"/> <img width="250" height="520" src="screenshots/compact/home_screen.png" alt="home screen"/> 
+<img width="250" height="520" src="screenshots/compact/sub_topics_screen.png" alt="subtopics screen"/>
+
+
 ## Features
 
 ### Introduction Screen
@@ -17,6 +22,15 @@
 ### Bookmarks Feature
 - Enable users to bookmark and save their favorite social skills notes.
 - Easily access and organize saved content for future reference.
+
+### Search Feature
+- Facilitate efficient content discovery with a powerful search functionality.
+- Allow users to search for specific social skills notes, making it easy to find relevant information quickly.
+
+### Share Feature
+- Enhance user engagement by incorporating a share feature.
+- Enable users to share noteworthy social skills notes with friends or on social media platforms.
+
 
 ## Technologies
 
@@ -76,9 +90,4 @@ We welcome contributions from the open-source community. If you'd like to contri
 5. Create a pull request to the `main` branch of this repository.
 
 ---
-
-## Screenshots (Compact)
-
-<img width="250" height="520" src="screenshots/compact/intro_screen_1.png" alt="intro screen 1"/> <img width="250" height="520" src="screenshots/compact/home_screen.png" alt="home screen"/> 
-<img width="250" height="520" src="screenshots/compact/sub_topics_screen.png" alt="subtopics screen"/>
 
