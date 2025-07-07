@@ -21,7 +21,8 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.FiberManualRecord
 import androidx.compose.material3.Button
@@ -220,7 +221,7 @@ fun IntroScreen(
                         Text(text = stringResource(R.string.skip))
                     }
 
-                    if (pagerState.currentPage != pagerState.initialPage) {
+                    if (pagerState.canScrollBackward) {
                         Spacer(modifier = Modifier.width(24.dp))
                         IconButton(onClick = {
                             scope.launch {
@@ -229,7 +230,7 @@ fun IntroScreen(
                                 )
                             }
                         }) {
-                            Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
+                            Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                         }
                     }
                     Spacer(modifier = Modifier.width(24.dp))
@@ -268,7 +269,7 @@ fun IntroScreen(
                         }
                     }) {
                         Icon(
-                            imageVector = Icons.Default.ArrowForward, contentDescription = "Forward"
+                            imageVector = Icons.AutoMirrored.Filled.ArrowForward, contentDescription = "Forward"
                         )
                     }
                 }
@@ -282,9 +283,10 @@ fun IntroScreen(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun IntroScreenPreview() {
+    val context = LocalContext.current
     IntroScreen(
         windowSize = calculateWindowSizeClass(
-            LocalContext.current as Activity
+            context as Activity
         ).widthSizeClass,
         navHostController = rememberNavController(),
     )
@@ -296,9 +298,11 @@ fun IntroScreenPreview() {
 )
 @Composable
 fun IntroScreenPreviewRotated() {
+    val context = LocalContext.current
+
     IntroScreen(
         windowSize = calculateWindowSizeClass(
-            LocalContext.current as Activity
+            context as Activity
         ).widthSizeClass,
         navHostController = rememberNavController()
     )

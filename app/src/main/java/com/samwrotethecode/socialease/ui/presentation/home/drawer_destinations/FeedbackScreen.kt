@@ -14,9 +14,9 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Send
-import androidx.compose.material.icons.outlined.Send
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.Send
+import androidx.compose.material.icons.automirrored.outlined.Send
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -42,6 +42,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -71,7 +73,7 @@ fun FeedbackScreen(
             navigationIcon = {
                 IconButton(onClick = { navHostController.navigateUp() }) {
                     Icon(
-                        imageVector = Icons.Default.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = stringResource(id = R.string.navigate_back),
                     )
                 }
@@ -89,7 +91,7 @@ fun FeedbackScreen(
                     viewModel.sendFeedback()
                 }) {
                     Icon(
-                        imageVector = Icons.Outlined.Send,
+                        imageVector = Icons.AutoMirrored.Outlined.Send,
                         contentDescription = stringResource(id = R.string.send)
                     )
                 }
@@ -144,8 +146,8 @@ fun FeedbackScreen(
                     }
                 ),
                 keyboardOptions = KeyboardOptions(
-                    autoCorrect = true,
-                    imeAction = ImeAction.Send,
+                    capitalization = KeyboardCapitalization.Unspecified, autoCorrectEnabled = true,
+                    keyboardType = KeyboardType.Unspecified, imeAction = ImeAction.Send
                 )
             )
             Spacer(modifier = Modifier.height(16.dp))
@@ -155,7 +157,7 @@ fun FeedbackScreen(
 
         if (uiState.feedbackSent) {
             CustomDialogBox(
-                icon = { Icon(imageVector = Icons.Default.Send, contentDescription = null) },
+                icon = { Icon(imageVector = Icons.AutoMirrored.Filled.Send, contentDescription = null) },
                 title = stringResource(R.string.feedback_sent),
                 text = stringResource(R.string.the_app_developer_has_received_your_feedback_and_will_take_time_to_review_it_thank_you),
                 confirmButtonText = stringResource(id = R.string.okay),

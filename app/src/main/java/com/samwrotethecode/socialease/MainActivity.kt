@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
@@ -37,7 +38,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val currentUser = Firebase.auth.currentUser
-
+        enableEdgeToEdge()
         setContent {
             SocialEaseTheme {
                 // A surface container using the 'background' color from the theme
@@ -65,8 +66,8 @@ class MainActivity : ComponentActivity() {
                     NavGraph(
                         navHostController = rememberNavController(),
                         startDestination =
-                        if (currentUser == null) Screens.IntroScreen.route
-                        else Screens.HomeScreen.route,
+                            if (currentUser == null) Screens.IntroScreen.route
+                            else Screens.HomeScreen.route,
                         windowSize = windowSize.widthSizeClass,
                         signInScreenViewModel = signInScreenViewModel,
                     ) {

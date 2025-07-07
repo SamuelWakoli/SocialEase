@@ -1,6 +1,5 @@
 package com.samwrotethecode.socialease.ui.presentation.start
 
-import android.app.Activity
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -33,8 +32,6 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -70,7 +67,6 @@ import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SignInScreen(
-    windowSize: WindowWidthSizeClass,
     navHostController: NavHostController,
     viewModel: SignInScreenViewModel,
     onSignInWithGoogle: () -> Unit
@@ -162,10 +158,10 @@ fun SignInScreen(
                         },
                         label = { Text(text = stringResource(R.string.email)) },
                         shape = MaterialTheme.shapes.medium,
-                        keyboardOptions = KeyboardOptions().copy(
+                        keyboardOptions = KeyboardOptions(
                             imeAction = ImeAction.Next,
                             keyboardType = KeyboardType.Email,
-                            autoCorrect = false,
+                            autoCorrectEnabled = false,
                             capitalization = KeyboardCapitalization.None,
                         ),
                     )
@@ -206,10 +202,10 @@ fun SignInScreen(
                         },
                         shape = MaterialTheme.shapes.medium,
                         keyboardOptions = KeyboardOptions(
-                            autoCorrect = false,
+                            capitalization = KeyboardCapitalization.None,
+                            autoCorrectEnabled = false,
                             keyboardType = KeyboardType.Password,
-                            imeAction = ImeAction.Done,
-                            capitalization = KeyboardCapitalization.None
+                            imeAction = ImeAction.Done
                         ),
                         keyboardActions = KeyboardActions(onDone = {
                             // first hide keyboard
@@ -219,15 +215,16 @@ fun SignInScreen(
                         }),
                     )
                     Spacer(modifier = Modifier.height(16.dp))
-                    Text(text = stringResource(R.string.forgot_password), style = TextStyle(
-                        color = MaterialTheme.colorScheme.secondary,
-                        textDecoration = TextDecoration.Underline,
-                    ), modifier = Modifier
-                        .clickable {
-                            navHostController.navigate(Screens.ForgotPasswordScreen.route)
-                        }
-                        .align(alignment = Alignment.End)
-                        .padding(horizontal = 16.dp))
+                    Text(
+                        text = stringResource(R.string.forgot_password), style = TextStyle(
+                            color = MaterialTheme.colorScheme.secondary,
+                            textDecoration = TextDecoration.Underline,
+                        ), modifier = Modifier
+                            .clickable {
+                                navHostController.navigate(Screens.ForgotPasswordScreen.route)
+                            }
+                            .align(alignment = Alignment.End)
+                            .padding(horizontal = 16.dp))
                     Spacer(modifier = Modifier.height(12.dp))
                     if (uiState.errorMessage != null) Text(
                         text = uiState.errorMessage, color = MaterialTheme.colorScheme.error
@@ -287,9 +284,6 @@ fun SignInScreen(
 @Composable
 fun SignInScreenPreview() {
     SignInScreen(
-        windowSize = calculateWindowSizeClass(
-            LocalContext.current as Activity
-        ).widthSizeClass,
         navHostController = rememberNavController(),
         viewModel = viewModel<SignInScreenViewModel>(),
     ) {}
@@ -302,9 +296,6 @@ fun SignInScreenPreview() {
 @Composable
 fun SignInScreenPreviewRotated() {
     SignInScreen(
-        windowSize = calculateWindowSizeClass(
-            LocalContext.current as Activity
-        ).widthSizeClass,
         navHostController = rememberNavController(),
         viewModel = viewModel<SignInScreenViewModel>(),
     ) {}

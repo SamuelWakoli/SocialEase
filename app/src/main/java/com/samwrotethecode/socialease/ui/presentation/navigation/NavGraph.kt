@@ -57,7 +57,6 @@ fun NavGraph(
         }
         composable(route = Screens.SignInScreen.route) {
             SignInScreen(
-                windowSize = windowSize,
                 navHostController = navHostController,
                 viewModel = signInScreenViewModel,
             ) {
@@ -66,7 +65,6 @@ fun NavGraph(
         }
         composable(route = Screens.RegisterScreen.route) {
             RegisterScreen(
-                windowSize = windowSize,
                 navHostController = navHostController,
                 viewModel = signInScreenViewModel,
             ) {

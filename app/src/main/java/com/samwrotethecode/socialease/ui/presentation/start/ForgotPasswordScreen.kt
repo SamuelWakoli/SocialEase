@@ -16,9 +16,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material.icons.automirrored.outlined.ArrowBack
+import androidx.compose.material.icons.automirrored.outlined.Send
 import androidx.compose.material.icons.outlined.Email
-import androidx.compose.material.icons.outlined.Send
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -75,7 +75,7 @@ fun ForgotPasswordScreen(
                     navigationIcon = {
                         IconButton(onClick = { navHostController.navigateUp() }) {
                             Icon(
-                                imageVector = Icons.Outlined.ArrowBack,
+                                imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
                                 contentDescription = stringResource(id = R.string.navigate_back)
                             )
                         }
@@ -88,7 +88,7 @@ fun ForgotPasswordScreen(
             containerColor = Color.Transparent
         ) { padding ->
 
-            Column (
+            Column(
                 Modifier
                     .padding(
                         padding
@@ -130,16 +130,16 @@ fun ForgotPasswordScreen(
                             )
                             else IconButton(onClick = { viewModel.sendPasswordResetEmail() }) {
                                 Icon(
-                                    imageVector = Icons.Outlined.Send,
+                                    imageVector = Icons.AutoMirrored.Outlined.Send,
                                     contentDescription = stringResource(R.string.send)
                                 )
                             }
                         },
                         shape = MaterialTheme.shapes.medium,
-                        keyboardOptions = KeyboardOptions().copy(
+                        keyboardOptions = KeyboardOptions(
                             imeAction = ImeAction.Next,
                             keyboardType = KeyboardType.Email,
-                            autoCorrect = false,
+                            autoCorrectEnabled = false,
                             capitalization = KeyboardCapitalization.None,
                         ),
                     )

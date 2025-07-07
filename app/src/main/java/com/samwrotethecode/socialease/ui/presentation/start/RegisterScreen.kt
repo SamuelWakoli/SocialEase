@@ -1,6 +1,5 @@
 package com.samwrotethecode.socialease.ui.presentation.start
 
-import android.app.Activity
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -19,7 +18,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Lock
@@ -37,8 +36,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -74,7 +71,6 @@ import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterScreen(
-    windowSize: WindowWidthSizeClass,
     navHostController: NavHostController,
     viewModel: SignInScreenViewModel,
     onSignInWithGoogle: () -> Unit
@@ -103,7 +99,7 @@ fun RegisterScreen(
                 title = { }, navigationIcon = {
                     IconButton(onClick = { navHostController.navigateUp() }) {
                         Icon(
-                            imageVector = Icons.Default.ArrowBack,
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = stringResource(id = R.string.navigate_back),
                         )
                     }
@@ -190,10 +186,10 @@ fun RegisterScreen(
                             },
                             label = { Text(text = stringResource(R.string.name)) },
                             shape = MaterialTheme.shapes.medium,
-                            keyboardOptions = KeyboardOptions().copy(
+                            keyboardOptions = KeyboardOptions(
                                 imeAction = ImeAction.Next,
                                 keyboardType = KeyboardType.Text,
-                                autoCorrect = false,
+                                autoCorrectEnabled = false,
                                 capitalization = KeyboardCapitalization.None,
                             ),
                         )
@@ -218,10 +214,10 @@ fun RegisterScreen(
                             },
                             label = { Text(text = stringResource(id = R.string.email)) },
                             shape = MaterialTheme.shapes.medium,
-                            keyboardOptions = KeyboardOptions().copy(
+                            keyboardOptions = KeyboardOptions(
                                 imeAction = ImeAction.Next,
                                 keyboardType = KeyboardType.Email,
-                                autoCorrect = false,
+                                autoCorrectEnabled = false,
                                 capitalization = KeyboardCapitalization.None,
                             ),
                         )
@@ -262,10 +258,10 @@ fun RegisterScreen(
                             },
                             shape = MaterialTheme.shapes.medium,
                             keyboardOptions = KeyboardOptions(
-                                autoCorrect = false,
+                                capitalization = KeyboardCapitalization.None,
+                                autoCorrectEnabled = false,
                                 keyboardType = KeyboardType.Password,
-                                imeAction = ImeAction.Done,
-                                capitalization = KeyboardCapitalization.None
+                                imeAction = ImeAction.Done
                             ),
                             keyboardActions = KeyboardActions(onDone = {
                                 // first hide keyboard
@@ -297,9 +293,10 @@ fun RegisterScreen(
                             }
                         }
                         Spacer(modifier = Modifier.height(16.dp))
-                        GoogleSignInButton(modifier = Modifier
-                            .padding(8.dp)
-                            .width(600.dp),
+                        GoogleSignInButton(
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .width(600.dp),
                             onClick = { onSignInWithGoogle() })
                     }
                 }
@@ -312,10 +309,8 @@ fun RegisterScreen(
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun RegisterScreenPreview() {
+    val context = LocalContext.current
     RegisterScreen(
-        windowSize = calculateWindowSizeClass(
-            LocalContext.current as Activity
-        ).widthSizeClass,
         navHostController = rememberNavController(),
         viewModel = viewModel<SignInScreenViewModel>(),
     ) {}
@@ -327,10 +322,8 @@ fun RegisterScreenPreview() {
 )
 @Composable
 fun RegisterScreenPreviewRotated() {
+    val context = LocalContext.current
     RegisterScreen(
-        windowSize = calculateWindowSizeClass(
-            LocalContext.current as Activity
-        ).widthSizeClass,
         navHostController = rememberNavController(),
         viewModel = viewModel<SignInScreenViewModel>(),
     ) {}

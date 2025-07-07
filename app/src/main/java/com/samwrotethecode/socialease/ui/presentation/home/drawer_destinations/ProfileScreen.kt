@@ -12,8 +12,8 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.outlined.Logout
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.outlined.Logout
 import androidx.compose.material.icons.outlined.PersonRemoveAlt1
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -67,7 +67,7 @@ fun ProfileScreen(
             navigationIcon = {
                 IconButton(onClick = { navHostController.navigateUp() }) {
                     Icon(
-                        imageVector = Icons.Default.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = stringResource(id = R.string.navigate_back)
                     )
                 }
@@ -127,7 +127,7 @@ fun ProfileScreen(
                     ListItem(
                         leadingContent = {
                             Icon(
-                                imageVector = Icons.Outlined.Logout, contentDescription = null
+                                imageVector = Icons.AutoMirrored.Outlined.Logout, contentDescription = null
                             )
                         },
                         headlineContent = { Text(text = stringResource(R.string.log_out)) },
@@ -166,7 +166,7 @@ fun ProfileScreen(
             }
 
             if (showLogOutDialog) CustomDialogBox(
-                icon = { Icon(imageVector = Icons.Outlined.Logout, contentDescription = null) },
+                icon = { Icon(imageVector = Icons.AutoMirrored.Outlined.Logout, contentDescription = null) },
                 title = stringResource(id = R.string.log_out),
                 text = stringResource(R.string.you_are_also_logged_out_from_your_personal_cloud_data),
                 confirmButtonText = stringResource(id = R.string.log_out),

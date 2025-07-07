@@ -7,9 +7,9 @@ import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.TopicCateg
 
 
 data class HomeBodyItemModel(
-    @DrawableRes val imageDrawable: Int,
-    @StringRes val title: Int,
-    @StringRes val description: Int,
+    @param:DrawableRes val imageDrawable: Int,
+    @param:StringRes val title: Int,
+    @param:StringRes val description: Int,
     val topicCategory: TopicCategories,
 )
 
