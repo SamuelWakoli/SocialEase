@@ -34,11 +34,11 @@ data class HomeUiStateModel(
     val displayName: String? = null,
     val email: String? = null,
     val showDropdownMenu: Boolean = false,
-    @DrawableRes val currentBackgroundImage: Int? = null,
+    @param:DrawableRes val currentBackgroundImage: Int? = null,
 
     // SubTopicsScreen state
     val currentCategory: TopicCategories? = null,
-    @StringRes val currentSubTopicTitleId: Int? = null,
+    @param:StringRes val currentSubTopicTitleId: Int? = null,
     val currentSubTopicsList: List<SubTopicsModel>? = null,
 
     // ReadingScreen state

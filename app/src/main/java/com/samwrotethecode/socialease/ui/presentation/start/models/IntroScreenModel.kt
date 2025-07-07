@@ -5,10 +5,10 @@ import androidx.annotation.StringRes
 import com.samwrotethecode.socialease.R
 
 data class IntroScreenModel(
-    @StringRes val title: Int,
-    @StringRes val subTitle: Int,
-    @StringRes val content: Int,
-    @DrawableRes val backgroundImage: Int,
+    @param:StringRes val title: Int,
+    @param:StringRes val subTitle: Int,
+    @param:StringRes val content: Int,
+    @param:DrawableRes val backgroundImage: Int,
 )
 
 val IntroScreenData: List<IntroScreenModel> = listOf(
