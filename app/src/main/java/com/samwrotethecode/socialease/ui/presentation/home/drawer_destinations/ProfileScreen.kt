@@ -178,14 +178,15 @@ fun ProfileScreen(
                 confirmButtonText = stringResource(id = R.string.log_out),
                 dismissButtonText = stringResource(id = R.string.cancel),
                 onConfirmClick = {
-                    viewModel.logOut()
-                    navHostController.navigate(
-                        Screens.SignInScreen.route
-                    ) {
-                        launchSingleTop = true
-                        navHostController.popBackStack()
+                    viewModel.logOut().also {
+                        navHostController.navigate(
+                            Screens.SignInScreen.route
+                        ) {
+                            popUpTo(Screens.HomeScreen.route) {
+                                inclusive = true
+                            }
+                        }
                     }
-
                 },
                 onDismissClick = { showLogOutDialog = !showLogOutDialog },
             )

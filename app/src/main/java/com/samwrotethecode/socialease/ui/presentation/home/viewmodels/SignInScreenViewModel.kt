@@ -20,13 +20,21 @@ class SignInScreenViewModel : ViewModel() {
     }
 
 
-    private fun resetData() {
+    fun resetData() {
         // clear userData
         _uiState.update {
             it.copy(
                 name = "",
                 email = "",
                 password = "",
+                isSignInSuccess = false,
+                showNameError = false,
+                showEmailError = false,
+                showPasswordError = false,
+                errorMessage = null,
+                isSignInButtonLoading = false,
+                isCreateAccountButtonLoading = false,
+                showPassword = false,
             )
         }
     }
