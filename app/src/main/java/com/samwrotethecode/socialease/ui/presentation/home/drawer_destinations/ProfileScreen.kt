@@ -111,7 +111,7 @@ fun ProfileScreen(
                     supportingContent = {
                         Text(
                             text =
-                            uiState.email ?: ""
+                                uiState.email ?: ""
                         )
                     },
                 )
@@ -127,7 +127,8 @@ fun ProfileScreen(
                     ListItem(
                         leadingContent = {
                             Icon(
-                                imageVector = Icons.AutoMirrored.Outlined.Logout, contentDescription = null
+                                imageVector = Icons.AutoMirrored.Outlined.Logout,
+                                contentDescription = null
                             )
                         },
                         headlineContent = { Text(text = stringResource(R.string.log_out)) },
@@ -166,30 +167,36 @@ fun ProfileScreen(
             }
 
             if (showLogOutDialog) CustomDialogBox(
-                icon = { Icon(imageVector = Icons.AutoMirrored.Outlined.Logout, contentDescription = null) },
+                icon = {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Outlined.Logout,
+                        contentDescription = null
+                    )
+                },
                 title = stringResource(id = R.string.log_out),
                 text = stringResource(R.string.you_are_also_logged_out_from_your_personal_cloud_data),
                 confirmButtonText = stringResource(id = R.string.log_out),
                 dismissButtonText = stringResource(id = R.string.cancel),
                 onConfirmClick = {
-                    viewModel.logOut().also {
-                        navHostController.navigate(
-                            Screens.SignInScreen.route
-                        ) {
-                            popUpTo(Screens.HomeScreen.route) {
-                                inclusive = true
-                            }
-                        }
+                    viewModel.logOut()
+                    navHostController.navigate(
+                        Screens.SignInScreen.route
+                    ) {
+                        launchSingleTop = true
+                        navHostController.popBackStack()
                     }
+
                 },
                 onDismissClick = { showLogOutDialog = !showLogOutDialog },
             )
 
             if (showDeleteAccountDialog) CustomDialogBox(
-                icon = { Icon(
-                    imageVector = Icons.Outlined.PersonRemoveAlt1,
-                    contentDescription = null
-                ) },
+                icon = {
+                    Icon(
+                        imageVector = Icons.Outlined.PersonRemoveAlt1,
+                        contentDescription = null
+                    )
+                },
                 title = stringResource(id = R.string.delete_account),
                 text = stringResource(R.string.are_you_sure_you_want_to_delete_your_account_if_you_delete_your_account_you_will_permanently_lose_your_cloud_data_such_as_bookmarks),
                 confirmButtonText = stringResource(id = R.string.delete_account),

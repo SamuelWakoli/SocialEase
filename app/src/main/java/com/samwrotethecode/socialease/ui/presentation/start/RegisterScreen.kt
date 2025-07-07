@@ -42,6 +42,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
@@ -50,6 +51,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentType
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -168,7 +171,11 @@ fun RegisterScreen(
                         OutlinedTextField(
                             value = uiState.name,
                             onValueChange = { viewModel.updateName(it) },
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .semantics {
+                                    contentType = ContentType.Username
+                                },
                             singleLine = true,
                             isError = uiState.showNameError,
                             supportingText = {
@@ -197,7 +204,11 @@ fun RegisterScreen(
                         OutlinedTextField(
                             value = uiState.email,
                             onValueChange = { viewModel.updateEmail(it) },
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .semantics {
+                                    contentType = ContentType.EmailAddress
+                                },
                             singleLine = true,
                             isError = uiState.showEmailError,
                             supportingText = {
@@ -225,7 +236,11 @@ fun RegisterScreen(
                         OutlinedTextField(
                             value = uiState.password,
                             onValueChange = { viewModel.updatePassword(it) },
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .semantics {
+                                    contentType = ContentType.NewPassword
+                                },
                             singleLine = true,
                             isError = uiState.showPasswordError,
                             supportingText = {
@@ -309,7 +324,6 @@ fun RegisterScreen(
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun RegisterScreenPreview() {
-    val context = LocalContext.current
     RegisterScreen(
         navHostController = rememberNavController(),
         viewModel = viewModel<SignInScreenViewModel>(),
@@ -322,7 +336,6 @@ fun RegisterScreenPreview() {
 )
 @Composable
 fun RegisterScreenPreviewRotated() {
-    val context = LocalContext.current
     RegisterScreen(
         navHostController = rememberNavController(),
         viewModel = viewModel<SignInScreenViewModel>(),

@@ -38,6 +38,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
@@ -45,6 +46,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentType
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -79,8 +82,7 @@ fun SignInScreen(
     LaunchedEffect(key1 = uiState.isSignInSuccess, block = {
         if (uiState.isSignInSuccess) {
             Toast.makeText(
-                context,
-                R.string.signed_in_successfully, Toast.LENGTH_LONG
+                context, R.string.signed_in_successfully, Toast.LENGTH_LONG
             ).show()
 
             navHostController.navigate(Screens.HomeScreen.route) {
@@ -91,8 +93,7 @@ fun SignInScreen(
     })
 
     Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxSize()
+        contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()
     ) {
         Image(
             painter = painterResource(id = R.drawable.intro_img_1),
@@ -109,14 +110,12 @@ fun SignInScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Box(
-                modifier = Modifier
-                    .width(600.dp),
+                modifier = Modifier.width(600.dp),
             ) {
                 Column(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier
-                        .padding(16.dp),
+                    modifier = Modifier.padding(16.dp),
 
                     ) {
                     Spacer(modifier = Modifier.height(16.dp))
@@ -147,7 +146,9 @@ fun SignInScreen(
                     OutlinedTextField(
                         value = uiState.email,
                         onValueChange = { viewModel.updateEmail(it) },
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .semantics { contentType = ContentType.EmailAddress },
                         singleLine = true,
                         isError = uiState.showEmailError,
                         supportingText = { if (uiState.showEmailError) Text(text = stringResource(R.string.email_cannot_be_empty)) },
@@ -169,7 +170,11 @@ fun SignInScreen(
                     OutlinedTextField(
                         value = uiState.password,
                         onValueChange = { viewModel.updatePassword(it) },
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .semantics {
+                                contentType = ContentType.Password
+                            },
                         singleLine = true,
                         isError = uiState.showPasswordError,
                         supportingText = {
@@ -217,9 +222,9 @@ fun SignInScreen(
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
                         text = stringResource(R.string.forgot_password), style = TextStyle(
-                            color = MaterialTheme.colorScheme.secondary,
-                            textDecoration = TextDecoration.Underline,
-                        ), modifier = Modifier
+                        color = MaterialTheme.colorScheme.secondary,
+                        textDecoration = TextDecoration.Underline,
+                    ), modifier = Modifier
                             .clickable {
                                 navHostController.navigate(Screens.ForgotPasswordScreen.route)
                             }
