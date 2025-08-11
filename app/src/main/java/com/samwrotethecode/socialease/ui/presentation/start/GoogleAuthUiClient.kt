@@ -7,8 +7,8 @@ import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.BeginSignInRequest.GoogleIdTokenRequestOptions
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.Firebase
 import com.samwrotethecode.socialease.R
 import com.samwrotethecode.socialease.ui.presentation.start.models.GoogleSignInResult
 import com.samwrotethecode.socialease.ui.presentation.start.models.UserData

@@ -1,9 +1,9 @@
 package com.samwrotethecode.socialease.ui.presentation.home.viewmodels
 
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.auth.ktx.userProfileChangeRequest
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.auth.userProfileChangeRequest
+import com.google.firebase.Firebase
 import com.samwrotethecode.socialease.ui.presentation.start.models.GoogleSignInResult
 import com.samwrotethecode.socialease.ui.presentation.start.models.SignInUiModel
 import kotlinx.coroutines.flow.MutableStateFlow

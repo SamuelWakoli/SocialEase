@@ -17,8 +17,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.auth.api.identity.Identity
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.Firebase
 import com.samwrotethecode.socialease.ui.presentation.home.viewmodels.SignInScreenViewModel
 import com.samwrotethecode.socialease.ui.presentation.navigation.NavGraph
 import com.samwrotethecode.socialease.ui.presentation.navigation.Screens
