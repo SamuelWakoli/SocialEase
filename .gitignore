@@ -15,6 +15,6 @@
 local.properties
 /app/google-services.json
 /keystore.jks
-/app/release/app-release.aab
+/app/release
 /social-ease.jks
 /social-ease.pem
