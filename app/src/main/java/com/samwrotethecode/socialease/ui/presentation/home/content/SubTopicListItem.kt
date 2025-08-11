@@ -81,7 +81,7 @@ fun SubTopicListItem(
             Column {
                 Text(
                     text = buildAnnotatedString {
-                        withStyle(SpanStyle(color = MaterialTheme.colorScheme.onTertiaryContainer)) {
+                        withStyle(SpanStyle(color = MaterialTheme.colorScheme.onSurface)) {
                             append(stringResource(generalDescriptionId))
                         }
                         append(" ")
