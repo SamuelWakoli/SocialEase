@@ -68,13 +68,13 @@ dependencies {
 
     // AUTHENTICATION
     // Firebase Authentication library
-    implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.auth)
     // Google Play services library
     implementation(libs.play.services.auth)
 
     // DATA
     // Firestore
-    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.firestore)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
