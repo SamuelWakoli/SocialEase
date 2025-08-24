@@ -58,20 +58,22 @@ fun AboutScreen(navHostController: NavHostController) {
                 CenterAlignedTopAppBar(
                     scrollBehavior = scrollBehavior,
                     navigationIcon = {
-                    IconButton(onClick = { navHostController.navigateUp() }) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.navigate_back)
-                        )
-                    }
-                }, title = {
-                    Text(text = stringResource(id = R.string.app_name))
-                }, colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = Color.Transparent,
-                    navigationIconContentColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
-                    actionIconContentColor = MaterialTheme.colorScheme.primary,
-                )
+                        IconButton(onClick = { navHostController.navigateUp() }) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = stringResource(R.string.navigate_back)
+                            )
+                        }
+                    },
+                    title = {
+                        Text(text = stringResource(id = R.string.app_name))
+                    },
+                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                        containerColor = Color.Transparent,
+                        navigationIconContentColor = MaterialTheme.colorScheme.primary,
+                        titleContentColor = MaterialTheme.colorScheme.primary,
+                        actionIconContentColor = MaterialTheme.colorScheme.primary,
+                    ),
                 )
             }, containerColor = Color.Transparent
         ) { paddingValues ->
@@ -87,9 +89,9 @@ fun AboutScreen(navHostController: NavHostController) {
                 Column(
                     modifier = Modifier
                         .widthIn(max = 800.dp)
-                        .clip(MaterialTheme.shapes.medium)
                         .padding(16.dp)
                         .background(Color.Transparent)
+                        .clip(MaterialTheme.shapes.large)
                 ) {
                     ListItem(
                         headlineContent = { },
