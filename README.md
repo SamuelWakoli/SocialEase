@@ -1,8 +1,10 @@
-<img width="80" height="80" src="app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" title="SocialEase Logo" alt="SocialEase Logo"/>
+<img width="192" height="192" src="app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" title="SocialEase Logo" alt="SocialEase Logo"/>
 
-**SocialEase** is a native Android app designed to enhance social skills using Jetpack Compose. Features include Introduction Screen, Authentication, Profiles, Bookmarks, Search, and Share functionalities.
+**SocialEase** is a native Android app designed to enhance social skills using Jetpack Compose.
+Features include Introduction Screen, Authentication, Profiles, Bookmarks, Search, and Share
+functionalities.
 
-<img width="250" height="520" src="screenshots/compact/intro_screen_1.png" alt="intro screen 1"/> <img width="250" height="520" src="screenshots/compact/home_screen.png" alt="home screen"/> <img width="250" height="520" src="screenshots/compact/sub_topics_screen.png" alt="subtopics screen"/>
+<img width="1235" height="2646" src="screenshots/compact/intro_screen_1.png" alt="intro screen 1"/> <img width="1235" height="2646" src="screenshots/compact/home_screen.png" alt="home screen"/> <img width="1235" height="2646" src="screenshots/compact/sub_topics_screen.png" alt="subtopics screen"/>
 
 [<img height="120" src="screenshots/compact/google-play-png-logo-3799.png">](https://play.google.com/store/apps/details?id=com.samwrotethecode.socialease)
 
@@ -10,7 +12,8 @@
 
 - **Introduction Screen:** Engage users with an informative introduction.
 
-- **Authentication and Profiles:** Implement secure user authentication. Allow users to create and manage profiles.
+- **Authentication and Profiles:** Implement secure user authentication. Allow users to create and
+  manage profiles.
 
 - **Bookmarks Feature:** Enable users to save and organize social skills notes.
 
@@ -21,15 +24,16 @@
 ## Technologies
 
 - **Google Identity Integration:** Integrate Google Identity for seamless and secure authentication.
-  
+
 - **Firebase:**
-  - *Firebase Authentication:* Utilize Firebase for secure user sign-up and login, supporting various authentication methods.
-  - *Realtime Database or Firestore:* Choose between Firebase Realtime Database and Firestore for real-time data storage.
+    - *Firebase Authentication:* Utilize Firebase for secure user sign-up and login, supporting
+      various authentication methods.
+    - *Realtime Database or Firestore:* Choose between Firebase Realtime Database and Firestore for
+      real-time data storage.
 
 - **Jetpack Compose:** Implement the modern Android UI toolkit for flexible UI design.
 
 - **Coroutines:** Incorporate Kotlin Coroutines for efficient asynchronous programming.
-
 
 ## Installation
 
@@ -41,9 +45,9 @@ Follow these steps to run the project locally:
 2. Open the project in Android Studio.
 
 3. Configure Firebase:
-   - Create a new Firebase project on the [Firebase Console](https://console.firebase.google.com/).
-   - Add your Android app and download the `google-services.json` file.
-   - Place the file in the `app` directory.
+    - Create a new Firebase project on the [Firebase Console](https://console.firebase.google.com/).
+    - Add your Android app and download the `google-services.json` file.
+    - Place the file in the `app` directory.
 
 4. Build and run the app on an Android emulator or device.
 
@@ -63,5 +67,6 @@ We welcome contributions! Follow these steps to contribute:
    `git push origin feature/new-feature`
 
 5. Create a pull request to the `main` branch.
+
 ---
 
