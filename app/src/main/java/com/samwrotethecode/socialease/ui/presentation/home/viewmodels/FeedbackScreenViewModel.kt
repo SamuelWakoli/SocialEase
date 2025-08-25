@@ -24,10 +24,8 @@ class FeedbackScreenViewModel : ViewModel() {
 
     private val database = Firebase.firestore
     private val userId = Firebase.auth.currentUser?.email ?: "anonymous"
+    private val feedbacksCollection = "feedbacks"
 
-    companion object {
-        const val FEEDBACKS_COLLECTION = "feedbacks"
-    }
 
     init {
         resetState()
@@ -71,7 +69,7 @@ class FeedbackScreenViewModel : ViewModel() {
                 "isRead" to false,
             )
 
-            database.collection(FEEDBACKS_COLLECTION).document(time).set(data)
+            database.collection(feedbacksCollection).document(time).set(data)
                 .addOnSuccessListener {
                     _uiState.update {
                         it.copy(

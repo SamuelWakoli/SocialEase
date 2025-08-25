@@ -2,7 +2,7 @@ package com.samwrotethecode.socialease.data.local_data
 
 import com.samwrotethecode.socialease.R
 
-var relationshipBuildingSubTopics = listOf<SubTopicsModel>(
+var relationshipBuildingSubTopics = listOf(
     SubTopicsModel(
         titleId = R.string.building_trust,
         generalDescriptionId = R.string.building_trust_general_description,

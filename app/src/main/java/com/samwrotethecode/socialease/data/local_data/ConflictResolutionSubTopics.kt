@@ -2,7 +2,7 @@ package com.samwrotethecode.socialease.data.local_data
 
 import com.samwrotethecode.socialease.R
 
-var conflictResolutionSubTopics = listOf<SubTopicsModel>(
+var conflictResolutionSubTopics = listOf(
     SubTopicsModel(
         titleId = R.string.identifying_conflict,
         generalDescriptionId = R.string.identifying_conflict_general_description,

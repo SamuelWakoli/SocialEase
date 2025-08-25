@@ -2,7 +2,7 @@ package com.samwrotethecode.socialease.data.local_data
 
 import com.samwrotethecode.socialease.R
 
-var selfAwarenessSubTopics = listOf<SubTopicsModel>(
+var selfAwarenessSubTopics = listOf(
     SubTopicsModel(
         titleId = R.string.self_reflection,
         generalDescriptionId = R.string.self_reflection_general_description,

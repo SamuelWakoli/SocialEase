@@ -45,7 +45,6 @@
 
     <!--  Conclusion  -->
     <string name="nonverbal_communication_conclusion">Conclusion:</string>
-    <string name="nonverbal_communication_conclusion_description">Mastering nonverbal communication is a valuable skill that enhances your ability to connect with others, both personally and professionally. By understanding and effectively utilizing nonverbal cues, you can become a more perceptive and persuasive communicator. Whether you\'re looking to improve relationships, excel in your career, or navigate diverse cultural contexts, nonverbal communication is a powerful tool at your disposal.</string>
 
 
     <!--  ACTIVE LISTENING  -->
@@ -134,28 +133,6 @@
     <!--  Conclusion  -->
     <string name="maintaining_eye_contact_conclusion">Conclusion:</string>
     <string name="maintaining_eye_contact_conclusion_description">Mastering the art of maintaining eye contact is a valuable skill that enhances your ability to connect with others, build trust, and communicate effectively. By understanding its importance and applying the techniques, you\'ll become a more engaging and attentive communicator. Whether you\'re in a personal conversation or a professional setting, maintaining eye contact is a powerful tool in your communication arsenal.</string>
-
-
-    <!--  EFFECTIVE USE OF TONE AND PITCH  -->
-    <string name="effective_use_of_tone_and_pitch">Effective Use of Tone and Pitch</string>
-    <string name="effective_use_of_tone_and_pitch_general_description">The effective use of tone and pitch in your communication is essential for conveying emotions and intentions through your voice. In this module, we\'ll explore the significance of tone and pitch and provide practical tips to help you become a more engaging and expressive communicator.</string>
-
-    <!--  CONTENT  -->
-    <!--  Understanding Tone and Pitch  -->
-    <string name="effective_use_of_tone_and_pitch_content_1">Understanding Tone and Pitch:</string>
-    <string name="effective_use_of_tone_and_pitch_content_description_1">- Tone and pitch refer to the way your voice sounds during communication.\n- They convey emotions, attitudes, and intentions, often influencing how your message is received.</string>
-
-    <!--  Importance of Effective Use of Tone and Pitch  -->
-    <string name="effective_use_of_tone_and_pitch_content_2">Importance of Effective Use of Tone and Pitch:</string>
-    <string name="effective_use_of_tone_and_pitch_content_description_2">1. Emotion Conveyance:\n- The right tone and pitch can effectively convey emotions, such as excitement, empathy, or urgency.\n- It adds depth and meaning to your words.\n\n2. Audience Engagement:\n- A well-modulated tone and pitch can captivate your audience, keeping them attentive and engaged.\n- It enhances your communication impact.</string>
-
-    <!--  Techniques for Effective Use of Tone and Pitch  -->
-    <string name="effective_use_of_tone_and_pitch_content_3">Techniques for Effective Use of Tone and Pitch:</string>
-    <string name="effective_use_of_tone_and_pitch_content_description_3">1. Vary Your Tone:\n- Avoid a monotone voice by varying your tone to match the context.\n- Use a warm tone for friendly conversations and a firm tone for assertiveness.\n\n2. Control Pitch Range:\n- Practice controlling your pitch range to emphasize key points.\n- Higher pitches can convey excitement, while lower pitches may convey seriousness.</string>
-
-    <!--  Conclusion  -->
-    <string name="effective_use_of_tone_and_pitch_conclusion">Conclusion:</string>
-    <string name="effective_use_of_tone_and_pitch_conclusion_description">Mastering the effective use of tone and pitch is a valuable skill that enhances your ability to communicate with emotion and impact. By understanding their significance and applying the techniques, you\'ll become a more engaging and expressive communicator. Whether you\'re delivering speeches, having conversations, or addressing a group, tone and pitch are powerful tools in your communication arsenal.</string>
 
 
 </resources>

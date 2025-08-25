@@ -54,14 +54,12 @@
     <!--  APPBAR  -->
     <string name="open_navigation_menu">Open navigation menu</string>
     <string name="search">Search</string>
-    <string name="show_popup_menu">Show popup menu</string>
     <string name="details">Details</string>
     <!--  The body content is in another file  -->
     <!--  DRAWER  -->
     <string name="feedback">Feedback</string>
     <string name="about">About</string>
     <string name="bookmarks">Bookmarks</string>
-    <string name="theme">Theme</string>
     <!--  DROPDOWN MENU  -->
     <string name="settings">Settings</string>
     <!--  PROFILE SCREEN  -->

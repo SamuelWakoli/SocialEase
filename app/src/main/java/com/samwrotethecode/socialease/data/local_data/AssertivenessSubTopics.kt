@@ -2,7 +2,7 @@ package com.samwrotethecode.socialease.data.local_data
 
 import com.samwrotethecode.socialease.R
 
-var assertivenessSubTopics = listOf<SubTopicsModel>(
+var assertivenessSubTopics = listOf(
     SubTopicsModel(
         titleId = R.string.expressing_needs_clearly,
         generalDescriptionId = R.string.expressing_needs_clearly_general_description,

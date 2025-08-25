@@ -2,7 +2,7 @@ package com.samwrotethecode.socialease.data.local_data
 
 import com.samwrotethecode.socialease.R
 
-var empathySubTopics = listOf<SubTopicsModel>(
+var empathySubTopics = listOf(
     SubTopicsModel(
         titleId = R.string.cognitive_empathy,
         generalDescriptionId = R.string.cognitive_empathy_general_description,

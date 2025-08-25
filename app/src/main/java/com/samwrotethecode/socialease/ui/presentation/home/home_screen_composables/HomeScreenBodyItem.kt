@@ -75,7 +75,7 @@ fun HomeScreenBodyItem(
             supportingContent = {
                 Text(
                     text = buildAnnotatedString {
-                        append(stringResource(id = homeBodyItemModel.description),)
+                        append(stringResource(id = homeBodyItemModel.description))
                         append(" ")
                         withStyle(SpanStyle(color = MaterialTheme.colorScheme.onPrimaryContainer)) {
                             append(stringResource(R.string.read_more))

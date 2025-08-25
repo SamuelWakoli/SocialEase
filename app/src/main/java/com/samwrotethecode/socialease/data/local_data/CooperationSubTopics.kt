@@ -2,7 +2,7 @@ package com.samwrotethecode.socialease.data.local_data
 
 import com.samwrotethecode.socialease.R
 
-var cooperationSubTopics = listOf<SubTopicsModel>(
+var cooperationSubTopics = listOf(
     SubTopicsModel(
         titleId = R.string.sharing,
         generalDescriptionId = R.string.sharing_general_description,

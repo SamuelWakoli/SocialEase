@@ -61,14 +61,14 @@ class HomeScreenViewModel : ViewModel() {
     private val auth: FirebaseAuth = Firebase.auth
     private var currentUser: FirebaseUser? = auth.currentUser
 
-    companion object {
-        const val USERS_COLLECTION = "users"
-        const val USERS_BOOKMARKS_FIELD = "bookmarks"
-    }
+
+    private val usersCollection = "users"
+    private val userBookmarksField = "bookmarks"
+
 
     private val database = Firebase.firestore
     private val userDataReference =
-        database.collection(USERS_COLLECTION).document(currentUser?.email ?: "anonymous")
+        database.collection(usersCollection).document(currentUser?.email ?: "anonymous")
 
     init {
         getUserData()
@@ -86,15 +86,15 @@ class HomeScreenViewModel : ViewModel() {
             userDataReference.get().addOnSuccessListener { documentSnapshot ->
                 // update bookmark ids
                 val bookmarksIdsFromDB =
-                    (documentSnapshot.data?.get(USERS_BOOKMARKS_FIELD)) as? MutableList<Int>
+                    (documentSnapshot.data?.get(userBookmarksField)) as? MutableList<Int>
                         ?: mutableListOf()
                 _uiState.update {
                     it.copy(
                         bookmarksIds = bookmarksIdsFromDB,
                         bookmarks =
-                        allSubTopics.filter { subtopic ->
-                            bookmarksIdsFromDB.any { id -> id == subtopic.titleId }
-                        }.toMutableList()
+                            allSubTopics.filter { subtopic ->
+                                bookmarksIdsFromDB.any { id -> id == subtopic.titleId }
+                            }.toMutableList()
                     )
                 }
             }
@@ -121,7 +121,7 @@ class HomeScreenViewModel : ViewModel() {
             _uiState.update { it.copy(bookmarks = bookmarks, bookmarksIds = bookmarksIds) }
 
             val data = mapOf<String, List<Int>>(
-                USERS_BOOKMARKS_FIELD to bookmarksIds
+                userBookmarksField to bookmarksIds
             )
             userDataReference.set(data, SetOptions.merge()).addOnFailureListener { e ->
                 _uiState.update {
@@ -244,7 +244,7 @@ class HomeScreenViewModel : ViewModel() {
     }
 
     /**
-     * This func updates the [ReadingScreen] data
+     * This func updates the [com.samwrotethecode.socialease.ui.presentation.home.content.ReadingScreen] data
      */
     fun updateReadingScreenState(currentSubTopic: SubTopicsModel) {
         _uiState.update { it.copy(currentSubTopic = currentSubTopic) }

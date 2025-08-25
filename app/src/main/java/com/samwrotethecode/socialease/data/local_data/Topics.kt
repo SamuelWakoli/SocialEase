@@ -13,7 +13,7 @@ data class HomeBodyItemModel(
     val topicCategory: TopicCategories,
 )
 
-val homeScreenBodyData = listOf<HomeBodyItemModel>(
+val homeScreenBodyData = listOf(
     HomeBodyItemModel(
         imageDrawable = R.drawable.communication,
         title = R.string.communication,

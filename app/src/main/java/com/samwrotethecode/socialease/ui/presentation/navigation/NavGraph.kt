@@ -1,6 +1,7 @@
 package com.samwrotethecode.socialease.ui.presentation.navigation
 
 import android.app.Activity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
@@ -147,7 +148,7 @@ fun NavGraphPreview() {
         navHostController = rememberNavController(),
         startDestination = Screens.IntroScreen.route,
         windowSize = calculateWindowSizeClass(
-            LocalContext.current as Activity
+            LocalActivity.current as Activity
         ).widthSizeClass,
         signInScreenViewModel = viewModel<SignInScreenViewModel>(),
         onSignInWithGoogle = {}
